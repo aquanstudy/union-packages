@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.mintegral.msdk.mtgjscommon.windvane.WindVaneWebView
+        android:id="@+id/mintegral_offerwall_reward_wv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+    <com.mintegral.msdk.playercommon.PlayerView
+        android:id="@+id/mintegral_offerwall_vfpv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </com.mintegral.msdk.playercommon.PlayerView>
+
+    <com.mintegral.msdk.offerwall.view.SoundImageView
+        android:id="@+id/mintegral_offerwall_siv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/mintegral_offerwall_reward_rl_progress"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/mintegral_offerwall_shape_progress" >
+
+        <TextView
+            android:id="@+id/mintegral_offerwall_reward_tv_sound"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/mintegral_offerwall_white"
+            android:textSize="12sp"
+            />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/mintegral_offerwall_reward_pb"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/mintegral_offerwall_rl_close"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/mintegral_offerwall_close_bg" >
+
+        <ImageView
+            android:id="@+id/mintegral_offerwall_iv_close"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/mintegral_offerwall_close" />
+    </RelativeLayout>
+
+</RelativeLayout>

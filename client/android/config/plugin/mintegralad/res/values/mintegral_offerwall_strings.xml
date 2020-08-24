@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="mintegral_offerwall_title">Mintegral Offer</string>
+    <string name="mintegral_offerwall_reward_exit_desc">No rewards earned yet! Complete video to earn rewards ?</string>
+    <string name="mintegral_offerwall_reward_left_btn_text">Stop</string>
+    <string name="mintegral_offerwall_reward_right_btn_text">Resume</string>
+
+</resources>

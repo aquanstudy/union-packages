@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>U8SDK打包管理系统</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="css/bootstrap-gtreetable.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+	<link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<!--<div class="dataTables_filter" id="searchDivAdmins"-->
+		<!--style="margin-right: 10px; overflow: hidden; clear: both;">-->
+		<!--<div style="float: left; padding-top: 10px; padding-bottom: 10px; margin-left: 10px; display: block;">-->
+			<!--<div>-->
+				<!--<span><b>选择管理账号：</b></span>-->
+				<!--<select class="form-control select2 adminRoleAjax" style="width: 200px;" id="admins"-->
+					<!--name="admins">-->
+				<!--</select>-->
+				<!--&lt;!&ndash;<button type="button" class="btn btn-primary pull-left" onclick="setAdminGame();">分配</button>&ndash;&gt;-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;">
+					<div class="btn-group" style="float: left; padding-top: 10px;">
+						<div style="margin-left: 10px;">
+							<span><b>选择管理账号：</b></span>
+							<select class="form-control select2 adminRoleAjax" style="width: 200px;" id="admins"
+									name="admins">
+							</select>
+							<!--<button type="button" class="btn btn-primary pull-left" onclick="setAdminGame();">分配</button>-->
+						</div>
+					</div>
+					<div class="btn-group" style="float: right; padding-top: 10px; margin-right: 10px;">
+						<button type="button" class="btn btn-primary" data-btn-type="select">查询</button>
+						<button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
+					</div>
+					<div style="float: right; padding-top: 10px; margin-right: 5px; display: block;">
+						<div style="float: right;">
+							<input placeholder="请输入游戏名称" id="searchGameName" class="form-control" type="search"
+								likeOption="true" />
+						</div>
+					</div>
+				</div>
+				<div class="box-body clearfix">
+					<table id="gameList" class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>游戏ID</th>
+								<th>游戏名称</th>
+								<!--<th>appKey</th>-->
+								<!--<th>appSecret</th>-->
+								<!--<th>notifyUrl</th>-->
+								<!--<th>testNotifyUrl</th>-->
+								<th><input name="select_all" value="0" id="example-select-all" type="checkbox" /></th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--<div class="modal fade" id="myModal" role="dialog" aria-labelledby="addTitle">-->
+		<!--<div class="modal-dialog" role="document">-->
+			<!--<div class="modal-content">-->
+				<!--<div class="modal-header">-->
+					<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+						<!--<span aria-hidden="true">&times;</span>-->
+					<!--</button>-->
+					<!--<h4 class="modal-title" id="addTitle">新增游戏</h4>-->
+				<!--</div>-->
+				<!--<div class="modal-body">-->
+					<!--<div class="box box-primary">-->
+						<!--<div id="errBlock"></div>-->
+						<!--<form class="form-horizontal" id="fm">-->
+							<!--<div class="box-body">-->
+								<!--<input type="text" class="form-control" type="hidden" style="display: none;" id="id"-->
+									<!--name="id">-->
+								<!--<div class="form-group">-->
+									<!--<label for="name" class="col-sm-2 control-label" data-toggle="tooltip">游戏名</label>-->
+									<!--<div class="col-sm-10">-->
+										<!--<input type="text" class="form-control" id="name" name="name" placeholder="游戏名"-->
+											<!--maxlength="20">-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="form-group">-->
+									<!--<label for="notifyUrl" class="col-sm-2 control-label">回调地址</label>-->
+									<!--<div class="col-sm-10">-->
+										<!--<input type="text" class="form-control" id="notifyUrl" name="notifyUrl" placeholder="回调地址"-->
+											<!--maxlength="60">-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="form-group">-->
+									<!--<label for="testNotifyUrl" class="col-sm-2 control-label">测试回调地址</label>-->
+									<!--<div class="col-sm-10">-->
+										<!--<input type="text" class="form-control" id="testNotifyUrl" name="testNotifyUrl"-->
+											<!--placeholder="测试回调地址" maxlength="60">-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="box-footer">-->
+								<!--<button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>-->
+								<!--<button type="button" class="btn btn-primary pull-right" onclick="saveGame();">保 存</button>-->
+							<!--</div>-->
+						<!--</form>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/select2/i18n/zh-CN.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<script src="js/bootstrap-gtreetable-xsdk.js"></script>
+<script src="js/bootstrap-gtreetable.zh-CN.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script>
+	var adminGames;
+	var cur_selectedID;
+	var cur_adminGamesList;
+	
+	function reloadAdmins(selectedID) {
+        $.get('admin/allNotTop',{}, function (result) {
+            var itemList = [];
+            if(result.code == 0){
+                var lst = result.data;
+                var itemIndex;
+                adminGames = lst;
+                cur_selectedID=adminGames[0].id;
+                for(itemIndex in lst){
+                    if(lst[itemIndex].id == selectedID){
+                        itemList.unshift({id:lst[itemIndex].id, text:lst[itemIndex].username});
+                    }else{
+                        itemList.push({id:lst[itemIndex].id, text:lst[itemIndex].username});
+                    }
+                }
+            }else if(result.code == 2){
+                parent.location.href = "login.html";
+            }
+            $("#admins").empty().trigger('change');
+            $("#admins").on('change', function (evt) {
+            });
+            $("#admins").select2({
+                data:itemList
+            });
+            $("#admins").trigger('change');
+        },'json');
+    }
+
+	function  getGameIds() {
+        var adminGamesTemp="";
+        var table = $('#gameList').DataTable();
+        table
+            .column( 0 )
+            .data()
+            .each( function ( value, index ) {
+				adminGamesTemp += "," + value;
+            } );
+        return adminGamesTemp;
+    }
+
+    function addAdminGame(gameId){
+
+        $.post('admin/addAdminGame?gameId='+gameId+'&adminId='+cur_selectedID,{}, function (result) {
+            if(result.code == 0){
+                //showTips("操作成功");
+                reloadAdmins(cur_selectedID);
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+    function addAdminGames(){
+
+	    var gameIds = getGameIds();
+        $.post('admin/addAdminGames?gameIds='+gameIds+'&adminId='+cur_selectedID,{}, function (result) {
+            if(result.code == 0){
+                //showTips("操作成功");
+                reloadAdmins(cur_selectedID);
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+    function removeAdminGame(gameId){
+
+        $.post('admin/removeAdminGame?gameId='+gameId+'&adminId='+cur_selectedID,{}, function (result) {
+            if(result.code == 0){
+                //showTips("操作成功");
+                reloadAdmins(cur_selectedID);
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+    function removeAdminGames(){
+        var gameIds = getGameIds();
+        $.post('admin/removeAdminGames?gameIds='+gameIds+'&adminId='+cur_selectedID,{}, function (result) {
+            if(result.code == 0){
+                //showTips("操作成功");
+                reloadAdmins(cur_selectedID);
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+    $(function () {
+
+		reloadAdmins(null);
+
+        function search() {
+            var searchGameName = $("#searchGameName").val();
+            if(isEmpty(searchGameName)){
+                showTips("请输入查询条件");
+                return;
+            }
+            var table = $('#gameList').DataTable();
+            table.ajax.reload();
+        }
+
+        var table = $('#gameList').DataTable({
+            select: {
+                style: 'single'
+            },
+            "lengthChange":false,
+            "serverSide":true,
+            "processing": true,
+            "pageLength": 10,
+            ajax: {
+                type:"GET",
+                url:"admin/game/getAllGames2",
+                dataSrc:"data",
+                data:function (d) {
+                    var param = {};
+                    var searchGameName = $("#searchGameName").val();
+                    param.gameName = searchGameName;
+                    param.draw = d.draw;
+                    param.start = d.start;
+                    param.length = d.length;
+
+                    return param;
+                }
+            },
+            columns: [
+                { data: "appID" },
+                { data: "name" },
+                { data: "appID", orderable:false, render: function (data){
+                	var isCheck;
+                	var idStr="\"abc"+data+"\"";
+                	if(cur_adminGamesList != undefined){
+	                	for(itemIndex in cur_adminGamesList){
+	                        if(cur_adminGamesList[itemIndex] == data){
+	                        	isCheck = true;
+	                        }
+	                    }
+                	}
+                	if(isCheck){
+                		//console.log('<input type="checkbox" checked '+'id='+idStr+' value="1"'+'>');
+	                    return '<input name="gameItem" type="checkbox" checked '+'id='+idStr+' value="'+data+'"'+'>';
+                	}else{
+                		//console.log('<input type="checkbox"'+'id='+idStr+' value="0"'+'>');
+                		return '<input name="gameItem" type="checkbox"'+'id='+idStr+' value="'+data+'"'+'>';
+                	}
+             }}
+            ],
+            
+            "searching":false,
+            "language": {
+                "lengthMenu": "显示 _MENU_ 条记录",
+                "zeroRecords": "没有查到任何记录",
+                "info": "_PAGE_ / _PAGES_",
+                "infoEmpty": "没有任何记录",
+                "infoFiltered": "(总记录：_MAX_ )",
+                "loadingRecords": "正在加载...",
+                "processing":     "正在处理...",
+                "search":         "搜索:",
+                "paginate": {
+                    "first":      "首页",
+                    "last":       "尾页",
+                    "next":       "下一页",
+                    "previous":   "上一页"
+                },
+                "aria": {
+                    "sortAscending":  ": 递增排序",
+                    "sortDescending": ": 递减排序"
+                },
+                "select": {
+                    "rows": "已选中%d行"
+                }
+            }
+        });
+        $('button[data-btn-type]').click(function() {
+            var action = $(this).attr('data-btn-type');
+            switch (action){
+                case 'reset':
+                    $("#searchGameName").val("");
+                    var table = $('#gameList').DataTable();
+                    table.ajax.reload();
+                    break;
+                case 'select':
+                    search();
+                    break;
+            }
+        });
+		$('#example-select-all').on('click', function() {
+				var rows = table.rows({
+					'search' : 'applied'
+				}).nodes();
+				$('input[type="checkbox"]', rows).prop('checked', this.checked);
+				if(this.checked){
+					addAdminGames();
+				}else{
+					removeAdminGames();
+				}
+
+			});
+
+		$('#gameList').on('change', 'input[name="gameItem"]', function() {
+
+		    var gameId = this.value;
+
+			if (!this.checked) {
+
+			    removeAdminGame(gameId);
+
+			}else{
+				addAdminGame(gameId);
+			}
+		});
+
+		$('#admins').on('change', function() {
+			//var needFresh;
+			if($("#admins").val() == undefined){
+				//needFresh = true;
+			}else if(cur_selectedID != $("#admins").val()){
+				cur_selectedID = $("#admins").val();
+				//needFresh = true;
+			}
+            var table = $('#gameList').DataTable();
+            for(itemIndex in adminGames){
+                if(adminGames[itemIndex].id == cur_selectedID){
+                    var cur_adminGames = adminGames[itemIndex].adminGames;
+                    cur_adminGamesList = undefined;
+                    if(cur_adminGames != undefined){
+                        cur_adminGamesList = cur_adminGames.split(",");
+                    }
+                }
+            }
+            table.ajax.reload(null, false);
+		});
+	});
+</script>
+</body>
+</html>

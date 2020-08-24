@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>U8SDK打包管理系统</title>
+
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.vertical-tabs.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link href="css/bootstrap-toggle.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .tab-pane{
+            height:600px;
+            margin-left: -10px;
+            overflow-y:auto;
+            overflow-x:hidden;
+            width:96%;
+        }
+    </style>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini">U8</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>U8SDK</b>打包系统</span>
+        </a>
+
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">收放菜单</span>
+            </a>
+
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <div style="margin-top: 15px;margin-right: 30px;"><a href="index.html" style="color: #ffffff;font-size: 14px;">返回首页</a></div>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img id="gameIcon" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p id="gameName" style="display: block;line-height: 36px;text-align: center;"></p>
+                    <!--<p name="currUserName">管理员</p>-->
+                    <!--<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>-->
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" id="menus">
+                <li class="header">管理菜单</li>
+                <li><a href="package.html" target="menuFrame"><i class="fa fa-cubes" aria-hidden="true"></i><span>打包配置</span></a></li>
+                <li><a href="packlogs.html" target="menuFrame"><i class="fa fa-spinner" aria-hidden="true"></i><span>打包队列</span></a></li>
+                <li><a href="packhistory.html" target="menuFrame"><i class="fa fa-history" aria-hidden="true"></i><span>打包记录</span></a></li>
+                <li><a href="keystores.html" target="menuFrame"><i class="fa fa-file-text" aria-hidden="true"></i><span>证书管理</span></a></li>
+            </ul>
+
+        </section>
+    </aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="scol-sm-3 clearfix">
+                <!--<div class="pull-left">-->
+                    <!--<h5>-->
+                        <!--<span>当前游戏：</span><span id="gameName" style="font-weight: bold;">U8SDK打包系统</span>-->
+                    <!--</h5>-->
+                <!--</div>-->
+                <div class="pull-left">
+                    <button type="button" class="btn btn-primary" data-btn-type="edit">游戏配置</button>
+                    <button type="button" class="btn btn-default" data-btn-type="plugin">更换全局插件</button>
+                </div>
+                <div class="pull-right">
+                    <ol class="breadcrumb">
+                        <li><a href="index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                        <li class="active" id="currPos">打包配置</li>
+                    </ol>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="content" style="margin-top: -20px;">
+            <iframe id="menuFrame" name="menuFrame" src="package.html" style="overflow:visible;" scrolling="yes" frameborder="no" width="100%" ></iframe>
+        </section>
+
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2018-2021 <a href="http://www.6xsdk.com">U8SDK 打包系统</a>.</strong> All rights
+        reserved.
+    </footer>
+
+</div>
+
+
+<div class="modal fade" id="testModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="testModalTitle">游戏参数配置</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal no-border" id="fmconfig" enctype="multipart/form-data">
+                    <div class="row" style="height: 600px;margin: -15px;">
+                        <div class="col-xs-2 vertical-line"> <!-- required for floating -->
+                            <!-- Nav tabs -->
+                            <ul id="configTab" class="nav nav-tabs tabs-left" style="margin-right:-15px;">
+                                <li class="active"><a href="#baseConfig" data-toggle="tab">基础配置</a></li>
+                                <li><a href="#apkConfig" data-toggle="tab">母包管理</a></li>
+                                <li><a href="#iconConfig" data-toggle="tab">Icon配置</a></li>
+                                <li id="pluginTabIndex"><a href="#pluginConfig" data-toggle="tab">插件配置</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane panel-custom active" id="baseConfig">
+                                    <p class="notewrapper note note-info">
+                                        1、游戏名称、版本等设置之后会覆盖母包的配置<br>
+                                        2、如果游戏是纯单机(无游戏服务器)，请勾选【纯单机】，纯单机不走支付回调通知，客户端直接发货<br>
+                                        3、so文件支持，请根据游戏母包支持的cpu架构设置。一般armeabi和armeabi-v7a勾选即可
+                                    </p>
+
+                                    <div class="box box-primary no-border">
+                                        <!--<div id="errBlock"></div>-->
+                                        <!--<form class="form-horizontal no-border" id="fm" >-->
+                                        <div class="box-body no-border">
+                                            <input type="text" class="form-control" type="hidden" style="display: none;" id="id"
+                                                   name="id">
+
+                                            <input type="text" class="form-control" type="hidden" style="display: none;" id="apkPath"
+                                                   name="apkPath">
+
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-3 control-label" data-toggle="tooltip">App ID</label>
+                                                <div class="col-sm-9">
+                                                    <span id="appID" style="display: inline-block;padding-top: 7px;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-3 control-label" data-toggle="tooltip">AppKey</label>
+                                                <div class="col-sm-9">
+                                                    <span id="appKey" style="display: inline-block;padding-top: 7px;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-3 control-label" data-toggle="tooltip">AppSecret</label>
+                                                <div class="col-sm-9">
+                                                    <span id="appSecret" style="display: inline-block;padding-top: 7px;"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" style="margin-top: 25px;">
+                                                <label for="name" class="col-sm-3 control-label" data-toggle="tooltip">游戏名称</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder=""
+                                                           maxlength="64">
+                                                    <label for="name" class="lbl-tips">显示在手机设备桌面上的游戏名称</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label for="orientation1" class="col-sm-3 control-label">横竖屏</label>
+                                                <div class="col-sm-9">
+                                                    <label class="radio-inline" style="margin-left: -20px;">
+                                                        <input type="radio" class="form-control" id="orientation1" name="orientation" value="portrait"> 竖屏
+                                                    </label>
+                                                    <label class="radio-inline" style="margin-left: 30px;">
+                                                        <input type="radio" class="form-control" id="orientation2" name="orientation" value="landscape"> 横屏
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label for="targetSdkVersion" class="col-sm-3 control-label">targetSdkVersion</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="targetSdkVersion" name="targetSdkVersion"
+                                                           placeholder="建议配置为22" maxlength="10">
+                                                    <label for="targetSdkVersion" class="lbl-tips">部分渠道SDK没有适配Android 6.0以上新的权限系统，建议配置为22</label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="versionCode" class="col-sm-3 control-label">版本号</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="versionCode" name="versionCode"
+                                                           placeholder="" maxlength="11">
+                                                    <label for="versionCode" class="lbl-tips">游戏版本号,配置之后会覆盖母包中的配置</label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="versionName" class="col-sm-3 control-label">版本名</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="versionName" name="versionName"
+                                                           placeholder="" maxlength="30">
+                                                    <label for="versionName" class="lbl-tips">游戏版本名称,配置之后会覆盖母包中的配置</label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="serverBaseUrl" class="col-sm-3 control-label">U8Server URL</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="serverBaseUrl" name="serverBaseUrl"
+                                                           placeholder="" >
+                                                    <label for="serverBaseUrl" class="lbl-tips">U8Server根地址，不配置默认使用全局配置(打包工具/config/local/local.properties中)</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label for="doNotCompress" class="col-sm-3 control-label">非压缩资源</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="doNotCompress" name="doNotCompress"
+                                                           placeholder="多个配置以逗号分割，比如 png,jpg,txt,mp3" >
+                                                    <label for="targetSdkVersion" class="lbl-tips">apktool.yml中doNotCompress配置.如果打出来的渠道包比母包小，可以配置该项</label>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="singleGame" class="col-sm-3 control-label">纯单机</label>
+                                                <div class="col-sm-9">
+                                                    <label class="radio-inline" style="margin-left: -20px;">
+                                                        <input type="checkbox" class="form-control" id="singleGame" name="singleGame" value="1">
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="cpuSupport1" class="col-sm-3 control-label">so文件支持</label>
+                                                <div class="col-sm-9">
+                                                    <label class="checkbox-inline" style="margin-left: -20px;">
+                                                        <input type="checkbox" id="cpuSupport1" name="cpuSupport" value="armeabi"> armeabi
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="cpuSupport2" name="cpuSupport" value="armeabi-v7a"> armeabi-v7a
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="cpuSupport3" name="cpuSupport" value="x86"> x86
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="cpuSupport4" name="cpuSupport" value="arm64-v8a"> arm64-v8a
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="checkbox" id="cpuSupport5" name="cpuSupport" value="x86_64"> x86_64
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane panel-custom" id="apkConfig">
+                                    <!--<p class="notewrapper note note-info" style="margin-top: 10px;">-->
+                                    <!--1、游戏接入U8SDK抽象层api之后， 打出的是母包。如果有多个母包，打包的时候请确认好当前使用的母包<br>-->
+                                    <!--2、已经上线的游戏，渠道参数的修改请慎重。这里部分参数是后端使用，修改之后，可能会影响线上的游戏-->
+                                    <!--</p>-->
+                                    <div class="box box-primary no-border" style="margin-left: 0px;">
+
+                                        <div class="dataTables_filter clearfix" style="margin-right: 10px;margin-bottom: 10px;">
+                                            <div class="btn-group" style="float: right; padding-top: 10px;">
+                                                <button type="button" class="btn btn-primary btn-sm" data-btn-type="uploadInConfig">上传母包</button>
+                                                <button type="button" class="btn btn-default btn-sm" data-btn-type="deleteApk">删除</button>
+                                            </div>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <table id="apkList" class=" table table-bordered table-striped table-hover"  style="width: 96% !important;margin-left: 20px;">
+                                                <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>游戏名称</th>
+                                                    <th>包名</th>
+                                                    <th>VersionCode</th>
+                                                    <th>VersionName</th>
+                                                    <th>上传时间</th>
+                                                    <th>作为母包</th>
+                                                </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+                                        <div class="clearfix" style="margin-left: 10px;">
+                                            <div class="lbl-tips tip-height">1、管理多个apk时，打包的时候请确认好当前哪个apk是母包</div>
+                                            <div class="lbl-tips tip-height">2、每次上传新apk的时候，自动将该apk作为母包</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane panel-custom" id="iconConfig">
+
+                                    <div class="icon-panel">
+                                        <div style="float:left;margin-right: 10px;">
+                                            <div id="iconPreview" class="iconpreview icon-size" style="display: none;">
+
+                                                <!--<div class="mask-inner">-->
+                                                <!--<i class="fa fa-trash-o" style=""></i>-->
+                                                <!--</div>-->
+                                            </div>
+
+                                        </div>
+
+                                        <div class="uploader">
+                                            <div class="clickable">
+                                                <label>
+                                                    <span class="addImgBtn"><i class="fa fa-plus-circle"></i></span>
+                                                    <span class="imguploadTit">选择ICON</span>
+                                                    <span class="imguploadTit">图片格式：PNG</span>
+                                                    <span class="imguploadTit">512*512像素</span>
+                                                    <input id="iconCustomFile" name="iconFile" title="添加图片" type="file">
+                                                </label>
+                                            </div>
+                                            <!--<div class="mask-inner">-->
+                                            <!--<i class="fa fa-trash-o" style=""></i>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix" style="margin-left: 10px;">
+                                        <div class="lbl-tips tip-height">1、游戏ICON大小必须为512*512像素(小于2M)，格式为PNG</div>
+                                        <div class="lbl-tips tip-height">2、该ICON将作为最终游戏安装之后显示在设备上的ICON，自动处理ICON时会基于该ICON生成带角标的ICON</div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane panel-custom" id="pluginConfig">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary" id="btnSaveConfig">保 存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="uploadModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="addTitle2">上传文件</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="passwordDiv">
+                    <!--<label class="col-sm-3">上传母包APK</label>-->
+                    <!--<input class="form-control" type="file" id="uploadFile">-->
+                    <div class="col-sm-12 input-group">
+                        <input id="uploadFile" type="file" style="display:none" onchange="$('#apkFilePath').val(this.files[0]);">
+
+                        <input id="apkFilePath" class="form-control" type="text" readonly="readonly" style="background-color: white;">
+                        <span class="input-group-addon" onclick="$('input[id=uploadFile]').click();" style="cursor: pointer; background-color: #367fa9;color:white;"><i class="fa fa-folder-open"></i>选择</span>
+                    </div>
+                </div>
+                <input type="text" class="form-control" type="hidden" style="display: none;" id="currID">
+                <div class="progress progress-striped active" style="display: none">
+                    <div id="progressBar" class="progress-bar progress-bar-info"
+                         role="progressbar" aria-valuemin="0" aria-valuenow="0"
+                         aria-valuemax="100" style="width: 0%">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input id="btnUpload" type="submit" name="submit" class="btn btn-success" value="上 传" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="pluginModal" class="modal fade" role="dialog" aria-labelledby="pluginModalLabel">
+    <div class="modal-dialog" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="pluginTitle">插件列表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table id="plugins" class="table table-bordered table-striped table-hover" style="width: 98% !important; margin:0 auto;">
+                        <thead>
+                        <tr>
+                            <th>插件名称</th>
+                            <th>插件版本</th>
+                            <th>插件目录</th>
+                            <th>状 态</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery 2.2.3 -->
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- jvectormap -->
+<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="plugins/chartjs/Chart.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- AdminLTE for demo purposes -->
+<!--<script src="js/demo.js"></script>-->
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="js/bootstrap-toggle.min.js"></script>
+
+<script>
+
+    function updateCurrPos(posStr){
+        $("#currPos").html(posStr);
+    }
+
+    function showFilePath(file) {
+        $("#apkFilePath").val(file.name);
+    }
+
+    function deleteApk(id) {
+        $.post('admin/game/deleteApk',{id:id}, function (result) {
+            if(result.code == 0){
+                showTips("操作成功");
+                var table = $('#apkList').DataTable();
+                table.ajax.reload();
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+    
+    function regMenuClickEvents() {
+        $('a[target="menuFrame"]').click(function(){
+
+            var posStr = $(this).html();
+
+            var startIndex = posStr.lastIndexOf("<span>");
+
+            updateCurrPos(posStr.substring(startIndex));
+
+        });
+    }
+
+    function gotoOtherView(targetHtml, posName){
+        $("#currPos").html(posName);
+        $("#menuFrame",parent.document.body).attr("src",targetHtml);
+    }
+
+
+
+    function queryGameDetail(callback){
+
+        var gameID = getParameter("gameID");
+        $.post('admin/game/getGameByID', {gameID:gameID}, function(result){
+
+            if (result.code == 0) {
+
+                if(callback != null){
+                    callback(result.object);
+                }
+
+            }else if(result.code == 2) {
+                location.href = "login.html";
+            }else{
+                alert(result.reason);
+            }
+
+        },'json');
+
+    }
+
+
+
+    $(function () {
+
+        var fromEditDialog = false;
+        var uploadUrl = "admin/game/uploadApk";//异步上传地址
+        var uploadType = "apk";
+        var apkTableInited = false;
+        var pluginInited = false;
+        var data = null;            //当前游戏data
+
+
+        //for menu begin
+        regMenuClickEvents();
+
+        var gameID = getParameter("gameID");
+        console.log("curr game id is :" + gameID);
+
+        $("#gameIcon").attr("src", 'admin/game/getGameIcon?gameID='+gameID);
+
+        $('a[target="menuFrame"]').each(function(){
+            console.log("curr menu game id is :" + gameID);
+            $(this).attr("href", $(this).attr("href")+"?gameID="+gameID);
+
+        });
+
+        $("#menuFrame").attr("src", "package.html?gameID="+gameID);
+        //for menu end
+
+        //for upload begin
+
+        $("#btnUpload").attr("disabled", true);
+
+        $("#uploadFile").change(function() {
+            $("#btnUpload").val("上 传");
+            $("#progressBar").width("0%");
+            var file = $(this).prop('files');
+            if (file.length != 0) {
+                $("#apkFilePath").val(file[0].name);
+                $("#btnUpload").attr('disabled', false);
+            }else{
+                $("#btnUpload").attr('disabled', true);
+            }
+
+        });
+        $("#btnUpload").click(function() {
+            // 进度条归零
+            $("#progressBar").width("0%");
+            // 上传按钮禁用
+            $(this).attr('disabled', true);
+            $("#progressBar").parent().show();
+            $("#progressBar").parent().addClass("active");
+            uploadFile();
+        });
+
+
+        bundleFilePreview("#iconCustomFile", "#iconPreview", false);
+
+        function showUploadDialog(type) {
+
+            if(data == null){
+                fromEditDialog = false;
+                showTips("游戏数据为空，请重新登录");
+                return;
+            }
+
+            $("#currID").val(data.id);
+            $("#uploadFile").val("");
+            $("#apkFilePath").val("");
+            $("#btnUpload").attr('disabled', true);
+
+            if(type == 'apk'){
+                //$("#uploadFile").attr("accept", ".apk");
+                uploadUrl = "admin/game/uploadApk";//异步上传地址
+                uploadType = "apk";
+            }else if(type == 'icon'){
+                //$("#uploadFile").attr("accept", ".png")
+                uploadUrl = "admin/game/uploadIcon";//异步上传地址
+                uploadType = "icon";
+            }
+
+            $('#uploadModal').modal('show');
+        }
+
+
+        //进度条控制
+        function progressFunction(evt) {
+            var progressBar = $("#progressBar");
+            if (evt.lengthComputable) {
+                var completePercent = Math.round(evt.loaded / evt.total * 100)+ "%";
+                progressBar.width(completePercent);
+                $("#btnUpload").val("正在上传 " + completePercent);
+            }
+        }
+
+        function uploadFile() {
+            var uploadFile = $("#uploadFile").get(0).files[0]; //获取文件对象
+            var form = new FormData();
+            form.append("appID", $("#currID").val());
+            form.append("file", uploadFile); // 文件对象
+
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: uploadUrl,
+                contentType: false,
+                processData: false,
+                data: form,
+                xhr: function(){ //获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数
+                    myXhr = $.ajaxSettings.xhr();
+                    if(progressFunction && myXhr.upload) { //检查进度函数和upload属性是否存在
+                        //绑定progress事件的回调函数
+                        myXhr.upload.addEventListener("progress",progressFunction, false);
+                    }
+                    return myXhr; //xhr对象返回给jQuery使用
+                },
+                error: function(request) {
+                    alert("上传失败，请检查服务器端日志");
+                },
+                success: function(result) {
+
+                    if(result.code == 0){
+                        $("#btnUpload").attr('disabled', false);
+                        $("#btnUpload").val("上 传");
+                        $("#progressBar").parent().removeClass("active");
+                        $("#progressBar").parent().hide();
+                        $('#uploadModal').modal('hide');
+                        showTips("文件已上传成功");
+                        if(fromEditDialog){
+                            if(uploadType == "apk"){
+                                if(data != null){
+                                    data.apkPath = result.object;
+                                }
+                                $("#apkPath").val(result.object);
+                                refreshApks();
+                            }else{
+//                                $("#fileUploadIcon").attr("disabled", true);
+//                                $("#fileUploadIcon").html("已上传");
+//                                reloadImg();
+                            }
+                            fromEditDialog = false;
+
+                        }else if(uploadType == 'icon'){
+//                            reloadImg();
+                        }
+                    }else if(result.code == 2){
+                        parent.location.href = "login.html";
+                    }else{
+                        showTips(result.reason);
+                    }
+
+
+                }
+            });
+        }
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+
+        //for upload end
+
+        //for game config begin
+        function saveGameConfig() {
+            if(data == null){
+                showTips("游戏数据为空，请重新登录");
+                return;
+            }
+
+            var pluginParams = getPluginValues();
+
+            $('#fmconfig').ajaxSubmit({
+                url:'admin/game/saveGame',
+                type:'POST',
+                dataType:'json',
+                data:{pluginParams:pluginParams},
+                success:function (result) {
+                    if(result.code == 0){
+
+                        savePluginFiles(function(){
+
+                            queryGameDetail(function(gameData){
+                                data = gameData;
+                                $("#gameIcon").attr("src", 'admin/game/getGameIcon?gameID='+gameID+"&rand="+Math.random());
+                                $("#gameName").html(data.name);
+                                $('#testModal').modal('hide');
+                                showTips("操作成功");
+                            });
+
+
+                        });
+
+                    }
+                    else{
+                        showTips(result.reason);
+                    }
+                }
+            });
+
+        }
+
+        $("#btnSaveConfig").click(function () {
+            saveGameConfig();
+        });
+
+        $('#apkList').on('change', 'input[type="checkbox"]', function() {
+
+            $('#apkList input[type="checkbox"]').prop('checked', false);
+
+            $(this).prop("checked", true);
+
+            $("#apkPath").val($(this).val());
+
+        });
+
+        function refreshApks() {
+
+            if(apkTableInited){
+                var table = $('#apkList').DataTable();
+                table.ajax.reload();
+                return;
+            }
+            apkTableInited = true;
+            $('#apkList').DataTable({
+                select: {
+                    style: 'single'
+                },
+                "lengthChange":false,
+                ajax: function (apkData, callback, settings) {
+                    if(data == null){
+                        showTips("游戏数据为空，请重新登录");
+                        return;
+                    }
+                    $.get('admin/game/getApksByGame', {gameID:data.id}, function (res) {
+                        if(res.code == 0){
+                            callback(res);
+                        }else{
+                            showTips(res.reason);
+                        }
+                    })
+                },
+                columns: [
+                    {data: "id"},
+                    { data: "name" },
+                    { data: "bundleID" },
+                    { data: "versionCode" },
+                    { data: "versionName" },
+                    { data: "uploadTime" },
+                    { data: "apkPath", orderable:false, render: function (apkPath){
+                        if (data != null && data.apkPath == apkPath){
+                            //当前母包
+                            return '<input type="checkbox" checked="checked" value="'+apkPath+'">';
+                        }
+                        return '<input type="checkbox" value="'+apkPath+'">';
+                    }
+                    }
+                ],
+                "searching":false,
+                "paging": false,
+                "bLengthChange": false,   //去掉每页显示多少条数据方法
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "",
+                    "infoEmpty": "还没有上传母包APK",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                    "loadingRecords": "正在加载...",
+                    "processing":     "正在处理...",
+                    "search":         "搜索:",
+                    "paginate": {
+                        "first":      "首页",
+                        "last":       "尾页",
+                        "next":       "下一页",
+                        "previous":   "上一页"
+                    },
+                    "aria": {
+                        "sortAscending":  ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": ""
+                    }
+                }
+            });
+
+        }
+        //for game config end
+
+        //for plugins begin
+
+        function tooglePlugin(sdkName, isChecked) {
+
+            if(data == null){
+                showTips("游戏数据为空，请重新登录");
+                return;
+            }
+
+            var checked = 0;
+            if(isChecked){
+                checked = 1;
+            }
+
+            $.post('admin/game/tooglePlugin',{gameID:data.id,sdkName:sdkName, checked:checked}, function (result) {
+                if(result.code == 0){
+                    //do nothing
+                }
+                else{
+                    showTips(result.reason);
+                }
+            },'json');
+        }
+
+        function refreshPlugins(){
+
+            if(data == null){
+                showTips("游戏数据为空，请重新登录");
+                return;
+            }
+
+            if(pluginInited){
+                var table = $('#plugins').DataTable();
+                table.ajax.url('/admin/game/getAllPlugins');
+                table.ajax.reload();
+                return;
+            }
+
+            pluginInited = true;
+
+            var table = $('#plugins').DataTable({
+                select: false,
+                "lengthChange":false,
+                "processing": true,
+//            "pageLength": 20,
+                "paging": false,
+                ajax: {
+                    type:"GET",
+                    url:"/admin/game/getAllPlugins",
+                    dataSrc:"data",
+                    data:function (d) {
+                        var param = {};
+                        param.gameID = data.id;
+
+                        return param;
+                    }
+                },
+                columns: [
+                    { data: "masterName" },
+                    { data: "versionName" },
+                    { data: "sdkName" },
+                    {
+                        "sClass":"text-center",
+                        "data":"state",
+                        "render":function(state, type, full, meta){
+
+                            if(state == 1){
+                                return '<input type="checkbox" id="'+full.sdkName+'" checked data-toggle="toggle">';
+                            }else{
+                                return '<input type="checkbox" id="'+full.sdkName+'" data-toggle="toggle">';
+                            }
+
+
+                        },
+                        "bSortable":false
+                    }
+                ],
+                "searching":false,
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "",
+                    "infoEmpty": "没有任何记录",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                    // "loadingRecords": "正在加载...",
+                    "processing":     "正在处理...",
+                    "search":         "搜索:",
+                    "paginate": {
+                        "first":      "首页",
+                        "last":       "尾页",
+                        "next":       "下一页",
+                        "previous":   "上一页"
+                    },
+                    "aria": {
+                        "sortAscending":  ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": ""
+                    }
+                }
+            });
+
+            $('#plugins').on( 'draw.dt', function () {
+                $('#plugins input[type="checkbox"]').bootstrapToggle({
+                    on: '启用',
+                    off: '禁用',
+                    size: 'small'
+                });
+            } );
+
+            $('#plugins').on('change', 'input[type="checkbox"]', function(){
+                var checked = $(this).prop('checked');
+                var sdkName = $(this).prop('id');
+
+                tooglePlugin(sdkName, checked);
+            });
+
+
+        }
+
+        function getPluginValues(){
+
+            var pluginParams = [];
+            $(".collapse").each(function(){
+
+                var divID = $(this).attr("id");
+
+                var gamePluginID = divID.substring("collapse".length);
+
+                var params = {}
+
+                $(this).find(".plugin-param").each(function(){
+                    var key = $(this).attr("id");
+                    key = key.substring(4); //remove key- prefix
+                    params[key] = $(this).val();
+                });
+
+                $(this).find(".cfiletype").each(function(){
+                    var key = $(this).attr("id");
+                    key = key.substring(5); //remove cfile prefix
+                    var path = $(this).attr("name");
+                    params[key] = path;
+                });
+
+                pluginParams.push({"id":gamePluginID,"params":params});
+
+            });
+
+            return JSON.stringify(pluginParams);
+
+        }
+
+        function savePluginFiles(sucCallback){
+
+            var fileIds = [];
+            var fileDict = [];
+            $(".cfiletype").each(function(){
+                var key = $(this).attr("id");
+                key = key.substring(5); //remove cfile prefix
+                var path = $(this).attr("name");
+                if($(this).get(0).files.length > 0){
+                    var uploadFile = $(this).get(0).files[0]; //获取文件对象
+                    fileIds.push({key:key,path:path});
+                    fileDict.push(uploadFile);
+                }
+            });
+
+            if(fileDict.length == 0){
+                if(sucCallback != null){
+                    sucCallback();
+                }
+                return;
+            }
+
+            var form = new FormData();
+            form.append("gameID", gameID);
+            form.append("fileIds", JSON.stringify(fileIds));
+
+            var itemIndex;
+            for(itemIndex in fileDict){
+                form.append('file', fileDict[itemIndex]);
+            }
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "/admin/game/savePluginFiles",
+                contentType: false,
+                processData: false,
+                data: form,
+                success: function(result) {
+
+                    if(result.code == 0){
+                        if(sucCallback != null){
+                            sucCallback();
+                        }
+                    }else{
+                        showTips(result.reason);
+                    }
+
+                }
+            });
+
+        }
+
+
+        function refreshGamePlugins(gameID){
+
+            $.post('admin/game/getGamePlugins',{gameID:gameID}, function (result) {
+                if(result.code == 0){
+
+                    if(result.data == null || result.data == undefined || result.data.length == 0) {
+                        //no plugin
+                        $("#pluginTabIndex").hide();
+                        return;
+                    }
+
+                    var html = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+                    var currPos = 0;
+                    $.each(result.data, function(ind, plugin){
+                        currPos = currPos + 1;
+                        var index = plugin.id;
+                        var title = "未知插件";
+                        var version = "";
+                        var metas = null;
+                        if(plugin.master != null && plugin.master != undefined){
+                            title = plugin.master.masterName;
+                            version = plugin.master.versionName;
+                            metas = plugin.master.metas;
+                        }
+
+                        html += '<div class="panel panel-default panel-border no-border-top"><div class="panel-heading no-background clearfix" role="tab" id="heading'+index+'"> <h4 class="panel-title" style="font-weight: bold;"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse'+index+'" aria-expanded="true" aria-controls="collapse'+index+'">'+title+'('+version+')'+'</a> </h4> </div>';
+                        var expand = "";
+                        if(currPos == 1){
+                            expand = "in";
+                        }
+                        html += '<div id="collapse'+index+'" class="panel-collapse collapse '+expand+'" role="tabpanel" aria-labelledby="heading'+index+'"> <div class="panel-body panel-border-top" style="margin-left: 10px;"> <div class="box box-primary no-border" style="margin-left: -10px;"> <div class="box-body no-border" style="margin-left: -40px;">';
+
+                        if(metas != null && metas != undefined && metas.length > 0){
+
+
+                            $.each(metas, function(index, item){
+
+                                html += '<div class="form-group"> <label class="col-sm-2 control-label" data-toggle="tooltip">'+item.showName+'</label> <div class="col-sm-9"> ';
+
+                                if(item.paramStyle == 2){
+                                    //文件
+                                    html += '<div class="col-sm-12 input-group">';
+                                    var fileID = 'cfile'+item.paramKey;
+                                    var filePathID = 'cfilepath'+index;
+                                    html += '<input id="'+fileID+'" name="'+item.styleExtra+'" class="cfiletype" type="file" style="display:none" onchange="$(\'#'+filePathID+'\').val(this.files[0].name);">';
+
+                                    html += '<input id="'+filePathID+'" class="form-control" type="text" value="'+item.defaultVal+'" readonly="readonly" style="background-color: white;">';
+
+                                    html += '<span class="input-group-addon" onclick="$(\'input[id='+fileID+']\').click();" style="cursor: pointer; background-color: #367fa9;color:white;"><i class="fa fa-folder-open"></i>选择</span>';
+
+                                    html += '</div>';
+
+                                }else if(item.paramStyle == 1){
+                                    //list
+                                    var options = "";
+
+                                    if(item.styleExtra != null && item.styleExtra != undefined){
+                                        var oplist = item.styleExtra.split("|");
+                                        $.each(oplist, function(opIndex, op){
+                                            if(op == item.defaultVal){
+                                                options += '<option value ="'+op+'" selected="selected">'+op+'</option>';
+                                            }else{
+                                                options += '<option value ="'+op+'">'+op+'</option>';
+                                            }
+                                        });
+                                    }
+
+                                    html += '<select id="key-'+item.paramKey+'" class="form-control select2 plugin-param" style="width: 100%;">'+options+'</select>'
+                                }else{
+                                    html += '<input type="text" id="key-'+item.paramKey+'" class="form-control plugin-param" value="'+item.defaultVal+'">';
+                                }
+
+
+
+                                html += '<label class="lbl-tips">'+item.metaDesc+'</label> </div> </div>';
+                            });
+
+                        }
+                        else{
+                            html += '<div class="form-group"> <label class="col-sm-12" style="color: gray;text-align: center;">该插件无需参数配置</label> </div> ';
+                        }
+
+                        html += '</div></div></div></div></div>';
+                    });
+                    html += "</div>";
+                    $("#pluginTabIndex").show();
+                    $("#pluginConfig").html(html);
+
+                }
+                else{
+                    showTips(result.reason);
+                }
+            },'json');
+
+        }
+
+        //for plugins end
+
+        //for button events begin
+
+        $('button[data-btn-type]').click(function() {
+            var action = $(this).attr('data-btn-type');
+            switch (action){
+
+                case 'uploadInConfig':
+                    fromEditDialog = true;
+                    showUploadDialog("apk");
+                    break;
+
+                case 'edit':
+
+                    if(data == null){
+                        showTips("游戏数据为空，请重新登录");
+                        return;
+                    }
+
+                    $("#fileUploadName").attr("disabled", false);
+                    $("#fileUploadName").html("上 传");
+                    $("#fileUploadIcon").attr("disabled", false);
+                    $("#fileUploadIcon").html("上 传");
+                    $("input:text").val('');
+                    $("#pluginConfig").html("");
+                    $("#pluginTabIndex").hide();
+
+                    $("#id").val(data.id);
+                    $("#name").val(data.name);
+                    $("#apkPath").val(data.apkPath);
+
+                    $("#appID").html(data.appID);
+                    $("#appKey").html(data.appKey);
+                    $("#appSecret").html(data.appSecret);
+
+                    if(data.singleGame == 1){
+                        $("#singleGame").iCheck('check');
+                    }else{
+                        $("#singleGame").iCheck('uncheck');
+                    }
+
+                    if("portrait" == data.orientation){
+                        $('#orientation1').iCheck('check');
+                    }else{
+                        $('#orientation1').iCheck('uncheck');
+                    }
+
+                    if("landscape" == data.orientation){
+                        $('#orientation2').iCheck('check');
+                    }else{
+                        $('#orientation2').iCheck('uncheck');
+                    }
+
+                    var soSupport = data.cpuSupport;
+
+                    if(soSupport && soSupport.length > 0){
+
+                        if(soSupport.indexOf("x86_64") != -1){
+                            $('#cpuSupport5').iCheck('check');
+                        }else {
+                            $('#cpuSupport5').iCheck('uncheck');
+                        }
+                        soSupport = soSupport.replace("x86_64", "");
+
+                        if(soSupport.indexOf("arm64-v8a") != -1){
+                            $('#cpuSupport4').iCheck('check');
+                        }else {
+                            $('#cpuSupport4').iCheck('uncheck');
+                        }
+                        soSupport = soSupport.replace("arm64-v8a", "");
+
+                        if(soSupport.indexOf("x86") != -1){
+                            $('#cpuSupport3').iCheck('check');
+                        }else{
+                            $('#cpuSupport3').iCheck('uncheck');
+                        }
+                        soSupport = soSupport.replace("x86", "");
+                        if(soSupport.indexOf("armeabi-v7a") != -1){
+                            $('#cpuSupport2').iCheck('check');
+                        }else{
+                            $('#cpuSupport2').iCheck('uncheck');
+                        }
+                        soSupport = soSupport.replace("armeabi-v7a", "");
+                        if(soSupport.indexOf("armeabi") != -1){
+                            $('#cpuSupport1').iCheck('check');
+                        }else{
+                            $('#cpuSupport1').iCheck('uncheck');
+                        }
+                    }
+
+
+                    $("#versionCode").val(data.versionCode);
+                    $("#versionName").val(data.versionName);
+                    $("#targetSdkVersion").val(data.targetSdkVersion);
+                    $("#serverBaseUrl").val(data.serverBaseUrl);
+                    $("#doNotCompress").val(data.doNotCompress);
+
+                    refreshApks();
+
+                    refreshGamePlugins(data.id);
+
+                    $("#iconPreview").css("background-image", "url(/admin/game/getGameIcon?gameID="+data.id+")");
+                    $("#iconPreview").show();
+
+                    $('#configTab a:first').tab('show');
+
+                    $('#testModal').modal({backdrop: 'static', keyboard: false});
+                    $('#testModal').modal('show');
+                    break;
+                case 'plugin':
+
+                    if(data == null){
+                        showTips("游戏数据为空，请重新登录");
+                        return;
+                    }
+
+
+                    refreshPlugins();
+
+                    $('#pluginModal').modal({backdrop: 'static', keyboard: false});
+                    $('#pluginModal').modal('show');
+
+
+                    break;
+
+                case 'deleteApk':
+                    var apkData = $('#apkList').DataTable().row('.selected').data();
+                    if(apkData == null){
+                        showTips("请先选择一条要删除的记录");
+                        return;
+                    }
+                    showConfirm("确定要删除该记录吗？（操作不可恢复）", function () {
+                        deleteApk(apkData.id);
+                    });
+                    break;
+            }
+        });
+
+        //for button events end
+
+
+        queryGameDetail(function(gameData){
+            data = gameData;
+            $("#gameName").html(data.name);
+        });
+
+
+    });
+
+
+    $("#menuFrame").load(function(){
+        //var mainheight = $(this).contents().find("body").height()+30;
+        $(this).height(window.innerHeight - 200);
+    });
+
+
+
+</script>
+
+</body>
+</html>

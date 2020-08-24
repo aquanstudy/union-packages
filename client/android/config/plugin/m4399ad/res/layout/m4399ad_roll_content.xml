@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                tools:background="@android:color/holo_red_light"
+                tools:layout_height="480dp"
+                tools:layout_width="320dp">
+
+    <include
+        android:id="@id/m4399ad_id_view_ad_content"
+        layout="@layout/m4399ad_iv_image_material_rounded"/>
+
+    <ViewStub
+        android:id="@+id/m4399ad_id_close_view_stub"
+        android:layout_width="@dimen/m4399ad_close_text_long_width"
+        android:layout_height="@dimen/m4399ad_close_text_height"
+        android:layout_alignTop="@id/m4399ad_id_view_ad_content"
+        android:layout_alignEnd="@id/m4399ad_id_view_ad_content"
+        android:layout_alignRight="@id/m4399ad_id_view_ad_content"
+        android:layout_margin="10dp"
+        tools:layout="@layout/m4399ad_tv_delay_auto_close"/>
+
+    <include layout="@layout/m4399ad_tv_ad_label"/>
+</RelativeLayout>

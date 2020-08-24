@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>打包系统</title>
+
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <link rel="stylesheet" href="css/xsdk.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+
+<div class="wrapper">
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini">U8</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>SDK</b>打包系统</span>
+        </a>
+
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">收放菜单</span>
+            </a>
+
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="dist/img/default_head.png" class="user-image" alt="User Image">
+                            <span class="hidden-xs" name="currUserName">管理员</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="dist/img/default_head.png" class="img-circle" alt="User Image">
+
+                                <p>
+                                    <span name="currUserName">管理员</span> - <span id="currRole">最高权限</span>
+                                    <small>操作完成，记得安全退出</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat" onclick="changePwd()">修改密码</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat" onclick="loginOut()">登  出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+                    <!--<li>-->
+                        <!--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="dist/img/default_head.png" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <span name="currUserName"></span>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu" id="menus">
+                <li class="header">管理菜单</li>
+
+            </ul>
+
+        </section>
+    </aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+
+            <h1>
+                &nbsp;
+                <!--U8SDK打包系统-->
+                <!--<small>版本 1.0.0</small>-->
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active" id="currPos">主面板</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <iframe id="menuFrame" name="menuFrame" src="main.html" style="overflow:visible;" allowfullscreen="true" scrolling="yes" frameborder="no" width="100%"></iframe>
+        </section>
+
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 1.0.0
+        </div>
+        <strong>Copyright &copy; 2018-2021 <a href="http://www.6xsdk.com">U8SDK 打包系统</a>.</strong> All rights
+        reserved.
+    </footer>
+	
+	<div class="modal fade" id="myModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="text-align: center" id="addTitle">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                    <div id="errBlock"></div>
+                    <form class="form-horizontal" id="fm">
+                        <div class="box-body">
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="id" name="id">
+                            <div class="form-group">
+                                <label for="curPwd" class="col-sm-2 control-label" data-toggle="tooltip">当前密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="curPwd" name="curPwd" placeholder="当前密码" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPwd" class="col-sm-2 control-label">新密码</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="newPwd" name="newPwd" placeholder="字母和数字,8-20位" minlength="8" maxlength="20">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-primary pull-right" onclick="saveNewPwd();">确定</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- jQuery 2.2.3 -->
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- jvectormap -->
+<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="plugins/chartjs/Chart.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- AdminLTE for demo purposes -->
+<!--<script src="js/demo.js"></script>-->
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script>
+
+    // function repairIFrameHeight(){
+    //
+    //     var bh = $("#menuFrame").contentWindow.document.body.scrollHeight;
+    //     $("#menuFrame").height = bh;
+    //
+    // }
+
+    function updateCurrPos(posStr){
+        $("#currPos").html(posStr);
+    }
+
+    function updateMenus(result) {
+
+        var menuHtml = "";
+
+        for(var index in result.nodes){
+            var parent = result.nodes[index];
+
+            menuHtml = menuHtml + '<li class="treeview"><a href="#"><i class="fa ' + parent.iconClass + '"></i> <span>' + parent.name + '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">';
+
+            for(var subIndex in parent.children){
+                var child = parent.children[subIndex];
+                menuHtml = menuHtml + '<li><a href="'+ child.path +'" target="menuFrame"><i class="fa ' + child.iconClass + '"></i>' + child.name + '</a></li>';
+            }
+            menuHtml = menuHtml + '</ul></li>';
+        }
+
+        $("#menus").append(menuHtml);
+    }
+    
+    function regMenuClickEvents() {
+        $('a[target="menuFrame"]').click(function(){
+
+            var posStr = $(this).html();
+
+            var startIndex = posStr.lastIndexOf(">");
+
+            updateCurrPos(posStr.substring(startIndex));
+
+        });
+    }
+
+    function gotoOtherView(targetHtml, posName){
+        $("#currPos").html(posName);
+        $("#menuFrame",parent.document.body).attr("src",targetHtml);
+    }
+
+    function reqIndexData() {
+
+        $.post('admin/getIndex', {}, function(result){
+
+            if (result.code == 0) {
+                //alert(result.admin.username);
+                //location.href="index.html"
+                $("#currRole").html(result.admin.adminRoleName);
+                $('*[name="currUserName"]').each(function(){
+                    $(this).html(result.admin.username);
+                });
+
+                updateMenus(result);
+
+                regMenuClickEvents();
+
+            }else if(result.code == 2) {
+                location.href = "login.html";
+            }else{
+                alert(result.reason);
+            }
+
+        },'json');
+    }
+
+
+
+    $(function () {
+
+        reqIndexData();
+
+        regMenuClickEvents();
+
+
+    });
+
+    function loginOut() {
+        location.href = 'admin/logout'
+    }
+    
+    function changePwd(){
+    	$('#myModal').modal({backdrop: 'static', keyboard: false});
+        $('#myModal').modal('show');
+    }
+
+    function saveNewPwd(){
+    	var password = $("#curPwd").val();
+        var password2 = $("#newPwd").val();
+    	//var reg=/^\w{5,19}$/;
+        //var reg = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{8,20}$/;
+        var reg = /^(?=.*[a-zA-Z])(?=.*\d).{8,20}$/;
+        if(isEmpty(password) ||isEmpty(password2) ||!reg.test(password2)){
+            alertShow("#errBlock", "请输入合法的密码(字母和数字,8-20位)");
+            return;
+        }
+    	$.post('admin/changePwd?curPwd='+$.md5(password)+'&newPwd='+$.md5(password2), {}, function(result){
+            if (result.code == 0) {
+            	showTips("密码已重置");
+            	$('#myModal').modal('hide');
+            }
+            else if(result.code == 2){
+                location.href = "login.html";
+            }
+            else{
+            	showTips(result.reason);
+            }
+        },'json');
+    }
+
+    $("#menuFrame").load(function(){
+        //var mainheight = $(this).contents().find("body").height()+30;
+        $(this).height(window.innerHeight - 200);
+    });
+
+</script>
+
+</body>
+</html>

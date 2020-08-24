@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--mintegral alertview -->
+    <color name="mintegral_video_common_alertview_bg">#FFFFFFFF</color>
+    <color name="mintegral_video_common_alertview_title_textcolor">#38B154</color>
+    <color name="mintegral_video_common_alertview_content_textcolor">#353535 </color>
+    <color name="mintegral_video_common_alertview_confirm_button_bg_default">#FFEAEAEA</color>
+
+    <color name="mintegral_video_common_alertview_confirm_button_bg_pressed">#B3EAEAEA</color>
+    <color name="mintegral_video_common_alertview_cancel_button_bg_default">#FF27AE5F</color>
+    <color name="mintegral_video_common_alertview_cancel_button_bg_pressed">#B327AE5F</color>
+
+    <color name="mintegral_video_common_alertview_confirm_button_textcolor">#38B154</color>
+    <color name="mintegral_video_common_alertview_cancel_button_textcolor">#FFFFFF</color>
+
+</resources>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>U8SDK打包管理系统</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+    <!-- <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"> -->
+    <link rel="stylesheet" href="plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;overflow: hidden;clear: both;">
+
+                <div style="float: left;margin-left: 10px;padding-top: 10px;">
+                    <div style="float:left; margin-top: 5px;">
+                        <b>选择游戏：</b></span>
+                    </div>
+                    <div style="float: left">
+                        <select class="form-control select2 adminRoleAjax" style="width: 200px;" id="games"
+                                name="games">
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="btn-group" style="float: right; padding-top: 10px;">
+                    <button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
+                </div>
+
+            </div>
+            <div class="box-body clearfix">
+                <table id="logs" class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>渠道号</th>
+                        <th>打包标识</th>
+                        <th>渠道名称</th>
+                        <th>测试状态</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addTitle">提交反馈</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                    <div id="errBlock"></div>
+                    <form class="form-horizontal" id="fm" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="id"
+                                   name="id">
+                            <div class="form-group">
+                                <label for="resultOK" class="col-sm-3 control-label">测试结果</label>
+                                <div class="col-sm-9">
+                                    <label class="radio-inline" style="margin-left: -20px;">
+                                        <input type="radio" class="form-control" id="resultOK" name="testResult" value="1"> 通过
+                                    </label>
+                                    <label class="radio-inline" style="margin-left: 30px;">
+                                        <input type="radio" class="form-control" id="resultNO" name="testResult" value="0"> 不通过
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="feedback" class="col-sm-3 control-label" data-toggle="tooltip">失败原因</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="feedback" name="feedback" placeholder="请简洁说明失败原因"
+                                           maxlength="100">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-primary pull-right" onclick="saveFeedback();">提 交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<!--<div id="myModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                <!--<h4 class="modal-title" id="addTitle">测试反馈</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="form-group">-->
+                    <!--<label class="col-sm-3 control-label">测试结果</label>-->
+                    <!--<div class="col-sm-9">-->
+                        <!--<label class="checkbox-inline" style="margin-left: -20px;">-->
+                            <!--<input type="checkbox" id="resultOK" name="testResult" value="armeabi" checked> 通过-->
+                        <!--</label>-->
+                        <!--<label class="checkbox-inline">-->
+                            <!--<input type="checkbox" id="resultNO" name="testResult" value="armeabi-v7a"> 不通过-->
+                        <!--</label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="feedback" class="col-sm-3 control-label">失败原因</label>-->
+                    <!--<div class="col-sm-9">-->
+                        <!--<input type="text" class="form-control" id="feedback" name="feedback" placeholder="请简洁描述测试失败原因"-->
+                               <!--maxlength="50">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<input id="btnCommit" type="submit" name="submit" class="btn btn-success" value="提 交" />-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<!-- <script src="plugins/datepicker/bootstrap-datepicker.js"></script> -->
+<!--<script src="plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>-->
+<!--<script src="plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js"></script>-->
+<script>
+
+    var inited = false;
+
+    function downloadLog(id){
+
+        //$.get('admin/channel/downloadLog',{packID:id});
+        location.href = 'admin/channel/downloadLog?packID='+id;
+    }
+
+    function downloadApk(id){
+        location.href = 'admin/channel/downloadApk?packID='+id;
+    }
+
+    function downloadTestCase(id){
+        $.post('admin/channel/hasTestCase',{channelID:id}, function (result) {
+            if(result.code == 0){
+                location.href = 'admin/channel/downloadTestCase?channelID='+id;
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+    function testFeedback(id){
+        $('#id').val(id);
+        $('#resultOK').iCheck('uncheck');
+        $('#resultNO').iCheck('uncheck');
+        $("#feedback").val("");
+
+        $('#myModal').modal({backdrop: 'static', keyboard: false});
+        $('#myModal').modal('show');
+    }
+
+    function saveFeedback(){
+
+        var val=$('input:radio[name="testResult"]:checked').val();
+        if(val == null){
+            showTips("请选择测试结果");
+            return;
+        }
+
+        var feedback = $("#feedback").val();
+        var packID = $("#id").val();
+
+        $.post('admin/channel/saveFeedback',{packID:packID,testResult:val,feedback:feedback}, function (result) {
+            if(result.code == 0){
+                $('#myModal').modal('hide');
+                showTips("提交成功");
+                var table = $('#logs').DataTable();
+                table.ajax.reload();
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+
+    }
+
+    $(function () {
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+
+        function deletePackLog(id) {
+            $.post('admin/channel/deletePackLog',{id:id}, function (result) {
+                if(result.code == 0){
+                    showTips("操作成功");
+                    var table = $('#logs').DataTable();
+                    table.ajax.reload();
+                }
+                else{
+                    showTips(result.reason);
+                }
+            },'json');
+        }
+
+//        function reloadGames(selector, selectedID) {
+//            $.get('admin/game/getAllPermittedGames',{}, function (result) {
+//                var itemList = [];
+//                if(result.code == 0){
+//                    var lst = result.data;
+//                    var itemIndex;
+//                    for(itemIndex in lst){
+//                        if(lst[itemIndex].appID == selectedID){
+//                            itemList.unshift({id:lst[itemIndex].appID, text:lst[itemIndex].name});
+//                        }else{
+//                            itemList.push({id:lst[itemIndex].appID, text:lst[itemIndex].name});
+//                        }
+//                    }
+//                    //gameLst = itemList;
+//                }else if(result.code == 2){
+//                    parent.location.href = "login.html";
+//                }
+//                $(selector).select2({
+//                    data:itemList
+//                });
+//                $(selector).trigger('change');
+//            },'json');
+//        }
+
+        function search() {
+
+            if(inited){
+                var table = $('#logs').DataTable();
+                table.ajax.url('/admin/channel/getTestLogs');
+                table.ajax.reload();
+                return;
+            }
+
+            inited = true;
+
+            var table = $('#logs').DataTable({
+                select: {
+                    style: 'single'
+                },
+                "lengthChange":false,
+                "processing": true,
+                "serverSide":true,
+                "pageLength": 10,
+                ajax: {
+                    type:"GET",
+                    url:"/admin/channel/getTestLogs",
+                    dataSrc:"data",
+                    data:function (d) {
+                        var param = {};
+                        param.appID = $("#games").val();
+                        param.draw = d.draw;
+                        param.start = d.start;
+                        param.length = d.length;
+
+                        return param;
+                    }
+                },
+                columns: [
+                    { data: "id" },
+                    { data: "channelID" },
+                    { data: "name" },
+                    { data: "channelName" },
+                    {
+                        "sClass":"text-center",
+                        "data":"testState",
+                        "render":function(data, type, full, meta){
+
+                            if(data == -1){
+                                if(full.testFeed != null && full.testFeed.trim().length > 0){
+                                    return "<span style='color:red;'>"+full.testFeed+"</span>";
+                                }else{
+                                    return "<span style='color:red;'>不通过</span>";
+                                }
+                            }else if(data == 0){
+                                return "";
+                            }else if(data == 1){
+                                return '<button type="button" class="btn btn-default btn-sm" data-btn-type="dlog"  onclick="testFeedback('+full.id+');">测试反馈</button>';
+                            }else if(data == 2){
+                                return "<span style='color:green;'>通过</span>";
+                            }
+
+                        },
+                        "bSortable":false
+                    },
+                    { data: "createDate" },
+                    {
+                        "sClass":"text-center",
+                        "data":"id",
+                        "render":function(data, type, full, meta){
+
+                            var str = '<button type="button" class="btn btn-default btn-sm" data-btn-type="dlog"  onclick="downloadTestCase('+full.channelLocalID+');">测试用例</button>';
+                            if(full.state == 2){
+                                str += '&nbsp;&nbsp;<button type="button" class="btn btn-default btn-sm" data-btn-type="dlog"  onclick="downloadApk('+data+');">下载apk</button>&nbsp;&nbsp;' + '<button type="button" class="btn btn-default btn-sm" data-btn-type="dlog"  onclick="downloadLog('+data+');">下载log</button>';
+                            }else if(full.state == -1){
+                                str += '&nbsp;&nbsp;<button type="button" class="btn btn-default btn-sm" data-btn-type="dlog"  disabled="disabled">下载apk</button>&nbsp;&nbsp;' + '<button type="button" class="btn btn-default btn-sm" data-btn-type="dlog"  onclick="downloadLog('+data+');">下载log</button>';
+                            }
+
+                            return str;
+
+
+
+                        },
+                        "bSortable":false
+                    },
+                ],
+                "searching":false,
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "_PAGE_ / _PAGES_",
+                    "infoEmpty": "没有任何记录",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                    // "loadingRecords": "正在加载...",
+                    "processing":     "正在处理...",
+                    "search":         "搜索:",
+                    "paginate": {
+                        "first":      "首页",
+                        "last":       "尾页",
+                        "next":       "下一页",
+                        "previous":   "上一页"
+                    },
+                    "aria": {
+                        "sortAscending":  ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": "已选中%d行"
+                    }
+                }
+            });
+
+            $('button[data-btn-type]').click(function() {
+                var action = $(this).attr('data-btn-type');
+                switch (action){
+
+                    case 'delete':
+                        var data = $('#logs').DataTable().row('.selected').data();
+                        if(data == null){
+                            showTips("请先选择一条要删除的记录");
+                            return;
+                        }
+                        showConfirm("确定要删除该记录吗？（操作不可恢复）", function () {
+                            deletePackLog(data.id);
+                        });
+                        break;
+                }
+            });
+        }
+
+        $('#games').on('change', function() {
+            //currGameName = $(this).find("option:selected").text();
+            search();
+
+        });
+
+        reloadGames("#games", 0);
+
+    });
+</script>
+</body>
+</html>

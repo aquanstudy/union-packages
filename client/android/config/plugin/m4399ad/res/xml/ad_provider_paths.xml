@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-files-path
+        name="external_files_path"
+        path="." />
+
+    <!-- GDT -->
+    <external-path
+        name="gdt_sdk_download_path"
+        path="GDTDOWNLOAD" />
+    <!-- GDT -->
+
+    <!-- Uniplay -->
+    <root-path
+        name="download"
+        path="" />
+    <!-- Uniplay -->
+
+    <!-- OneWay -->
+    <root-path
+        name="root"
+        path="" />
+    <files-path
+        name="files"
+        path="." />
+    <external-path
+        name="sdcard"
+        path="." />
+    <cache-path
+        name="cache"
+        path="." />
+    <external-files-path
+        name="exFiles"
+        path="." />
+    <external-cache-path
+        name="exCache"
+        path="." />
+    <!-- OneWay -->
+</paths>

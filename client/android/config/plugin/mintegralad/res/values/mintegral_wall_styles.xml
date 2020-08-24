@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="mintegral_style_ratingbar" parent="@android:style/Widget.RatingBar">
+         <!-- item name="android:maxHeight">16dp</item -->
+          <!-- item name="android:minHeight">16dp</item -->
+           <item name="android:progressDrawable">@drawable/mintegral_wall_bg_ratingbar</item>
+    </style>
+
+</resources>

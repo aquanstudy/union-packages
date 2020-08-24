@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@id/m4399ad_id_view_close_ad"
+             android:layout_width="32dp"
+             android:layout_height="32dp"
+             android:layout_alignTop="@id/m4399ad_id_view_ad_content"
+             android:layout_alignEnd="@id/m4399ad_id_view_ad_content"
+             android:layout_alignRight="@id/m4399ad_id_view_ad_content"
+             android:layout_margin="20dp"
+             android:adjustViewBounds="true"
+             android:background="@android:color/transparent"
+             android:contentDescription="@string/m4399ad_default_img_content_desc"
+             android:scaleType="fitXY"
+             android:src="@drawable/m4399ad_ic_close_ad"/>

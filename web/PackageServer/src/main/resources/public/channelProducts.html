@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>U8SDK打包管理系统</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"> -->
+    <link rel="stylesheet" href="plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;overflow: hidden;clear: both;">
+                <div class="btn-group" style="float: left; padding-top: 10px;margin-left: 10px;">
+                    <button type="button" class="btn btn-default" data-btn-type="back">返回</button>
+                </div>
+
+                <div style="float: left;margin-left: 20px;padding-top: 10px;">
+                    <div style="float:left; margin-top: 5px;">
+                        <span id="gameName" style="font-weight: bold;"></span>的商品映射配置
+                    </div>
+                </div>
+
+                <div class="btn-group" style="float: right; padding-top: 10px;">
+                    <button type="button" class="btn btn-default" data-btn-type="add">新增</button>
+                    <button type="button" class="btn btn-default" data-btn-type="edit">编辑</button>
+                    <button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <table id="products" class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>游戏商品ID</th>
+                        <th>渠道平台商品ID</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addTitle">商品映射关系配置</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                    <div id="errBlock"></div>
+                    <form class="form-horizontal" id="fm">
+                        <div class="box-body">
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="id"
+                                   name="id">
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="appID"
+                                   name="appID">
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="channelID"
+                                   name="channelID">
+                            <div class="form-group">
+                                <label for="gameProductID" class="col-sm-3 control-label" data-toggle="tooltip">游戏商品ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="gameProductID" name="gameProductID" placeholder="请输入游戏中商品ID"
+                                           maxlength="255">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="channelProductID" class="col-sm-3 control-label">渠道平台商品ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="channelProductID" name="channelProductID"
+                                           placeholder="请输入该商品对应的渠道后台商品ID" maxlength="255">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                            <button type="button" class="btn btn-primary pull-right" onclick="saveProduct();">保 存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<!-- <script src="plugins/datepicker/bootstrap-datepicker.js"></script> -->
+<script src="plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script src="plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js"></script>
+<script>
+
+    var inited = false;
+
+    function saveProduct() {
+        var gameProductID = $("#gameProductID").val();
+        if(isEmpty(gameProductID)){
+            alertShow("#errBlock", "请输入游戏商品ID");
+            return;
+        }else{
+            alertHide("#errBlock");
+        }
+
+        var channelProductID = $("#channelProductID").val();
+        if(isEmpty(channelProductID)){
+            alertShow("#errBlock", "请输入渠道平台商品ID");
+            return;
+        }else{
+            alertHide("#errBlock");
+        }
+
+        $("#appID").val( getParameter("appID"));
+        $("#channelID").val( getParameter("channelID"));
+
+        $('#fm').ajaxSubmit({
+            url:'admin/channelproduct/save',
+            type:'POST',
+            dataType:'json',
+            data:{},
+            success:function (result) {
+                if(result.code == 0){
+                    $('#myModal').modal('hide');
+                    showTips("操作成功");
+                    var table = $('#products').DataTable();
+                    table.ajax.reload();
+                }
+                else{
+                    showTips(result.reason);
+                }
+            }
+        });
+    }
+
+    function deleteProduct(id) {
+
+        var appID = getParameter("appID");
+        var channelID = getParameter("channelID");
+
+        $.post('admin/channelproduct/delete',{appID:appID, channelID:channelID, id:id}, function (result) {
+            if(result.code == 0){
+                showTips("操作成功");
+                var table = $('#products').DataTable();
+                table.ajax.reload();
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+
+    $(function () {
+
+        var gameName = getParameter("gameName");
+        var channelName = getParameter("channelName");
+        var channelID = getParameter("channelID")
+
+        $("#gameName").html(gameName+"——"+channelName+"(渠道号："+channelID+")");
+
+
+
+        function search() {
+
+            if(inited){
+                var table = $('#products').DataTable();
+                table.ajax.url('/admin/channelproduct/getAll');
+                table.ajax.reload();
+                return;
+            }
+
+            inited = true;
+
+            var table = $('#products').DataTable({
+                select: {
+                    style: 'single'
+                },
+                "lengthChange":false,
+                "processing": true,
+                "pageLength": 10,
+                ajax: {
+                    type:"GET",
+                    url:"/admin/channelproduct/getAll",
+                    dataSrc:"data",
+                    data:function (d) {
+
+                        var appID = getParameter("appID");
+                        var channelID = getParameter("channelID");
+
+                        var param = {};
+                        param.appID = appID;
+                        param.channelID = channelID;
+
+                        return param;
+                    }
+                },
+                columns: [
+                    { data: "id" },
+                    { data: "gameProductID" },
+                    { data: "channelProductID" }
+                ],
+                "searching":false,
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "_PAGE_ / _PAGES_",
+                    "infoEmpty": "没有任何记录",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                    // "loadingRecords": "正在加载...",
+                    "processing":     "正在处理...",
+                    "search":         "搜索:",
+                    "paginate": {
+                        "first":      "首页",
+                        "last":       "尾页",
+                        "next":       "下一页",
+                        "previous":   "上一页"
+                    },
+                    "aria": {
+                        "sortAscending":  ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": "已选中%d行"
+                    }
+                }
+            });
+
+            $('button[data-btn-type]').click(function() {
+                var action = $(this).attr('data-btn-type');
+                switch (action){
+
+                    case 'add':
+                        $(':input','#myModal')
+                                .not(':button, :submit, :reset')
+                                .val('')
+                                .removeAttr('checked')
+                                .removeAttr('selected');
+
+                        $('#myModal').modal({backdrop: 'static', keyboard: false});
+                        $('#myModal').modal('show');
+                        break;
+
+                    case 'edit':
+                        var data = $('#products').DataTable().row('.selected').data();
+                        if(data == null){
+                            showTips("请先选择一条要编辑的记录");
+                            return;
+                        }
+                        $(':input','#myModal')
+                                .not(':button, :submit, :reset')
+                                .val('')
+                                .removeAttr('checked')
+                                .removeAttr('selected');
+
+                        $("#id").val(data.id);
+                        $("#gameProductID").val(data.gameProductID);
+                        $("#channelProductID").val(data.channelProductID);
+
+                        $('#myModal').modal({backdrop: 'static', keyboard: false});
+                        $('#myModal').modal('show');
+                        break;
+
+                    case 'delete':
+                        var data = $('#products').DataTable().row('.selected').data();
+                        if(data == null){
+                            showTips("请先选择一条要删除的记录");
+                            return;
+                        }
+                        showConfirm("确定要删除该记录吗？（操作不可恢复）", function () {
+                            deleteProduct(data.id);
+                        });
+                        break;
+                    case 'back':
+                        window.history.back();
+                        break;
+                }
+            });
+        }
+
+        search();
+
+
+
+    });
+</script>
+</body>
+</html>

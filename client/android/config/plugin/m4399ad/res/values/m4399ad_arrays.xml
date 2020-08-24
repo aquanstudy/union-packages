@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="m4399sdk_support_error_web_titles">
+        <item>找不到网页</item>
+        <item>Error 405</item>
+        <!--<item>error</item>-->
+    </array>
+</resources>

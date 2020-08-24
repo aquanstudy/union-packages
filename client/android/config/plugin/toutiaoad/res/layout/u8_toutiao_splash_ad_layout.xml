@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <FrameLayout
+        android:id="@+id/u8_toutiao_splash_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        >
+    </FrameLayout>
+
+    <!-- 4.预设开屏图片区域： -->
+    <!-- 开发者可以把自家App设计开屏图片摆放在这里，本示例中放置了一张静态图片。然后在onADPresent回调中再把这个图片隐藏起来。 !-->
+    <!-- 注意1：直接将此图盖在广告容器的上面即可，始终不要将广告容器splash_container的设为invisible，否则将不会展示广告无法计费，返回错误码600。-->
+    <!-- 注意2：建议开发者使用自己的开屏图片资源，而不是联盟的@drawable/tx_splash_holder，资源规格可参照@drawable/tx_splash_holder -->
+    <ImageView
+        android:id="@+id/tt_splash_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/tx_splash_holder" />
+
+</RelativeLayout>

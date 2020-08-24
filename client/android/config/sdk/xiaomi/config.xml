@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <params>
+        <param name="MiAppID" bWriteInClient="1" bWriteInManifest="0" desc="小米" required="1" showName="AppID" />
+        <param name="MiAppKey" bWriteInClient="1" bWriteInManifest="0" desc="小米" required="1" showName="AppKey" />
+    </params>
+
+    <operations>
+        <operation from="SDKManifest.xml" step="1" to="AndroidManifest.xml" type="mergeManifest" />
+        <operation from="assets" step="2" to="assets" type="copyRes" />
+        <operation from="libs" step="3" to="lib" type="copyRes" />
+        <operation from="res" step="4" to="res" type="copyRes" />
+    </operations>
+
+    <plugins>
+        <plugin name="com.u8.sdk.XiaoMiUser" desc="用户登录接口" type="1" />
+        <plugin name="com.u8.sdk.XiaoMiPay" desc="用户支付接口" type="2" />
+    </plugins>
+
+    <version>
+        <name>小米(商用版本)</name>
+        <serverChannelMaster>xiaomi</serverChannelMaster>
+        <versionCode>1</versionCode>
+        <versionName>3.2.2</versionName>
+    </version>
+
+</config>

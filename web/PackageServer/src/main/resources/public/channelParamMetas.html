@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>U8SDK打包管理系统</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"> -->
+    <link rel="stylesheet" href="plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;overflow: hidden;clear: both;">
+                <div class="btn-group" style="float: left; padding-top: 10px;margin-left: 10px;">
+                    <button type="button" class="btn btn-default" data-btn-type="back">返回</button>
+                </div>
+
+                <div style="float: left;margin-left: 20px;padding-top: 10px;">
+                    <div style="float:left; margin-top: 5px;">
+                        <span id="channelName" style="font-weight: bold;"></span> 的参数Meta配置
+                    </div>
+                </div>
+
+                <div class="btn-group" style="float: right; padding-top: 10px;">
+                    <button type="button" class="btn btn-default" data-btn-type="add">新增</button>
+                    <button type="button" class="btn btn-default" data-btn-type="edit">编辑</button>
+                    <button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
+                </div>
+
+            </div>
+            <div class="box-body">
+                <table id="metas" class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>唯一Key</th>
+                        <th>显示名称</th>
+                        <th>默认值</th>
+                        <th>存储位置</th>
+                        <th>参数类型</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addTitle">参数Meta配置</h4>
+            </div>
+            <div class="modal-body no-border">
+                <div class="row" style="margin-left: -50px">
+                    <div class="row" style="width: 80%;margin: 0 auto;">
+                        <!--<div class="box box-primary no-border">-->
+                        <div id="errBlock"></div>
+                        <form class="form-horizontal no-border" id="fm">
+                            <!--<div class="box-body no-border" style="margin-left: -90px;">-->
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="id"
+                                   name="id">
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="masterSdkName"
+                                   name="masterSdkName">
+                            <div class="form-group">
+                                <label for="paramKey" class="col-sm-2 control-label" data-toggle="tooltip">唯一Key</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="paramKey" name="paramKey" placeholder="请输入参数唯一Key"
+                                           maxlength="255">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">参数类型</label>
+                                <div class="col-sm-10" style="margin-left: -20px;">
+                                    <label class="checkbox-inline" >
+                                        <input type="radio" id="typeNone" name="paramType" value="0"> <span id="lblTypeNone" >通用</span>
+                                    </label>
+                                    <label class="checkbox-inline" >
+                                        <input type="radio" id="typeClient" name="paramType" value="1"> <span id="lblTypeClient" >客户端</span>
+                                    </label>
+                                    <label class="checkbox-inline" >
+                                        <input type="radio" id="typeServer" name="paramType" value="2"> <span id="lblTypeServer">服务端</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="showName" class="col-sm-2 control-label">显示名称</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="showName" name="showName"
+                                           placeholder="参数配置时，显示的名称" maxlength="255">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">样式<a id="paramStyleTips" href="javascript:void(0);" data-toggle="popover"  data-html="true" title="配置说明" data-content="选择文本样式，下面样式值留空即可.<br>选择列表样式，下面样式值请配置多个选择项(用|分割).<br>选择文件样式，样式值请填写文件相对资源路径,比如assets/config.txt和res/drawable/icon.png" class="popup" style="display: inline-block;cursor:default;margin-top: 0;"><i class="fa fa-question-circle" style="font-size: 14px;"></i></a></label>
+
+                                <div class="col-sm-10" style="margin-left: -20px;">
+                                    <label class="checkbox-inline" >
+                                        <input type="radio" id="styleText" name="paramStyle" value="0"> <span id="lblStyleText" >文 本</span>
+                                    </label>
+                                    <label class="checkbox-inline" >
+                                        <input type="radio" id="styleList" name="paramStyle" value="1"> <span id="lblStyleList" >列 表</span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" id="styleFile" name="paramStyle" value="2"> <span id="lblStyleFile" >文 件</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="defaultVal" class="col-sm-2 control-label">样式值</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="styleExtra" name="styleExtra"
+                                           placeholder="如果样式需要额外值配合,请配置到这里" maxlength="4096">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="defaultVal" class="col-sm-2 control-label">默认值</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="defaultVal" name="defaultVal"
+                                           placeholder="给该配置项添加一个默认值" maxlength="4096">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="metaDesc" class="col-sm-2 control-label">配置说明</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="metaDesc" name="metaDesc"
+                                           placeholder="给该配置项添加一个简洁说明" maxlength="60">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">存储位置</label>
+                                <div class="col-sm-10" style="margin-left: -20px;">
+                                    <label class="checkbox-inline">
+                                        <input type="radio" id="posNone" name="pos" value="0"> <span id="lblPosNone" >不存储</span>
+                                    </label>
+                                    <label class="checkbox-inline" style="margin-left: -5px;">
+                                        <input type="radio" id="posConfig" name="pos" value="1"> <span id="lblPosConfig" >配置文件</span>
+                                    </label>
+                                    <label class="checkbox-inline" style="margin-left: -5px;">
+                                        <input type="radio" id="posMetaData" name="pos" value="2"> <span id="lblPosMetaData" >meta-data</span>
+                                    </label>
+                                    <label class="checkbox-inline" style="margin-left: -5px;">
+                                        <input type="radio" id="posBoth" name="pos" value="3"> <span id="lblPosBoth">都存储</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!--</div>-->
+                        </form>
+                        <!--</div>-->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                    <button type="button" class="btn btn-primary pull-right" onclick="saveMeta();">保 存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<!-- <script src="plugins/datepicker/bootstrap-datepicker.js"></script> -->
+<script src="plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script src="plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js"></script>
+<script>
+
+    var inited = false;
+
+    function saveMeta() {
+
+        var paramKey = $("#paramKey").val();
+        if(isEmpty(paramKey)){
+            alertShow("#errBlock", "请输入参数唯一Key");
+            return;
+        }else{
+            alertHide("#errBlock");
+        }
+
+        var showName = $("#showName").val();
+        if(isEmpty(showName)){
+            alertShow("#errBlock", "请输入参数显示名称");
+            return;
+        }else{
+            alertHide("#errBlock");
+        }
+
+        $("#masterSdkName").val( getParameter("masterSdkName"));
+
+        $('#fm').ajaxSubmit({
+            url:'admin/channel/saveMeta',
+            type:'POST',
+            dataType:'json',
+            data:{},
+            success:function (result) {
+                if(result.code == 0){
+                    $('#myModal').modal('hide');
+                    showTips("操作成功");
+                    var table = $('#metas').DataTable();
+                    table.ajax.reload();
+                }
+                else{
+                    showTips(result.reason);
+                }
+            }
+        });
+    }
+
+    function deleteMeta(id) {
+
+        $.post('admin/channel/deleteMeta',{metaID:id}, function (result) {
+            if(result.code == 0){
+                showTips("操作成功");
+                var table = $('#metas').DataTable();
+                table.ajax.reload();
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+
+    $(function () {
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+
+        var channelName = getParameter("channelName");
+
+        $("#channelName").html(channelName);
+
+        $('#paramStyleTips').popover({
+            trigger: 'hover',
+            container: 'body'
+        });
+
+
+        function search() {
+
+            if(inited){
+                var table = $('#metas').DataTable();
+                table.ajax.url('/admin/channel/getMetas');
+                table.ajax.reload();
+                return;
+            }
+
+            inited = true;
+
+            var table = $('#metas').DataTable({
+                select: {
+                    style: 'single'
+                },
+                "lengthChange":false,
+                "processing": true,
+                "pageLength": 10,
+                ajax: {
+                    type:"GET",
+                    url:"/admin/channel/getMetas",
+                    dataSrc:"data",
+                    data:function (d) {
+                        var masterSdkName = getParameter("masterSdkName");
+
+                        var param = {};
+                        param.masterSdkName = masterSdkName;
+
+                        return param;
+                    }
+                },
+                columns: [
+                    { data: "id" },
+                    { data: "paramKey" },
+                    { data: "showName" },
+                    { data: "defaultVal" },
+                    {
+                        "sClass":"text-center",
+                        "data":"pos",
+                        "render":function(data, type, full, meta){
+
+                            if(data == 0){
+
+                                return "不存储";
+                            }else if(data == 1){
+                                return "配置文件";
+                            }else if(data == 2) {
+                                return "meta-data";
+                            }else if(data == 3) {
+                                return "都存储";
+                            }
+
+                        },
+                        "bSortable":false
+                    },
+                    {
+                        "sClass":"text-center",
+                        "data":"paramType",
+                        "render":function(data, type, full, meta){
+
+                            if(data == 0){
+                                return "前后端通用";
+                            }else if(data == 1){
+                                return "客户端专用";
+                            }else if(data == 2) {
+                                return "服务端专用";
+                            }
+
+                        },
+                        "bSortable":false
+                    },
+                ],
+                "searching":false,
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "_PAGE_ / _PAGES_",
+                    "infoEmpty": "没有任何记录",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                    // "loadingRecords": "正在加载...",
+                    "processing":     "正在处理...",
+                    "search":         "搜索:",
+                    "paginate": {
+                        "first":      "首页",
+                        "last":       "尾页",
+                        "next":       "下一页",
+                        "previous":   "上一页"
+                    },
+                    "aria": {
+                        "sortAscending":  ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": "已选中%d行"
+                    }
+                }
+            });
+
+            $('button[data-btn-type]').click(function() {
+                var action = $(this).attr('data-btn-type');
+                switch (action){
+
+                    case 'add':
+                        $(":input[type='text']",'#myModal').val('');
+
+                        $("input[name='pos']").iCheck('uncheck');
+                        $("input[name='paramType']").iCheck('uncheck');
+                        $("input[name='paramStyle']").iCheck('uncheck');
+
+                        $("#posConfig").iCheck("check");
+                        $("#typeNone").iCheck("check");
+
+                        $('#myModal').modal({backdrop: 'static', keyboard: false});
+                        $('#myModal').modal('show');
+                        break;
+
+                    case 'edit':
+                        var data = $('#metas').DataTable().row('.selected').data();
+                        if(data == null){
+                            showTips("请先选择一条要编辑的记录");
+                            return;
+                        }
+                        $(":input[type='text']",'#myModal').val('');
+
+                        $("input[name='pos']").iCheck('uncheck');
+                        $("input[name='paramType']").iCheck('uncheck');
+                        $("input[name='paramStyle']").iCheck('uncheck');
+
+                        $("#id").val(data.id);
+                        $("#paramKey").val(data.paramKey);
+                        $("#showName").val(data.showName);
+                        $("#metaDesc").val(data.metaDesc);
+                        $("#defaultVal").val(data.defaultVal);
+                        $("#styleExtra").val(data.styleExtra);
+
+                        if(data.pos == 0){
+                            $("#posNone").iCheck('check');
+                        }else if(data.pos == 1){
+                            $("#posConfig").iCheck('check');
+                        }else if(data.pos == 2){
+                            $("#posMetaData").iCheck('check');
+                        }else if(data.pos == 3){
+                            $("#posBoth").iCheck('check');
+                        }
+
+                        if(data.paramType == 0){
+                            $("#typeNone").iCheck('check');
+                        }else if(data.paramType == 1){
+                            $("#typeClient").iCheck('check');
+                        }else if(data.paramType == 2){
+                            $("#typeServer").iCheck('check');
+                        }
+
+                        if(data.paramStyle == 0){
+                            $("#styleText").iCheck('check');
+                        }else if(data.paramStyle == 1){
+                            $("#styleList").iCheck('check');
+                        }else if(data.paramStyle == 2){
+                            $("#styleFile").iCheck('check');
+                        }
+
+                        $('#myModal').modal({backdrop: 'static', keyboard: false});
+                        $('#myModal').modal('show');
+                        break;
+
+                    case 'delete':
+                        var data = $('#metas').DataTable().row('.selected').data();
+                        if(data == null){
+                            showTips("请先选择一条要删除的记录");
+                            return;
+                        }
+                        showConfirm("确定要删除该记录吗？（删除之后可能会影响服务器端参数读取，请提前确认好再删除）", function () {
+                            deleteMeta(data.id);
+                        });
+                        break;
+                    case 'back':
+                        window.history.back();
+                        break;
+                }
+            });
+        }
+
+        search();
+
+
+
+    });
+</script>
+</body>
+</html>

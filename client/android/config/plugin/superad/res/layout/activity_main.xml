@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top" >
+
+    <LinearLayout
+        android:id="@+id/layout_chuanshanjia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/tt_splash_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开屏" />
+
+        <Button
+            android:id="@+id/tt_popup_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="插屏" />
+
+        <Button
+            android:id="@+id/tt_banner_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Banner" />
+
+        <Button
+            android:id="@+id/tt_video_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="激励视频" />
+
+        <Button
+            android:id="@+id/tt_native_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="原生" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout_chuanshanjia"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/tx_splash_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开屏" />
+
+        <Button
+            android:id="@+id/tx_popup_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="插屏" />
+
+        <Button
+            android:id="@+id/tx_banner_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Banner" />
+
+        <Button
+            android:id="@+id/tx_video_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="激励视频" />
+
+        <Button
+            android:id="@+id/tx_native_ad_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="原生" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

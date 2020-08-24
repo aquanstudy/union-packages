@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="m4399ad_default_img_content_desc">TODO</string>
+
+    <!-- Advert request error message-->
+    <string name="m4399ad_error_not_initialed">MobileAds没有初始化，请先调用`MobileAds.initialize`</string>
+    <string name="m4399ad_error_ad_unit_null">在加载广告前没有先设置广告位id</string>
+    <string name="m4399ad_error_join_args">请求参数错误</string>
+    <string name="m4399ad_error_no_network">无可用网络</string>
+    <string name="m4399ad_error_abnormal_response">网络请求异常</string>
+    <string name="m4399ad_error_fill_img_content">加载广告图片失败</string>
+    <string name="m4399ad_error_parse_video_meta">获取视频信息失败</string>
+    <string name="m4399ad_error_invalid_context">Context不可用</string>
+    <string name="m4399ad_error_show_dialog_exception">显示广告对话框异常</string>
+
+    <!--Advert view-->
+    <string name="m4399ad_fmt_close_ad_delayed">%02ds</string>
+    <string name="m4399ad_fmt_video_duration">%02ds</string>
+    <string name="m4399ad_action_close">关闭</string>
+    <string name="m4399ad_action_close_ad">关闭广告</string>
+    <string name="m4399ad_action_abandon_and_quit">放弃并退出</string>
+    <string name="m4399ad_action_continue_view">继续观看</string>
+
+    <!--Advert event and action-->
+    <string name="m4399ad_message_downloading">正在下载《%s》</string>
+    <string name="m4399ad_message_start_download">开始下载《%s》</string>
+    <string name="m4399ad_message_download_failed">下载失败</string>
+    <string name="m4399ad_message_exe_action_failed">操作失败</string>
+
+    <string name="m4399ad_ad_label">广告</string>
+    <string name="m4399ad_dialog_title_abort_video_play">中途退出可能无法获得奖励，是否放弃？</string>
+    <string name="m4399ad_dialog_title_confirm_video">您当前没有连接WIFI，播放广告将消耗流量，您确定要播放吗？</string>
+    <string name="m4399ad_dialog_title_confirm_download">您当前没有连接WIFI，下载游戏将消耗流量，您确定要下载吗？</string>
+
+    <string name="m4399ad_action_download">下载</string>
+    <string name="m4399ad_action_download_immediately">立即下载</string>
+    <string name="m4399ad_action_play">开始玩</string>
+    <string name="m4399ad_action_browse">打开</string>
+    <string name="m4399ad_action_display_ad">继续播放</string>
+    <string name="m4399ad_action_cancel_display">取消播放</string>
+    <string name="m4399ad_action_cancel">取消</string>
+
+    <string name="m4399ad_error_start_app">启动应用失败，通过点击桌面图标重试</string>
+    <string name="m4399ad_error_app_not_found">没有自动启动方式，通过点击桌面图片重试</string>
+    <string name="m4399ad_error_intent_not_supported">当前版本游戏盒不支持直接打开小游戏，请在游戏盒内打开</string>
+    <string name="m4399ad_error_start_minigame">启动小游戏失败，通过点击桌面图标重试</string>
+    <string name="m4399ad_error_play_video">视频播放出错，请尝试重新打开</string>
+    <string name="m4399ad_error_video_data">解析视频数据错误，请尝试重新打开</string>
+    <string name="m4399ad_error_no_ad_container">缺少展示广告的容器</string>
+    <string name="m4399ad_error_no_ad_material">指定广告位没有数据</string>
+    <string name="m4399ad_error_no_preloaded_ad">没有预加载好的广告</string>
+    <string name="m4399ad_error_ad_not_inited">没有初始化广告</string>
+    <string name="m4399ad_error_context_not_inited">AdContext没有初始化，可能被异常销毁</string>
+    <string name="m4399ad_error_request_not_cool_down">同一广告位连续请求太频繁</string>
+    <string name="m4399ad_error_bad_container">控件广告需要合适的容器</string>
+    <string name="m4399ad_error_corrupted_apk_file">游戏安装文件异常</string>
+    <string name="m4399ad_error_denied_for_non_wifi">用户拒绝非wifi环境下展示广告</string>
+
+
+    <!-- Target Details -->
+    <string name="m4399ad_target_desc_title">游戏简介</string>
+    <string name="m4399ad_fmt_target_apk_size">大小：%.1fM</string>
+    <string name="m4399ad_fmt_target_download_amount_1">%d下载</string>
+    <string name="m4399ad_fmt_target_download_amount_10k">%.1f万+下载</string>
+    <string name="m4399ad_fmt_target_gallery_indicator">%1$d/%2$d</string>
+
+    <!-- Support -->
+    <string name="m4399sdk_support_msg_network_off">网络断开连接</string>
+    <string name="m4399sdk_support_msg_network_timeout">加载网页超时</string>
+    <string name="m4399sdk_support_msg_network_abnormal">网络异常，点击刷新点击</string>
+    <string name="m4399sdk_support_title_ssl_error">网页SSL证书错误</string>
+    <string name="m4399sdk_support_msg_ssl_error">当前网页SSL证书异常，是否继续打开？</string>
+    <string name="m4399sdk_support_action_goon">继续</string>
+    <string name="m4399sdk_support_action_cancel">取消</string>
+    <string name="m4399sdk_support_hint_download_dest">下载完成后请到sdcard的Download目录下查找文件</string>
+    <string name="m4399sdk_support_msg_download_start">下载已开始，可在通知栏查看进度</string>
+
+</resources>

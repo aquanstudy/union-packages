@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <permissionConfig>
+
+        <!-- TODO GAME SDK接入必须权限模块 START -->
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+        <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+
+        <!-- TODO GAME SDK Midas接入配置 设置屏幕兼容声明 START -->
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+        <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+        <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission android:name="android.permission.READ_SMS" />
+        <uses-permission android:name="android.permission.SEND_SMS" />
+        <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true" />
+        <!-- TODO GAME SDK Midas接入配置 设置屏幕兼容声明 END -->
+        <!-- 【必须】 信鸽SDK所需权限   -->
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <uses-permission android:name="android.permission.VIBRATE" />
+        <!-- 【常用】 信鸽SDK所需权限 -->
+        <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+        <!-- 【可选】 信鸽SDK所需权限 -->
+        <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+        <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+        <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+        <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission android:name="android.permission.READ_LOGS" />
+        <uses-permission android:name="android.permission.BLUETOOTH" />
+        <uses-permission android:name="android.permission.BATTERY_STATS" />
+
+        <!-- TODO GAME SDK设备指纹接入权限 -->
+        <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.BLUETOOTH"/>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+        <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" />
+        
+    </permissionConfig>
+    
+    <applicationConfig keyword="com.tencent.tauth.AuthActivity" proxyApplication="com.u8.sdk.YSDKProxyApplication">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+		<activity
+            android:name="com.u8.sdk.ChooseLoginTypeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="behind" 
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- TODO GAME SDK接入YSDK登陆接入配置 START -->
+        <activity
+            android:name="com.tencent.ysdk.module.realName.impl.RegisterRealNameActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+
+        <!-- TODO GAME SDK接入YSDK登陆接入配置 END -->
+        <!-- TODO GAME SDK QQ接入配置 START -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- TODO GAME SDK QQ接入配置 END -->
+
+        <!-- TODO GAME SDK 微信接入配置 START -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="WXEntryActivity"
+            android:launchMode="singleTop"
+            android:taskAffinity=".diff"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <!-- TODO GAME 这里为游戏微信登录的配置，游戏需要修改为自己的包名加.diff -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- TODO GAME 1.4.1之后版本支持微信扫码登录，低于此版本升级的YSDK务必增加此处Activity用于二维码展示 -->
+        <activity android:name="com.tencent.ysdk.module.user.impl.wx.qrcode.QRActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=".u8sdk">
+
+        </activity>
+        <!-- TODO GAME SDK 微信接入配置 END -->
+                <!-- TODO GAME SDK接入免登录接入配置 START -->
+        <activity
+            android:name="com.tencent.ysdk.module.user.impl.freelogin.FreeLoginInfoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <!-- TODO GAME 这里为解析外部传入的登录信息，为云设备或者沙盒游戏宿主所调用,这里 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+        </activity>
+
+        <!--        &lt;!&ndash; TODO GAME SDK接入YSDK登陆接入配置 END &ndash;&gt;-->
+
+
+        <!-- TODO GAME SDK Midas接入配置 START -->
+        <!-- 请务必设置屏幕方向! midas当前不支持屏幕旋转 android:screenOrientation="portrait" android:screenOrientation="landscape" -->
+        <activity
+            android:name="com.tencent.midas.proxyactivity.APMidasPayProxyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.midas.wx.APMidasWXPayActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="com.tencent.midas.qq.APMidasQQWalletActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="qwallet100703379" />
+                <!-- TODO GAME 这里为米大师的默认配置，游戏不要修改 -->
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.midas.jsbridge.APWebJSBridgeActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <!-- TODO GAME SDK Midas接入配置 END -->
+        <!--省流量更新SDK的下载服务须注册-->
+        <service
+            android:name="com.tencent.tmdownloader.TMAssistantDownloadService"
+            android:exported="false"
+            android:process=":TMAssistantDownloadSDKService"></service>
+
+        <!-- TODO GAME SDK 推送能力接入配置 START -->
+        <!-- 【必须】 信鸽Activity -->
+        <activity
+            android:name="com.tencent.android.tpush.XGPushActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent">
+            <intent-filter>
+                <!-- 若使用AndroidStudio，请设置android:name="android.intent.action" -->
+                <action android:name="android.intent.action" />
+            </intent-filter>
+        </activity>
+        <!-- 【必须】 信鸽receiver广播接收 -->
+        <receiver
+            android:name="com.tencent.android.tpush.XGPushReceiver"
+            android:process=":xg_service_v4">
+            <intent-filter android:priority="0x7fffffff">
+                <!-- 【必须】 信鸽SDK的内部广播 -->
+                <action android:name="com.tencent.android.tpush.action.SDK" />
+                <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />
+                <!-- 【必须】 系统广播：开屏和网络切换 -->
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <!-- 【可选】 一些常用的系统广播，增强信鸽service的复活机会，请根据需要选择。当然，你也可以添加APP自定义的一些广播让启动service -->
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 【必须】YSDK实现的Receiver，用于接收消息透传和操作结果的回调 -->
+
+        <receiver
+            android:name="com.tencent.ysdk.module.push.XGPushModule"
+            android:exported="true">
+            <intent-filter>
+                <!-- 接收消息透传 -->
+                <action android:name="com.tencent.android.tpush.action.PUSH_MESSAGE" />
+                <!-- 监听注册、反注册、设置/删除标签、通知被点击等处理结果 -->
+                <action android:name="com.tencent.android.tpush.action.FEEDBACK" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 【必须】 信鸽service -->
+        <service
+            android:name="com.tencent.android.tpush.service.XGPushServiceV4"
+            android:exported="true"
+            android:persistent="true"
+            android:process=":xg_service_v4" />
+
+        <!-- 【必须】 提高service的存活率 -->
+        <service
+            android:name="com.tencent.android.tpush.rpc.XGRemoteService"
+            android:exported="true">
+            <intent-filter>
+                <!-- 【必须】 请修改为当前APP包名 .PUSH_ACTION, 如demo的包名为：com.qq.xgdemo -->
+                <action android:name="${applicationId}.PUSH_ACTION" />
+            </intent-filter>
+        </service>
+        <!-- 【必须】 增强xg_service存活率 -->
+        <service
+            android:name="com.tencent.android.tpush.service.XGDaemonService"
+            android:process=":xg_service_v4" />
+        <!-- 【必须】 【注意】authorities修改为 包名.AUTH_XGPUSH, 如demo的包名为：com.tencent.tmgp.yybtestsdk-->
+        <provider
+            android:name="com.tencent.android.tpush.XGPushProvider"
+            android:authorities="${applicationId}.AUTH_XGPUSH"
+            android:exported="true" />
+
+        <!-- 【必须】 【注意】authorities修改为 包名.TPUSH_PROVIDER, 如demo的包名为：com.tencent.tmgp.yybtestsdk-->
+        <provider
+            android:name="com.tencent.android.tpush.SettingsContentProvider"
+            android:authorities="${applicationId}.TPUSH_PROVIDER"
+            android:exported="false" />
+
+        <!-- 【必须】 【注意】authorities修改为 包名.TENCENT.MID.V3, 如demo的包名为：com.tencent.tmgp.yybtestsdk-->
+        <provider
+            android:name="com.tencent.mid.api.MidProvider"
+            android:authorities="${applicationId}.TENCENT.MID.V3"
+            android:exported="true"></provider>
+
+
+        <!-- 【必须】 CHANNEL_ID无需修改保持不变-->
+        <meta-data
+            android:name="XG_V4_CHANNEL_ID"
+            android:value="1234567" />
+        <!-- TODO GAME SDK 推送能力接入配置 End -->
+
+        <!-- TODO 鉴权SDK 接入配置 START -->
+        <activity
+            android:name="com.tencent.qqdownloader.pay.QQDownloaderEntryActivity"
+            android:exported="true"></activity>
+
+        <meta-data
+            android:name="YSDK_AUTH_KEY"
+            android:value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsKX4kg6T32qn8uHc6j9AwMeQzpUW3hh6o8WiBJi9wlx0pWWRLoqdQuhoUPGpfrdVyt/iEnlvF4fmCkk82bJxXv4x2QRqR4tq3Li5YODzk/xLlQsa3F9nPb+iadqdQJfm6n53ts3uxkApl3gMURuw8SfoFuzuB3mpYHFO+DXQ7BSU2N/+Sdjb6xuOPWHrk9kXSo+h2VTkCwYcpEVC505T0MoA4PtX3GwsO7+lSJrRwuwzXi0eBi5evV57g9WhNnsZLfHTYqC43EGfbj0+/rNXQgz2AfJ78y5jW0am2WMBaO4Sao/acYHu/e+PSqr+fvolmbB1cFLCkCFnF6jBMuk8AQIDAQAB" />
+        <meta-data
+            android:name="YSDK_AUTH_KEY_VERSION"
+            android:value="0" />
+        <!-- TODO 鉴权SDK 接入配置 END -->
+        <activity android:name=".module.submodule.inner.WebActivity"></activity>
+
+        <provider
+            android:name="com.tencent.ysdk.framework.web.YYBInstallFileProvider"
+            android:authorities="${applicationId}.installfileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/com_tencent_ysdk_fileprovider_path" />
+        </provider>
+    </applicationConfig>
+    
+</manifest>

@@ -1,0 +1,185 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tx_video_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/tx_layout_chuanshanjia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/tx_ad_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 原生广告的小图 -->
+            <ImageView
+                android:id="@+id/tx_img_logo"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp" />
+
+            <LinearLayout
+                android:id="@+id/tx_cav_btns"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_alignTop="@id/tx_img_logo"
+                >
+
+                <ImageView
+                    android:id="@+id/tx_video_ad_close_btn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="right|top"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/tx_video_close"
+                    />
+
+                <!-- 原生广告的点击按钮 -->
+                <Button
+                    android:id="@+id/tx_btn_download"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="7dp"
+                    android:background="#80000000"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <!-- 原生广告的标题 -->
+            <TextView
+                android:id="@+id/tx_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tx_img_logo"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@id/tx_img_logo"
+                android:layout_toLeftOf="@id/tx_cav_btns"
+                android:textColor="#e0000000" />
+
+            <!-- 原生广告的描述 -->
+            <TextView
+                android:id="@+id/tx_text_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tx_img_logo"
+                android:layout_below="@id/tx_text_title"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_toLeftOf="@id/tx_cav_btns"
+                android:layout_toRightOf="@id/tx_img_logo"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="#a0000000" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/tx_custom_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp">
+
+            <!-- 原生广告的视频组件 -->
+            <com.qq.e.ads.nativ.MediaView
+                android:id="@+id/tx_gdt_media_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- 开发者自定义的倒计时 -->
+            <TextView
+                android:id="@+id/tx_text_count_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:background="#80000000"
+                android:paddingBottom="3dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:paddingTop="3dp"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <!-- 原生广告的大图 -->
+            <ImageView
+                android:id="@+id/tx_img_poster"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="fitXY" />
+
+            <!-- 原生三小图 -->
+            <LinearLayout
+                android:id="@+id/tx_native_3img_ad_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tx_native_3img_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/black" />
+
+                <LinearLayout
+                    android:id="@+id/tx_native_3img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp"
+                    android:weightSum="3">
+
+                    <ImageView
+                        android:id="@+id/tx_img_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"/>
+
+                    <ImageView
+                        android:id="@+id/tx_img_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"/>
+
+                    <ImageView
+                        android:id="@+id/tx_img_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tx_native_3img_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

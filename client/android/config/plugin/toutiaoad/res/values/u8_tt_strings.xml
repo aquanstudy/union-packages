@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="u8_tt_log_desc">天翼</string>
+    <string name="u8_tt_click_skip">点击跳过</string>
+    <string name="u8_tt_permission_tip">应用缺少必要的权限！请点击"权限"，打开所需要的权限。</string>
+
+</resources>

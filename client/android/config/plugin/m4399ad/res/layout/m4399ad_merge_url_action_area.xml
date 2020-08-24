@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/m4399ad_fragment_rewarded_video">
+
+    <TextView
+        android:id="@id/m4399ad_id_tv_target_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_weight="1.0"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textSize="12sp"
+        tools:text="病毒末世下的人类生存手游"/>
+
+    <TextView
+        android:id="@id/m4399ad_id_btn_ad_action"
+        android:layout_width="62dp"
+        android:layout_height="26dp"
+        android:background="@drawable/m4399ad_shape_tv_video_action_indicator_bg"
+        android:gravity="center"
+        android:text="@string/m4399ad_action_browse"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"/>
+</merge>

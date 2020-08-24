@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="m4399ad_interstitial_ad_width">320dp</dimen>
+    <dimen name="m4399ad_interstitial_ad_height">480dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_width">144dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_height">240dp</dimen>
+</resources>

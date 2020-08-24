@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#EEEEEE"
+              android:orientation="vertical">
+
+    <include layout="@layout/util_mch_header"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="设置自定义的用户名和密码\n可以更便捷的登录"
+            android:textColor="#a0a0a0"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/mch_input_back_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/mch_platform_login_account_4040"/>
+
+        <EditText
+            android:id="@+id/et_mch_visitor_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:enabled="true"
+            android:gravity="center_vertical"
+            android:hint="用户名，6-15位字符"
+            android:maxLines="1"
+            android:maxLength="15"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:paddingLeft="5dp"
+            android:textColor="#949494"
+            android:textColorHint="#949494"
+            android:textSize="17sp">
+        </EditText>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#DCDCDC"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/mch_input_back_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/mch_platform_login_password_4040"/>
+
+        <EditText
+            android:id="@+id/et_mch_visitor_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:enabled="true"
+            android:gravity="center_vertical"
+            android:hint="密码,6-15位字符"
+            android:maxLength="15"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="5dp"
+            android:textColor="#949494"
+            android:textColorHint="#949494"
+            android:textSize="17sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#DCDCDC"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/btn_mch_update_visitorinfo"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/mch_cricle_5dp_bg_blue"
+            android:text="确认"
+            android:textColor="#fff"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

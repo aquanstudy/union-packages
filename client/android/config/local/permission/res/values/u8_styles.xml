@@ -1,0 +1,104 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--    <style name="x_style_with_mask"  parent="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">-->
+<!--	    <item name="android:windowBackground">@color/x_mask</item>-->
+<!--	    <item name="android:windowIsTranslucent">true</item>-->
+<!--	    <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
+<!--	</style>    -->
+<!--    -->
+<!--    &lt;!&ndash; 最近登陆列表 &ndash;&gt;-->
+<!--    <style name="x_account_list" parent="android:Theme.Light"></style>-->
+
+<!--    <style name="x_account_list.Divider">-->
+<!--        <item name="android:background">#ffdddddd</item>-->
+<!--    </style>-->
+
+<!--    <style name="x_account_list.Divider.Horizontal" parent="x_account_list.Divider">-->
+<!--        <item name="android:layout_width">match_parent</item>-->
+<!--        <item name="android:layout_height">1px</item>-->
+<!--    </style>-->
+
+<!--    &lt;!&ndash; 退出框，确认安装框 &ndash;&gt;-->
+<!--    <style name="X_AlertDialog_Exit" parent="@android:style/Theme.Dialog">-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:backgroundDimEnabled">false</item>-->
+<!--    </style>-->
+<!--    -->
+<!--    <style name="x_dialog_with_mask" parent="@android:style/Theme.Dialog">-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:backgroundDimEnabled">true</item>-->
+<!--    </style>   -->
+
+<!--    &lt;!&ndash; 字体18sp &ndash;&gt;-->
+<!--    <style name="x_eighteensp">-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--    </style>-->
+<!--    &lt;!&ndash; 通用按钮 &ndash;&gt;-->
+<!--    <style name="x_but_common" parent="x_eighteensp">-->
+<!--        <item name="android:gravity">center</item>-->
+<!--        <item name="android:layout_height">40dp</item>-->
+<!--        <item name="android:textColor">@android:color/white</item>-->
+<!--        <item name="android:singleLine">true</item>-->
+<!--        <item name="android:layout_marginTop">5dp</item>-->
+<!--        <item name="android:layout_marginLeft">20dp</item>-->
+<!--        <item name="android:layout_marginRight">20dp</item>-->
+<!--        <item name="android:layout_width">fill_parent</item>-->
+<!--        <item name="android:background">@drawable/x_corner_button</item>-->
+<!--    </style>-->
+<!--    &lt;!&ndash; 通用竖版背景 &ndash;&gt;-->
+<!--    <style name="x_common_vertical_view">-->
+<!--        <item name="android:layout_width">fill_parent</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:layout_gravity">center</item>-->
+<!--        <item name="android:layout_marginBottom">50dp</item>-->
+<!--        <item name="android:layout_marginLeft">20dp</item>-->
+<!--        <item name="android:layout_marginRight">20dp</item>-->
+<!--        <item name="android:layout_marginTop">50dp</item>-->
+<!--        <item name="android:background">@drawable/x_common_corners_bg</item>-->
+<!--        <item name="android:orientation">vertical</item>-->
+<!--        <item name="android:visibility">gone</item>-->
+<!--    </style>-->
+<!--    &lt;!&ndash; 通用横版背景 &ndash;&gt;-->
+<!--    <style name="x_common_horizontal_view">-->
+<!--        <item name="android:layout_width">320dp</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--        <item name="android:layout_gravity">center</item>-->
+<!--        <item name="android:layout_marginBottom">0dp</item>-->
+<!--        <item name="android:layout_marginLeft">20dp</item>-->
+<!--        <item name="android:layout_marginRight">20dp</item>-->
+<!--        <item name="android:layout_marginTop">0dp</item>-->
+<!--        <item name="android:background">@drawable/x_common_corners_bg</item>-->
+<!--        <item name="android:orientation">vertical</item>-->
+<!--        <item name="android:visibility">gone</item>-->
+<!--    </style>-->
+<!--    &lt;!&ndash; 通用分隔视图 &ndash;&gt;-->
+    <style name="u8_common_divide">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:background">#00000000</item>
+    </style>
+<!--    &lt;!&ndash; 自动登陆动画 &ndash;&gt;-->
+<!--    <style name="x_autologin_dialog_anim">-->
+<!--        <item name="android:windowEnterAnimation">@anim/x_appear_to_left</item>-->
+<!--        <item name="android:windowExitAnimation">@anim/x_disappear_to_left</item>-->
+<!--    </style>-->
+
+    <style name="u8_common_title">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/u8_common_title_height</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/u8_corner_title</item>
+    </style>
+
+    <!-- 退出框，确认安装框 -->
+    <style name="u8_permission_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>

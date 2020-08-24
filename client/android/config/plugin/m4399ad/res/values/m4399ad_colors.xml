@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="m4399ad_color_black_50000000">#50000000</color>
+    <color name="m4399ad_color_white_50ffffff">#50ffffff</color>
+    <color name="m4399sdk_support_color_primary">#54ba3d</color>
+    <color name="m4399sdk_support_color_primary_dark">#4ca733</color>
+</resources>

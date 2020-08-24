@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mintegral_video_common_alertview_bg_padding">30dp</dimen>
+    <dimen name="mintegral_video_common_alertview_title_size">20sp</dimen>
+
+    <dimen name="mintegral_video_common_alertview_content_size">18sp</dimen>
+    <dimen name="mintegral_video_common_alertview_content_margintop">13dp</dimen>
+
+    <dimen name="mintegral_video_common_alertview_button_width">105dp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_height">38dp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_radius">50dp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_textsize">18sp</dimen>
+    <dimen name="mintegral_video_common_alertview_button_margintop">38dp</dimen>
+    <dimen name="mintegral_video_common_alertview_contentview_minwidth">240dp</dimen>
+    <dimen name="mintegral_video_common_alertview_contentview_maxwidth">240dp</dimen>
+
+</resources>

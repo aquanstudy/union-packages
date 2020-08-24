@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/U8_Temp_AS_Project.iml" filepath="$PROJECT_DIR$/U8_Temp_AS_Project.iml" group="U8_Temp_AS_Project" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="U8_Temp_AS_Project/app" />
+    </modules>
+  </component>
+</project>

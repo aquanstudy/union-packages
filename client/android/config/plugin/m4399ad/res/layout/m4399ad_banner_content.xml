@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:background="@color/m4399ad_color_black_50000000"
+                android:gravity="center_horizontal"
+                tools:layout_height="50dp"
+                tools:layout_width="320dp">
+
+    <include
+        android:id="@id/m4399ad_id_view_ad_content"
+        layout="@layout/m4399ad_iv_image_material"/>
+
+    <include layout="@layout/m4399ad_tv_ad_label"/>
+
+    <ImageButton
+        android:id="@id/m4399ad_id_view_close_ad"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignEnd="@id/m4399ad_id_view_ad_content"
+        android:layout_alignRight="@id/m4399ad_id_view_ad_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/m4399ad_default_img_content_desc"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/m4399ad_ic_close_ad"/>
+</RelativeLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="u8_background_gray">#f5f5f5</color>
+    <color name="u8_dark">#333333</color>
+    <color name="u8_title_blue">#5098cd</color>
+    <color name="u8_btn_blue">#4790c6</color>
+    <color name="u8_btn_blue_pressed">#4790d6</color>
+    <color name="u8_btn_gray">#333333</color>
+
+
+</resources>

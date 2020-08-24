@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <permissionConfig>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="com.huawei.hwid.permission.gameservice.archive.access.provider" />
+
+    </permissionConfig>
+    
+    <applicationConfig keyword="" proxyApplication="com.u8.sdk.HuaWeiProxyApplication">
+
+    <service android:exported="false" android:name="com.huawei.agconnect.core.ServiceDiscovery" />
+    <provider android:authorities="${applicationId}.AGCInitializeProvider" android:exported="false" android:name="com.huawei.agconnect.core.provider.AGConnectInitializeProvider" />
+
+        <meta-data android:name="com.huawei.hms.client.service.name:base" android:value="base:4.0.0.300" />
+
+        <activity android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout" android:exported="false" android:name="com.huawei.updatesdk.support.pm.PackageInstallerActivity" android:theme="@style/upsdkDlDialog">
+            <meta-data android:name="hwc-theme" android:value="androidhwext:style/Theme.Emui.Translucent" />
+        </activity>
+
+        <provider android:authorities="${applicationId}.hms.update.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.huawei.hms.update.provider.UpdateProvider">
+        </provider>
+    <activity android:configChanges="orientation|locale|layoutDirection|fontScale|screenSize|smallestScreenSize|screenLayout" android:excludeFromRecents="true" android:exported="false" android:hardwareAccelerated="true" android:name="com.huawei.hms.activity.BridgeActivity" android:theme="@android:style/Theme.Translucent">
+            <meta-data android:name="hwc-theme" android:value="androidhwext:style/Theme.Emui.Translucent" />
+        </activity>
+        <activity android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout" android:name="com.huawei.hms.activity.EnableServiceActivity">
+        </activity>
+        <meta-data android:name="com.huawei.hms.min_api_level:base:hmscore" android:value="1" />
+
+        <activity android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout" android:exported="false" android:name="com.huawei.updatesdk.service.otaupdate.AppUpdateActivity" android:theme="@style/upsdkDlDialog">
+            <meta-data android:name="hwc-theme" android:value="androidhwext:style/Theme.Emui.Translucent.NoTitleBar" />
+        </activity>
+        <activity android:configChanges="orientation|locale|screenSize|layoutDirection|fontScale" android:excludeFromRecents="true" android:exported="false" android:hardwareAccelerated="true" android:name="com.huawei.appmarket.component.buoycircle.impl.delegete.BuoyBridgeActivity" android:theme="@android:style/Theme.Translucent">
+            <meta-data android:name="hwc-theme" android:value="androidhwext:style/Theme.Emui.Translucent" />
+        </activity>
+    <service android:exported="true" android:name="com.huawei.hms.jos.games.service.GameService">
+            <intent-filter>
+                <action android:name="com.huawei.hms.games.service" />
+            </intent-filter>
+        </service>
+
+        <meta-data android:name="com.huawei.hms.client.service.name:game" android:value="game:4.0.0.300" />
+        <provider android:authorities="${applicationId}.hmssdk.jos.archive" android:exported="true" android:name="com.huawei.hms.jos.games.archive.ArchiveRemoteAccessProvider">
+        </provider>
+
+        <meta-data android:name="com.huawei.hms.jos.versioncode" android:value="40000300" />
+
+        <meta-data android:name="com.huawei.hms.min_api_level:hianalytics:hianalytics" android:value="1" />
+    <meta-data android:name="com.huawei.hms.client.service.name:hianalytics" android:value="hianalytics:4.0.0.300" />
+        <meta-data android:name="com.huawei.hms.min_api_level:hwid:hwid" android:value="1" />
+    <meta-data android:name="com.huawei.hms.client.service.name:hwid" android:value="hwid:4.0.0.300" />
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.huawei.hms.hwid.internal.ui.activity.HwIdSignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <meta-data android:name="com.huawei.hms.client.service.name:iap" android:value="iap:4.0.0.300" />
+    <meta-data android:name="com.huawei.hms.min_api_level:opendevice:push" android:value="1" />
+    <provider android:authorities="${applicationId}.aaidinitprovider" android:exported="false" android:name="com.huawei.hms.aaid.InitProvider" />
+
+        <meta-data android:name="com.huawei.hms.client.service.name:opendevice" android:value="opendevice:4.0.0.300" />
+        </applicationConfig>
+
+    
+</manifest>

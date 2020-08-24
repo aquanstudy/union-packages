@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.m4399.ad.view.AdRoundedImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                                     xmlns:tools="http://schemas.android.com/tools"
+                                     android:id="@id/m4399ad_id_view_ad_content"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="match_parent"
+                                     android:layout_centerInParent="true"
+                                     android:adjustViewBounds="true"
+                                     android:contentDescription="@string/m4399ad_default_img_content_desc"
+                                     android:scaleType="fitCenter"
+                                     tools:background="@color/m4399ad_color_black_50000000"
+                                     tools:layout_gravity="center"
+                                     tools:layout_height="320dp"
+                                     tools:layout_width="320dp"/>

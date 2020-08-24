@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <permissionConfig>
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+        <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+        <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+        <!-- 需要请求的运行时权限 -->
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        
+        <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    </permissionConfig>
+
+    <applicationConfig
+        keyword="com.nearme.game.sdk.component.proxy.ProxyActivity"
+        proxyApplication="com.u8.sdk.OppoProxyApplication" >
+        
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        
+
+        <!-- nearme game sdk config goes here -->
+        <activity
+            android:name="com.nearme.game.sdk.component.proxy.JumpToProxyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:process=":gcsdk"
+            android:theme="@style/Theme_Dialog_Custom" >
+        </activity>
+
+        <provider
+            android:name="com.nearme.platform.opensdk.pay.NearMeFileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name="com.nearme.game.sdk.component.proxy.ProxyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:process=":gcsdk"
+            android:theme="@style/Theme_Dialog_Custom" />
+        <activity
+            android:name="com.nearme.game.sdk.component.proxy.ExitActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:process=":gcsdk"
+            android:theme="@style/Theme_Dialog_Custom" />
+
+        <service
+            android:name="com.nearme.game.sdk.component.proxy.ProxyApiService"
+            android:priority="1000"
+            android:process=":gcsdk" />
+
+        <receiver
+            android:name="com.nearme.game.sdk.component.proxy.ProxyUserCenterOperateReceiver"
+            android:exported="true"
+            android:process=":gcsdk" >
+            <intent-filter>
+                <action android:name="com.oppo.usercenter.account_login" />
+                <action android:name="com.oppo.usercenter.account_logout" />
+                <action android:name="com.oppo.usercenter.modify_name" />
+                <action android:name="com.usercenter.action.receiver.account_login" />
+                <action android:name="com.heytap.usercenter.account_logout" />
+            </intent-filter>
+        </receiver>
+        <!-- nearme game sdk config end -->
+    </applicationConfig>
+
+</manifest>

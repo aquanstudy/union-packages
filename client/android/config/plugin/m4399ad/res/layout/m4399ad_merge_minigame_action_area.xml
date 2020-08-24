@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/m4399ad_fragment_rewarded_video">
+
+    <RelativeLayout
+        android:layout_width="48dp"
+        android:layout_height="48dp">
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/m4399ad_id_iv_target_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:visibility="visible"
+            tools:background="@color/m4399ad_color_black_50000000"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/m4399ad_ic_minigame_badge"
+            android:contentDescription="@string/m4399ad_default_img_content_desc"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_weight="1.0"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@id/m4399ad_id_tv_target_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="明日之后-病毒末世下的人"/>
+
+        <TextView
+            android:id="@id/m4399ad_id_tv_target_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textSize="12sp"
+            tools:text="病毒末世下的人类生存手游"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@id/m4399ad_id_btn_ad_action"
+        android:layout_width="62dp"
+        android:layout_height="26dp"
+        android:background="@drawable/m4399ad_shape_tv_video_action_indicator_bg"
+        android:gravity="center"
+        android:text="@string/m4399ad_action_play"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"/>
+</merge>

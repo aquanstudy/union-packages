@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                tools:background="@android:color/black">
+
+    <LinearLayout
+        android:id="@id/m4399ad_id_ad_action_container_shared"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
+        android:background="@drawable/m4399ad_shape_dialog_video_alert_bg"
+        android:orientation="vertical"
+        android:padding="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/m4399ad_id_ll_detail_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@id/m4399ad_id_iv_target_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/m4399sdk_support_ic_network_off"
+                tools:background="@color/m4399ad_color_black_50000000"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1.0"
+                android:orientation="vertical"
+                tools:ignore="RtlHardcoded">
+
+                <TextView
+                    android:id="@id/m4399ad_id_tv_target_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="明日之后-病毒末世下的人"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/m4399ad_id_tv_target_apk_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        tools:text="大小：23M"/>
+
+                    <TextView
+                        android:id="@+id/m4399ad_id_tv_target_download_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:includeFontPadding="false"
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        tools:text="1245万+下载"/>
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    style="@style/m4399ad.ScrollBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/m4399ad_id_ll_target_labels_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <ScrollView
+            style="@style/m4399ad.ScrollBar.Vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:layout_weight="1.0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    style="@style/m4399ad.ScrollBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:background="@android:color/holo_green_dark">
+
+                    <LinearLayout
+                        android:id="@+id/m4399ad_id_ll_target_screenshot_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/m4399ad_iv_target_screenshot_height"
+                        android:orientation="horizontal"/>
+                </HorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/m4399ad_id_tv_target_desc_title"
+                        style="@style/m4399ad.Text.H1"/>
+
+                    <TextView
+                        android:id="@id/m4399ad_id_tv_target_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="left"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="#666666"
+                        android:textSize="14sp"
+                        tools:ignore="RtlHardcoded"
+                        tools:text="采集宝箱或其它掉落，会给你特殊道具，按道具所描述捐给相应NPC或相应任务描述，会获客观的得熟练度和其它奖励。秋日森林地图中会随机刷NPC，地图会显示篮圈就是NPC，找他去做他给的任务也给熟练度"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@id/m4399ad_id_btn_ad_action"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/m4399ad_selector_btn_action_download_bg"
+            android:gravity="center"
+            android:text="@string/m4399ad_action_download_immediately"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/m4399ad_id_close_page_or_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/m4399ad_id_ll_detail_content"
+        android:layout_alignEnd="@id/m4399ad_id_ll_detail_content"
+        android:layout_alignRight="@id/m4399ad_id_ll_detail_content"
+        android:layout_margin="18dp"
+        android:contentDescription="@string/m4399ad_default_img_content_desc"
+        android:src="@drawable/m4399ad_ic_close_dialog"/>
+
+    <FrameLayout
+        android:id="@+id/m4399ad_id_fl_target_screenshot_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/m4399ad_id_target_screenshot_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#666666">
+        </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:id="@+id/m4399ad_id_target_screenshot_indicator"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_margin="30dp"
+            android:background="@drawable/m4399ad_shape_tv_close_bg_disabled"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            tools:text="2/5"/>
+    </FrameLayout>
+
+</RelativeLayout>

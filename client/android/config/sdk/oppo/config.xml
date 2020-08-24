@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <params>
+        <param name="debug_mode" bWriteInClient="0" bWriteInManifest="1" desc="是否显示日志(true|false)" required="1" showName="日志开关" />
+        <param name="is_offline_game" bWriteInClient="0" bWriteInManifest="1" desc="单机填true;网游填false" required="1" showName="单机还是网游" />
+        <param name="app_key" bWriteInClient="0" bWriteInManifest="1" desc="app_key" required="1" showName="app_key" />
+        <param name="app_secret" bWriteInClient="1" bWriteInManifest="0" desc="app_secret" required="1" showName="app_secret" />
+
+    </params>
+
+    <operations>
+        <operation from="SDKManifest.xml" step="1" to="AndroidManifest.xml" type="mergeManifest" />
+        <operation from="assets" step="2" to="assets" type="copyRes" />
+        <operation from="libs" step="3" to="lib" type="copyRes" />
+        <operation from="res" step="4" to="res" type="copyRes" />
+    </operations>
+
+    <plugins>
+        <plugin name="com.u8.sdk.OppoUser" desc="用户登录接口" type="1" />
+        <plugin name="com.u8.sdk.OppoPay" desc="用户支付接口" type="2" />
+    </plugins>
+
+    <dependencies>
+        <dependency name="androidx.appcompat:appcompat:1.0.2" />
+        <dependency name="androidx.legacy:legacy-support-v4:1.0.0" />
+    </dependencies>
+
+    <version>
+        <name>OppoPay</name>
+        <serverChannelMaster>oppo</serverChannelMaster>
+        <versionCode>1</versionCode>
+        <versionName>2.0.4.009</versionName>
+    </version>
+
+</config>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>U8SDK打包管理系统</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"> -->
+    <!--<link rel="stylesheet" href="plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">-->
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <!--<div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;overflow: hidden;clear: both;">-->
+
+
+
+            <!--</div>-->
+            <div class="box-body">
+                <table id="channels" class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>渠道名称</th>
+                        <th>SDK目录</th>
+                        <th>SDK版本</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<!--<script src="plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>-->
+<!--<script src="plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js"></script>-->
+<script>
+
+    var inited = false;
+
+    $(function () {
+
+
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+
+
+        function search() {
+
+            if(inited){
+                var table = $('#channels').DataTable();
+                table.ajax.url('/admin/channel/getAllMasters');
+                table.ajax.reload();
+                return;
+            }
+
+            inited = true;
+
+            var table = $('#channels').DataTable({
+                "dom": '<"toolbar">frtip',
+                select: {
+                    style: 'single'
+                },
+                "lengthChange":false,
+                ajax: {
+                    type:"GET",
+                    url:"/admin/channel/getAllMasters",
+                    dataSrc:"data",
+                    data:function (d) {
+                        var param = {};
+                        return param;
+                    }
+                },
+                columns: [
+                    { data: "masterName" },
+                    { data: "sdkName" },
+                    { data: "versionName" },
+                    {
+                        "sClass":"text-center",
+                        "data":"versionName",
+                        "render":function(data, type, full, meta){
+
+                            if(data != null && data.length > 0){
+                                return "<span style='color:green;'>可用</span>";
+                            }else{
+                                return "<span style='color:red;'>不可用</span>";
+                            }
+
+
+                        },
+                        "bSortable":false
+                    }
+                ],
+                "searching":true,
+                "ordering":false,
+                "bStateSave":true,
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "_PAGE_ / _PAGES_",
+                    "infoEmpty": "没有任何记录",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                     "loadingRecords": "正在处理...",
+                    "processing":     "正在处理...",
+                    "search":         "搜索:",
+                    "paginate": {
+                        "first":      "首页",
+                        "last":       "尾页",
+                        "next":       "下一页",
+                        "previous":   "上一页"
+                    },
+                    "aria": {
+                        "sortAscending":  ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": "已选中%d行"
+                    }
+                }
+            });
+
+            $("div.toolbar").html('<div class="btn-group" style="float: right; margin-left: 10px;"> <button type="button" class="btn btn-primary btn-sm" data-btn-type="meta">配置参数Meta</button> </div>');
+
+            $('button[data-btn-type]').click(function() {
+                var action = $(this).attr('data-btn-type');
+                switch (action){
+
+                    case 'meta':
+
+                        var data = $('#channels').DataTable().row('.selected').data();
+                        if(data == null){
+                            showTips("请先选择一条要操作的记录");
+                            return;
+                        }
+
+                        window.location.href = "channelParamMetas.html?channelName="+data.masterName+"&masterSdkName="+data.masterSdkName;
+                        break;
+
+                }
+            });
+
+
+        }
+
+        search();
+
+
+    });
+</script>
+</body>
+</html>

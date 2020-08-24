@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@id/m4399ad_id_view_close_ad"
+              android:layout_width="@dimen/m4399ad_close_text_long_width"
+              android:layout_height="@dimen/m4399ad_close_text_height"
+              android:layout_margin="10dp"
+              android:background="@drawable/m4399ad_shape_tv_delay_dismiss_bg"
+              android:gravity="center"
+              android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/m4399ad_action_close"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:background="@android:color/white"/>
+
+    <TextView
+        android:id="@id/m4399ad_id_tv_close_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/m4399ad_action_close"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        tools:text="06s"/>
+</LinearLayout>

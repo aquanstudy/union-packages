@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="m4399ad_banner_ad_width">320dp</dimen>
+    <dimen name="m4399ad_banner_ad_height">50dp</dimen>
+    <dimen name="m4399ad_interstitial_ad_width">480dp</dimen>
+    <dimen name="m4399ad_interstitial_ad_height">320dp</dimen>
+    <dimen name="m4399ad_interstitial_image_corner_radius">16dp</dimen>
+    <dimen name="m4399ad_roll_image_corner_radius">8dp</dimen>
+    <dimen name="m4399ad_close_text_short_width">52dp</dimen>
+    <dimen name="m4399ad_close_text_long_width">74dp</dimen>
+    <dimen name="m4399ad_close_text_height">24dp</dimen>
+    <dimen name="m4399ad_imgBtn_close_size">28dp</dimen>
+    <dimen name="m4399ad_ad_label_width">27dp</dimen>
+    <dimen name="m4399ad_ad_label_height">14dp</dimen>
+    <dimen name="m4399ad_ad_label_margin">10dp</dimen>
+    <dimen name="m4399ad_video_dialog_width">304dp</dimen>
+    <dimen name="m4399ad_video_down_app_icon">8dp</dimen>
+    <dimen name="m4399ad_iv_target_label_margin">6dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_margin">12dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_width">173dp</dimen>
+    <dimen name="m4399ad_iv_target_screenshot_height">104dp</dimen>
+</resources>

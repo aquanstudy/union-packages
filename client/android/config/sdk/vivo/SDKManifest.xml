@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <permissionConfig>
+
+        <!--联运SDK跳转游戏中心-->
+        <uses-permission android:name="vivo.game.permission.OPEN_JUMP_INTENTS"/>
+        <!--联运SDK监听网络状态变化，在支付登录过程中做一些异常处理-->
+        <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+        <!--允许程序访问Wi-Fi网络状态信息-->
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+        <!--允许程序打开网络套接字-->
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <!--允许程序访问有关GSM网络信息-->
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        <!--读取imei-->
+        <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+        <!--联运sdk写入内容到sd卡-->
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <!--强制安装联运APK时，需要从SDK中读取APK文件-->
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+        <!--判断游戏是否是在主进程初始化，避免初始化进程错误导致功能不可用-->
+        <uses-permission android:name="android.permission.GET_TASKS"/>
+        <!--获取安装权限-->
+        <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
+        <uses-permission android:name="com.asus.msa.SupplementaryDID.ACCESS" />
+
+        
+    </permissionConfig>
+    
+    <applicationConfig keyword="com.vivo.account.base.activity.LoginActivity" 
+        proxyApplication="com.u8.sdk.ViVoProxyApplication">
+
+        <!-- vivo sdk componets start -->
+        <!--vivo sdk的Activity-->
+        <activity
+            android:name="com.vivo.unionsdk.ui.UnionActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                    android:host="union.vivo.com"
+                    android:path="/openjump"
+                    android:scheme="vivounion"/>
+            </intent-filter>
+        </activity>
+        <!-- vivo sdk componets end -->
+
+        <meta-data
+            android:name="vivo_union_sdk"
+            android:value="4.5.0.1"/>
+        
+    </applicationConfig>
+    
+    
+    
+</manifest>

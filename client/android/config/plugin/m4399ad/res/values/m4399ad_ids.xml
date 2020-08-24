@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="m4399ad_id_view_ad_content" type="id"/>
+    <item name="m4399ad_id_view_close_ad" type="id"/>
+    <item name="m4399ad_id_tv_close_ad" type="id"/>
+    <item name="m4399ad_id_tv_ad_label" type="id"/>
+    <item name="m4399ad_id_check_sound_control" type="id"/>
+    <item name="m4399ad_id_btn_ad_action" type="id"/>
+    <item name="m4399ad_id_ad_action_container_shared" type="id"/>
+    <item name="m4399ad_id_iv_target_icon" type="id"/>
+    <item name="m4399ad_id_tv_target_name" type="id"/>
+    <item name="m4399ad_id_tv_target_desc" type="id"/>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:background="@drawable/m4399ad_shape_dialog_video_alert_bg"
+              android:orientation="vertical"
+              tools:layout_width="@dimen/m4399ad_video_dialog_width">
+
+    <TextView
+        android:id="@+id/m4399ad_id_alert_title"
+        style="@style/m4399ad.Text.H1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="26dp"
+        android:text="@string/m4399ad_dialog_title_confirm_video"
+        tools:ignore="RtlHardcoded"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="#eeeeee"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/m4399ad_id_alert_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/m4399ad_selector_btn_left_bg"
+            android:gravity="center"
+            android:textColor="#777777"
+            android:textSize="16sp"
+            tools:text="@string/m4399ad_action_cancel_display"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#eeeeee"/>
+
+        <Button
+            android:id="@+id/m4399ad_id_alert_sure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/m4399ad_selector_tv_right_bg"
+            android:gravity="center"
+            android:textColor="#54ba3d"
+            android:textSize="16sp"
+            tools:text="@string/m4399ad_action_display_ad"/>
+
+    </LinearLayout>
+
+</LinearLayout>

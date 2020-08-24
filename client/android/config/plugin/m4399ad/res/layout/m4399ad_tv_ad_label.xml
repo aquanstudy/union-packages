@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:id="@id/m4399ad_id_tv_ad_label"
+          android:layout_width="@dimen/m4399ad_ad_label_width"
+          android:layout_height="@dimen/m4399ad_ad_label_height"
+          android:layout_alignStart="@id/m4399ad_id_view_ad_content"
+          android:layout_alignLeft="@id/m4399ad_id_view_ad_content"
+          android:layout_alignBottom="@id/m4399ad_id_view_ad_content"
+          android:layout_margin="@dimen/m4399ad_ad_label_margin"
+          android:background="@drawable/m4399ad_shape_tv_ad_label_bg"
+          android:gravity="center"
+          android:text="@string/m4399ad_ad_label"
+          android:textColor="@android:color/white"
+          android:textSize="9sp"
+          tools:ignore="SmallSp"/>
+

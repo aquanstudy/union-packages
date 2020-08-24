@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/m4399ad.Text.Target_Label"
+    tools:text="官方版"/>

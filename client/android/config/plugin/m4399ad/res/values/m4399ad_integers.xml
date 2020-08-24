@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Advert size specification-->
+    <integer name="m4399ad_banner_ad_spec_width">640</integer>
+    <integer name="m4399ad_banner_ad_spec_height">100</integer>
+    <integer name="m4399ad_interstitial_ad_spec_width">960</integer>
+    <integer name="m4399ad_interstitial_ad_spec_height">640</integer>
+    <!--Advert screen orientation definition: port,1; landscape: 3-->
+    <integer name="m4399ad_test_app_orientation">3</integer>
+</resources>

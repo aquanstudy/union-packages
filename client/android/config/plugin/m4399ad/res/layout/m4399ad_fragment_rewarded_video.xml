@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black">
+
+    <SurfaceView
+        android:id="@id/m4399ad_id_view_ad_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#55000000"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+
+    <ImageView
+        android:id="@+id/m4399ad_id_video_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:ignore="ContentDescription"/>
+
+    <ProgressBar
+        android:id="@+id/m4399ad_psb_video_load_indicator"
+        style="@style/m4399ad.Progress"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"/>
+
+    <FrameLayout
+        android:id="@+id/m4399ad_id_fl_sound_control_container"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignTop="@id/m4399ad_id_view_ad_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/m4399ad_selector_tv_close_video_bg"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        tools:ignore="RtlHardcoded,RtlSymmetry">
+
+        <CheckBox
+            android:id="@id/m4399ad_id_check_sound_control"
+            android:layout_width="15dp"
+            android:layout_height="13dp"
+            android:layout_gravity="center"
+            android:alpha="0.70"
+            android:background="@drawable/m4399ad_selector_check_sound_control_bg"
+            android:button="@null"
+            android:checked="true"
+            android:clickable="false"
+            android:duplicateParentState="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/m4399ad_id_tv_video_timer"
+        android:layout_width="@dimen/m4399ad_close_text_short_width"
+        android:layout_height="28dp"
+        android:layout_alignTop="@id/m4399ad_id_view_ad_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toEndOf="@id/m4399ad_id_fl_sound_control_container"
+        android:layout_toRightOf="@id/m4399ad_id_fl_sound_control_container"
+        android:background="@drawable/m4399ad_shape_tv_video_timer_bg"
+        android:gravity="center"
+        android:textColor="#99ffffff"
+        android:textSize="14sp"
+        tools:ignore="RtlHardcoded"
+        tools:text="10s"/>
+
+    <TextView
+        android:id="@id/m4399ad_id_view_close_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_alignTop="@id/m4399ad_id_view_ad_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/m4399ad_selector_tv_close_video_bg"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="@string/m4399ad_action_close_ad"
+        android:textColor="#99ffffff"
+        android:textSize="12sp"
+        tools:ignore="RelativeOverlap"/>
+
+    <LinearLayout
+        android:id="@+id/m4399ad_id_ad_action_container_shared"
+        style="@style/m4399ad.download.sheet"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/m4399ad_id_view_ad_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/m4399ad_selector_ll_video_action_area_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp"
+        android:paddingTop="10dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="10dp">
+    </LinearLayout>
+
+</RelativeLayout>

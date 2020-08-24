@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+     android:layout_centerInParent="true"
+     android:background="@android:color/transparent"
+    android:id="@+id/u8_permission_item_bg">
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+		<RelativeLayout
+		    android:id="@+id/u8_permission_item_wrapper"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+		    <ImageView
+		        android:id="@+id/u8_permission_item_img"
+		        android:layout_width="70dp"
+		        android:layout_height="70dp"
+		        android:layout_centerInParent="true"
+		        android:scaleType="centerInside"/>
+<!--		    <ImageView-->
+<!--		        android:id="@+id/x_p_pay_slt"-->
+<!--		        android:layout_width="60dp"-->
+<!--		        android:layout_height="60dp"-->
+<!--		        android:layout_centerInParent="true"-->
+<!--		        android:scaleType="centerInside" -->
+<!--		        android:background="@drawable/x_p_pay_slt"/>-->
+		</RelativeLayout>
+		<TextView 
+		    android:id="@+id/u8_permission_item_name"
+		    android:layout_gravity="center_horizontal"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginTop="2dp"
+		    android:text=""
+		    android:textColor="@color/u8_title_blue"
+		    android:textSize="13sp"/>
+	</LinearLayout>
+</RelativeLayout>

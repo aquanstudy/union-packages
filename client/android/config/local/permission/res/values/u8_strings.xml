@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 退出框 -->
+    <string name="u8_permission_title">权限申请说明</string>
+    <string name="u8_permission_desc">为保证良好的游戏体验，我们需要向您申请以下权限：</string>
+    <string name="u8_permission_ok">确  定</string>
+    <string name="u8_permission_read">我已阅读并同意</string>
+    <string name="u8_permission_protocol">《用户隐私保护协议》</string>
+    <string name="u8_permission_tip">请阅读并同意《用户隐私保护协议》</string>
+    <string name="u8_permission_confirm_title">隐私协议说明</string>
+    <string name="u8_permission_confirm_ok">同意并继续</string>
+    <string name="u8_permission_confirm_cancel">拒绝</string>
+    <string name="u8_permission_confirm_txt1">继续前，您需同意</string>
+    <string name="u8_permission_confirm_txt2">游戏收集的信息，仅用于改善玩家的游戏体验，我们将保护您的信息安全和个人隐私。</string>
+    <string name="u8_permission_exit_tip">亲爱的玩家，感谢您的下载和体验，游戏即将退出。</string>
+
+</resources>

@@ -1,0 +1,39 @@
+<div class="row">
+    <table id="plugins" class="table table-bordered table-striped table-hover" style="width: 98% !important; margin:0 auto;">
+        <thead>
+        <tr>
+            <th>插件名称</th>
+            <th>插件版本</th>
+            <th>插件目录</th>
+            <th>状 态</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<script>
+
+    var pluginInited = false;
+
+
+    function tooglePlugin(sdkName, isChecked) {
+
+        var gameID = getCurrGameID();
+        var checked = 0;
+        if(isChecked){
+            checked = 1;
+        }
+
+        $.post('admin/game/tooglePlugin',{gameID:gameID,sdkName:sdkName, checked:checked}, function (result) {
+            if(result.code == 0){
+                //do nothing
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+
+
+
+</script>

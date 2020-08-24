@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <appender name="DailyRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>log/sdk.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <FileNamePattern>log/u8x.sdk.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>${FILE_LOG_PATTERN}</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.u8x" level="debug">
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="DailyRollingFile"/>
+    </logger>
+
+    <logger name="com.u8x.dao.mapper" level="warn">
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="DailyRollingFile"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="info">
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="DailyRollingFile"/>
+    </logger>
+
+    <logger name="org.springframework" level="info">
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="DailyRollingFile"/>
+    </logger>
+
+    <logger name="com.mybatis" level="info">
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="DailyRollingFile"/>
+    </logger>
+
+    <root level="info">
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <appender-ref ref="DailyRollingFile"/>
+    </root>
+</configuration>

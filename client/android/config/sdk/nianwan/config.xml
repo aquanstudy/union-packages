@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <params>
+        <param name="game_id" required="1" showName="game_id" desc="game_id" bWriteInManifest="1" bWriteInClient="0" />
+        <param name="game_name" required="1" showName="game_name" desc="game_name" bWriteInManifest="1" bWriteInClient="0" />
+        <param name="game_appid" required="1" showName="game_appid" desc="game_appid" bWriteInManifest="1" bWriteInClient="0" />
+        <param name="sign_key" required="1" showName="sign_key" desc="sign_key" bWriteInManifest="1" bWriteInClient="0" />
+    </params>
+    <operations>
+        <operation step="1" type="mergeManifest" from="SDKManifest.xml" to="AndroidManifest.xml" />
+        <operation step="2" type="copyRes" from="assets" to="assets" />
+        <operation step="3" type="copyRes" from="libs" to="lib" />
+        <operation step="4" type="copyRes" from="res" to="res" />
+    </operations>
+    <plugins>
+        <plugin name="com.u8.sdk.NianWanUser" type="1" desc="用户登录接口"/>
+        <plugin name="com.u8.sdk.NianWanPay" type="2" desc="用户支付接口"/>
+    </plugins>
+    <version>
+        <name>念玩</name>
+        <versionCode>1</versionCode>
+        <versionName>1.0</versionName>
+    </version>
+	
+	<extraR>
+        <package name="android.support.v7.appcompat" />
+        <package name="android.support.coordinatorlayout" />
+        <package name="android.support.compat" />
+    </extraR>
+	
+</config>

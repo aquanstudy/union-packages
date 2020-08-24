@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="45dp">
+
+
+        <RelativeLayout
+            android:id="@+id/menu_list"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/float_backgrount"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            //礼包
+
+            <LinearLayout
+                android:id="@+id/ll_mch_floating_pack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_mch_floating_pack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/mch_floating_pack" />
+
+            </LinearLayout>
+
+
+            //个人
+
+            <LinearLayout
+                android:id="@+id/ll_mch_floating_personal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/ll_mch_floating_pack"
+                android:layout_toRightOf="@+id/ll_mch_floating_pack"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_mch_floating_pers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/mch_floating_pers" />
+
+            </LinearLayout>
+
+            //客服
+
+            <LinearLayout
+                android:id="@+id/ll_mch_floating_service"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/ll_mch_floating_pack"
+                android:layout_toRightOf="@+id/ll_mch_floating_personal"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_mch_floating_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/mch_floating_service" />
+
+            </LinearLayout>
+
+            //登出
+
+            <LinearLayout
+                android:id="@+id/ll_mch_floating_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/ll_mch_floating_pack"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@+id/ll_mch_floating_service"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/mch_floating_logout" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <com.lang.lun.sdk.view.round.CircleImageView
+            android:id="@+id/channel_float"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/float_ico" />
+    </FrameLayout>
+
+</LinearLayout>

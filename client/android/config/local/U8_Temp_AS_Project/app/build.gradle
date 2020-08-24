@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.u8.sdk"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+configurations {
+    scm
+}
+
+
+dependencies {
+    ${U8_DEPENDENCIES_PLACEHOLDER}
+}
+
+task copyDeps {
+    dependsOn configurations.scm
+
+    doLast {
+        configurations.scm.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+            def id = artifact.moduleVersion.id
+            def targetName = "${id.group}_${id.name}_${id.version}.${artifact.type}"
+            copy {
+                from(artifact.file)
+                into('${U8_SDK_LIBS_FOLDER}')
+                rename('(.*)', targetName)
+            }
+        }
+    }
+}
+
+task walkDependencyGraph(type: DependencyGraphWalk) {
+    dependsOn configurations.scm
+}
+
+class DependencyGraphWalk extends DefaultTask {
+    @TaskAction
+    void walk() {
+        Configuration configuration = project.configurations.scm
+        ResolutionResult resolutionResult = configuration.incoming.resolutionResult
+        ResolvedComponentResult root = resolutionResult.root
+        logger.quiet configuration.name
+        traverseDependencies(0, root.dependencies)
+    }
+
+    private void traverseDependencies(int level, Set<? extends DependencyResult> results) {
+        for (DependencyResult result : results) {
+            if (result instanceof ResolvedDependencyResult) {
+                ResolvedComponentResult componentResult = result.selected
+                ComponentIdentifier componentIdentifier = componentResult.id
+                String node = calculateIndentation(level) + "- $componentIdentifier.displayName ($componentResult.selectionReason)"
+                logger.quiet node
+                traverseDependencies(level + 1, componentResult.dependencies)
+            } else if (result instanceof UnresolvedDependencyResult) {
+                ComponentSelector componentSelector = result.attempted
+                String node = calculateIndentation(level) + "- $componentSelector.displayName (failed)"
+                logger.quiet node
+            }
+        }
+    }
+
+    private String calculateIndentation(int level) {
+        '     ' * level
+    }
+}
+
+
+
+

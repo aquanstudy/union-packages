@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>U8SDK打包管理系统</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;">
+                <div class="btn-group" style="float: right;padding-top: 10px;">
+                    <button type="button" class="btn btn-default" data-btn-type="add">新增</button>
+                    <button type="button" class="btn btn-default" data-btn-type="edit" >编辑</button>
+                    <button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
+                </div>
+                <div class="btn-group" style="float:right;padding-top: 10px;margin-right: 10px;">
+                    <button type="button" class="btn btn-primary" data-btn-type="select">查询</button>
+                    <button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
+                </div>
+                <div style="float: right;padding-top: 10px;margin-right: 5px;display: block;">
+                    <div style="float:right;"><input placeholder="请输入角色名称" id="searchRoleName" class="form-control" type="search" likeOption="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="box-body clearfix">
+                <table id="roleList" class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>角色ID</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                        <th>创建时间</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="addTitle">新增角色</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box box-primary">
+                    <div id="errBlock"></div>
+                    <form class="form-horizontal" id="fm">
+                        <div class="box-body">
+                            <input type="text" class="form-control" type="hidden" style="display: none;" id="id" name="id">
+                            <div class="form-group">
+                                <label for="rolename" class="col-sm-2 control-label" data-toggle="tooltip">角色名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="roleName" name="roleName" placeholder="角色名" maxlength="20">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="roledesc" class="col-sm-2 control-label">角色描述</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="roleDesc" name="roleDesc" placeholder="角色描述" maxlength="20">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取  消</button>
+                            <button type="button" class="btn btn-primary pull-right" onclick="saveRole();">保  存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<script>
+    function saveRole() {
+        var rolename = $("#roleName").val();
+        if(isEmpty(rolename)){
+            alertShow("#errBlock", "请输入角色名");
+            return;
+        }else{
+            alertHide("#errBlock");
+    	}
+        $('#fm').ajaxSubmit({
+            url:'admin/saveRole',
+            type:'POST',
+            dataType:'json',
+            data:{},
+            success:function (result) {
+                if(result.code == 0){
+                    $('#myModal').modal('hide');
+                    showTips("操作成功");
+                    var table = $('#roleList').DataTable();
+                    table.ajax.reload();
+                }else if(result.code == 2){
+                    parent.location.href = "login.html";
+                }
+                else{
+                    showTips(result.reason);
+                }
+            }
+        });
+    }
+    function deleteAdmin(id) {
+        $.post('admin/deleteRole',{id:id}, function (result) {
+            if(result.code == 0){
+                showTips("操作成功");
+                var table = $('#roleList').DataTable();
+                table.ajax.reload();
+            }else if(result.code == 2){
+                parent.location.href = "login.html";
+            }
+            else{
+                showTips(result.reason);
+            }
+        },'json');
+    }
+    $(function () {
+        function search() {
+            var adminRoleName = $("#searchRoleName").val();
+            if(isEmpty(adminRoleName)){
+                showTips("请输入查询条件");
+                return;
+            }
+            var table = $('#roleList').DataTable();
+            table.ajax.url('admin/notTopRoles?roleName='+adminRoleName);
+            table.ajax.reload();
+        }
+
+        var table = $('#roleList').DataTable({
+            select: {
+                style: 'single'
+            },
+            "lengthChange":false,
+//            "ajax": {
+//                url:'admin/notTopRoles',
+//                type:'GET'
+//            },
+            ajax: function (data, callback, settings) {
+                $.get('admin/notTopRoles?time='+new Date().getTime(), {}, function (res) {
+                    if(res.code == 0){
+                        callback(res);
+                    }else if(res.code == 2){
+                        parent.location.href = "login.html";
+                    }else{
+                        showTips(res.reason);
+                    }
+                })
+            },
+            columns: [
+                { data: "id" },
+                { data: "roleName" },
+                { data: "roleDesc" },
+                { data: "createTime" }
+            ],
+            "searching":false,
+            "language": {
+                "lengthMenu": "显示 _MENU_ 条记录",
+                "zeroRecords": "没有查到任何记录",
+                "info": "_PAGE_ / _PAGES_",
+                "infoEmpty": "没有任何记录",
+                "infoFiltered": "(总记录：_MAX_ )",
+                "loadingRecords": "正在加载...",
+                "processing":     "正在处理...",
+                "search":         "搜索:",
+                "paginate": {
+                    "first":      "首页",
+                    "last":       "尾页",
+                    "next":       "下一页",
+                    "previous":   "上一页"
+                },
+                "aria": {
+                    "sortAscending":  ": 递增排序",
+                    "sortDescending": ": 递减排序"
+                },
+                "select": {
+                    "rows": "已选中%d行"
+                }
+            }
+        });
+        $('button[data-btn-type]').click(function() {
+            var action = $(this).attr('data-btn-type');
+            switch (action){
+                case 'add':
+                    $(':input','#myModal')
+                        .not(':button, :submit, :reset')
+                        .val('')
+                        .removeAttr('checked')
+                        .removeAttr('selected');
+                	$('#myModal').modal({backdrop: 'static', keyboard: false});
+                    $('#myModal').modal('show');
+                    break;
+                case 'edit':
+                	var data = $('#roleList').DataTable().row('.selected').data();
+                    if(data == null){
+                        showTips("请先选择一条要编辑的记录");
+                        return;
+                    }
+                    $("#id").val(data.id);
+                    $("#roleName").val(data.roleName);
+                    $("#roleDesc").val(data.roleDesc);
+                	$('#myModal').modal({backdrop: 'static', keyboard: false});
+                    $('#myModal').modal('show');
+                    break;
+                case 'delete':
+                    var data = $('#roleList').DataTable().row('.selected').data();
+                    if(data == null){
+                        showTips("请先选择一条要删除的记录");
+                        return;
+                    }
+                    showConfirm("确定要删除该记录吗？（操作不可恢复）", function () {
+                        deleteAdmin(data.id);
+                    });
+                    break;
+                case 'reset':
+                    $("#searchRoleName").val("");
+                    var table = $('#roleList').DataTable();
+                    table.ajax.url('admin/notTopRoles');
+                    table.ajax.reload();
+                    break;
+                case 'select':
+                    search();
+                    break;
+            }
+        });
+    });
+</script>
+</body>
+</html>

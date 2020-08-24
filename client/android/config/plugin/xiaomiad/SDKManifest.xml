@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <permissionConfig>
+
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+        <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+        <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    </permissionConfig>
+
+    <applicationConfig proxyApplication="com.u8.sdk.ad.mimo.MimoAdProxyApplication">
+
+
+        <!--闪屏广告必须全屏展示，通过android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"设置你的SplashActivity为全屏显示，
+        闪屏只支持竖屏展示，通过android:screenOrientation="portrait" 设置你的SplashActivity为竖屏显示-->
+        <activity android:name="com.u8.sdk.ad.mimo.SplashAdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+
+
+        <activity android:name="com.miui.zeus.mimo.sdk.activityProxy.ProxyActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="false" android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+
+        <activity android:name="com.miui.zeus.mimo.sdk.activityProxy.FullScreenProxyActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:exported="false" android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" />
+
+<!--         <provider android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider" android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/mimo_file_paths" />
+        </provider> -->
+    </applicationConfig>
+
+</manifest>

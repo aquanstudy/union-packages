@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <permissionConfig>
+
+        <!-- SDK 相关 start -->
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+        <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <!-- SDK 相关  end -->
+    </permissionConfig>
+
+    <applicationConfig keyword="com.lang.lun.sdk.activity.TransparencyActivity" >
+
+        <!-- start -->
+        <activity
+            android:name="com.lang.lun.sdk.activity.TransparencyActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@style/MCHTransparent" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.ChoosePayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.WapPayActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/MCHTransparent" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.PacksActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.PersonalActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.ChangePasswordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.MoneyRecordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.GameRecordActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.AddPlatformCoinActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.lang.lun.sdk.activity.BindPhoneActivity"
+            android:launchMode="singleTop" />
+        <activity android:name="com.lang.lun.sdk.activity.VisitorUpdateInfo" />
+
+        <service android:name="com.lang.lun.sdk.server.FloatService" />
+
+        <activity
+            android:name="com.lang.lun.sdk.activity.ForgetPasswordActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop" />
+
+        <!-- 去认证 -->
+        <activity android:name="com.lang.lun.sdk.activity.CertificateActivity" />
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <!-- end -->
+    </applicationConfig>
+
+</manifest>

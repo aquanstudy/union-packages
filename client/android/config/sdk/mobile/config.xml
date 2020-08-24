@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config>
+    <params>
+        <param name="AppId" bWriteInClient="1" bWriteInManifest="0" desc="AppId" required="1" showName="AppId" />
+        <param name="AppKey" bWriteInClient="1" bWriteInManifest="0" desc="AppKey" required="1" showName="AppKey" />
+        <param name="AppName" bWriteInClient="1" bWriteInManifest="0" desc="AppName" required="1" showName="AppName" />
+    </params>
+    <operations>
+        <operation from="SDKManifest.xml" step="1" to="AndroidManifest.xml" type="mergeManifest" />
+        <operation from="assets" step="2" to="assets" type="copyRes" />
+        <operation from="libs" step="3" to="lib" type="copyRes" />
+        <operation from="res" step="4" to="res" type="copyRes" />
+    </operations>
+    <plugins>
+        <plugin name="com.u8.sdk.MMUser" desc="用户登录接口" type="1" />
+        <plugin name="com.u8.sdk.MMPay" desc="用户支付接口" type="2" />
+    </plugins>
+	<dependencies>
+		<dependency name="com.android.support:appcompat-v7:28.0.0" />
+	</dependencies>
+    <version>
+        <name>中国移动</name>
+        <versionCode>1</versionCode>
+        <versionName>2.2.0</versionName>
+    </version>
+    <extraR>
+        <package name="com.cmic.mpay" />
+        <package name="android.support.v7.appcompat" />
+        <package name="android.support.coordinatorlayout" />
+        <package name="android.support.compat" />
+    </extraR>
+</config>

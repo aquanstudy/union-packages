@@ -1,0 +1,2 @@
+sdk tools: 26
+android sdk: 8.0

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000" >
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/u8_dialog_corner_bg"
+        android:orientation="vertical" >
+
+        <!-- 顶部椭园边缘 -->
+
+	    <RelativeLayout
+	        style="@style/u8_common_title">
+	
+	        <TextView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:text="@string/u8_permission_confirm_title"
+	            android:textColor="@android:color/white"
+	            android:textSize="@dimen/u8_common_textsize_l" />
+	    </RelativeLayout>
+	
+	    <View
+	        style="@style/u8_common_divide"
+	        android:layout_height="10dp" >
+	    </View> 
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/u8_permission_confirm_txt1"
+					android:textColor="@color/u8_dark"
+					android:textSize="@dimen/u8_common_textsize_m" />
+
+				<TextView
+					android:id="@+id/u8_protocol_addr2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="1dp"
+					android:text="@string/u8_permission_protocol"
+					android:textColor="@color/u8_title_blue"
+					android:textStyle="bold"
+					android:textSize="@dimen/u8_common_textsize_m" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/u8_permission_confirm_txt2"
+					android:textColor="@color/u8_dark"
+					android:textSize="@dimen/u8_common_textsize_m" />
+			</LinearLayout>
+
+
+        </LinearLayout>
+        
+	    <View
+	        style="@style/u8_common_divide"
+	        android:layout_height="10dp" >
+	    </View>        
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="2dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+			<Button
+				android:id="@+id/u8_protocol_cancel"
+				android:layout_width="0dp"
+				android:layout_height="35dp"
+				android:layout_marginBottom="1dp"
+				android:layout_marginLeft="6dp"
+				android:layout_marginTop="1dp"
+				android:layout_weight="1"
+				android:background="@drawable/u8_corner_gray"
+				android:gravity="center"
+				android:text="@string/u8_permission_confirm_cancel"
+				android:textColor="@color/u8_btn_gray"
+				android:textSize="14sp"
+				android:textStyle="bold"
+				android:visibility="visible" />
+
+            <Button
+                android:id="@+id/u8_protocol_ok"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="1dp"
+				android:layout_marginLeft="20dp"
+				android:layout_marginRight="6dp"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/u8_corner_button"
+                android:gravity="center"
+                android:text="@string/u8_permission_confirm_ok"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+	    <View
+	        style="@style/u8_common_divide"
+	        android:layout_height="10dp" >
+	    </View>        
+    </LinearLayout>
+
+</RelativeLayout>

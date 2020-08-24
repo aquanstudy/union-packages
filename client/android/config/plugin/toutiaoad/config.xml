@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    
+	<params>
+        <param name="TT_AD_APP_ID" required="1" showName="AppID" desc="广告联盟上申请的appid" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_APP_NAME" required="1" showName="AppName" desc="广告联盟上创建的游戏名称" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_SPLASH_POS_ID" required="1" showName="闪屏广告ID" desc="广告联盟上申请的闪屏广告的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+
+        <param name="TT_AD_BANNER_POS_ID" required="1" showName="Banner广告ID" desc="广告联盟上申请的Banner广告的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_BANNER_WIDTH" required="1" showName="Banner宽度" desc="广告联盟上申请的Banner广告的广告位宽度" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_BANNER_HEIGHT" required="1" showName="Banner高度" desc="广告联盟上申请的Banner广告的广告位高度" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_BANNNER_INTERVAL_SECS" required="1" showName="刷新间隔(秒)" desc="Banner广告位广告刷新间隔，大于等于30秒" bWriteInManifest="0" bWriteInClient="1" />
+
+        <param name="TT_AD_POPUP_POS_ID" required="1" showName="插屏广告ID" desc="广告联盟上申请的插屏广告的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_POPUP_WIDTH" required="1" showName="插屏宽度" desc="广告联盟上创建的广告宽度" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_POPUP_HEIGHT" required="1" showName="插屏高度" desc="广告联盟商创建的广告高度" bWriteInManifest="0" bWriteInClient="1" />
+
+        <param name="TT_AD_REWARD_VIDEO_POS_ID" required="1" showName="激励广告ID" desc="广告联盟上申请的激励视频的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_VIDEO_POS_ID" required="1" showName="视频广告ID" desc="广告联盟上申请的普通视频的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_VIDEO_ORIENTATION" required="1" showName="视频横竖屏" paramStyle="list" styleExtra="portrait|landscape" desc="视频广告横屏(landscape)还是竖屏(portrait)" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_VIDEO_WIDTH" required="1" showName="视频宽度" desc="广告联盟上申请的视频的广告位宽度" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_VIDEO_HEIGHT" required="1" showName="视频高度" desc="广告联盟上申请的视频的广告位高度" bWriteInManifest="0" bWriteInClient="1" />
+
+        <param name="TT_AD_NATIVE_POS_ID" required="1" showName="原生广告ID" desc="广告联盟上申请的原生广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_NATIVE_AD_TYPE" required="1" paramStyle="list" styleExtra="1|2" showName="原生广告类型" desc="广告联盟上申请的原生广告类型(1：banner；2：插屏)" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_NATIVE_WIDTH" required="1" showName="原生宽度" desc="广告联盟上申请的原生广告位宽度" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="TT_AD_NATIVE_HEIGHT" required="1" showName="原生高度" desc="广告联盟上申请的原生广告位高度" bWriteInManifest="0" bWriteInClient="1" />
+    </params>
+    
+    <operations>
+        <operation step="1" type="mergeManifest" from="SDKManifest.xml" to="AndroidManifest.xml" />
+        <operation step="2" type="copyRes" from="assets" to="assets" />
+        <operation step="3" type="copyRes" from="libs" to="lib" />
+        <operation step="4" type="copyRes" from="res" to="res" />
+        <operation step="4" type="copyRes" from="root" to="" />
+    </operations>
+    
+    <plugins>
+        <plugin name="com.u8.sdk.ad.toutiao.ToutiaoAd" type="7" desc="广告接口"/>
+    </plugins>
+    
+    <version>
+        <name>穿山甲广告</name>
+        <versionCode>1</versionCode>
+        <versionName>1.9.9.5</versionName>
+    </version>     
+    
+</config>

@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>U8SDK打包管理系统</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- <link rel="stylesheet" href="plugins/datepicker/datepicker3.css"> -->
+    <!--<link rel="stylesheet" href="plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">-->
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="css/bootstrap-gtreetable.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.vertical-tabs.css">
+    <link rel="stylesheet" href="css/xsdk.css">
+    <link rel="stylesheet" href="css/bootstrap-dialog.css">
+    <link href="css/bootstrap-toggle.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .tab-pane {
+            height: 500px;
+            margin-left: -10px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 96%;
+        }
+    </style>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;overflow: hidden;clear: both;">
+
+                <!--<div style="float: left;margin-left: 10px;padding-top: 10px;">-->
+                <!--<div style="float:left; margin-top: 5px;">-->
+                <!--<b>选择游戏：</b>-->
+                <!--</div>-->
+                <!--<div style="float: left">-->
+                <!--<select class="form-control select2 adminRoleAjax" style="width: 200px;" id="games"-->
+                <!--name="games">-->
+                <!--</select>-->
+                <!--</div>-->
+
+                <!--</div>-->
+
+                <div class="btn-group" style="float:right;padding-top: 10px;margin-right: 5px;">
+                    <button type="button" class="btn btn-primary" data-btn-type="pack" style="margin-left: 10px;">一键打包
+                    </button>
+                </div>
+                <div class="btn-group" style="float:right;padding-top: 10px;margin-right: 10px;">
+
+                    <button type="button" class="btn btn-default" data-btn-type="add">新增</button>
+                    <button type="button" class="btn btn-default" data-btn-type="addSubConfig">新增子配置</button>
+                    <button type="button" class="btn btn-default" data-btn-type="edit">编辑</button>
+                    <button type="button" class="btn btn-default" data-btn-type="config">参数配置</button>
+                    <button type="button" class="btn btn-default" data-btn-type="plugin">更换插件</button>
+                    <button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
+                </div>
+
+                <div class="btn-group" style="float:right;padding-top: 10px;margin-right: 10px;">
+                    <button type="button" class="btn btn-primary" data-btn-type="select">查询</button>
+                </div>
+
+                <div style="float:right;margin-top: 10px; margin-right: 5px;"><input placeholder="打包标识" id="searchName"
+                                                                                     class="form-control" type="search"
+                                                                                     likeOption="true"
+                                                                                     style="width: 100px;"/></div>
+                <div style="float:right;margin-top: 10px; margin-right: 15px;"><input placeholder="渠道名称"
+                                                                                      id="searchChannelName"
+                                                                                      class="form-control" type="search"
+                                                                                      likeOption="true"
+                                                                                      style="width: 100px;"/></div>
+                <div style="float:right;margin-top: 10px;margin-right: 15px;"><input placeholder="渠道号"
+                                                                                     id="searchChannelID"
+                                                                                     class="form-control" type="search"
+                                                                                     likeOption="true"
+                                                                                     style="width: 80px;"/></div>
+
+            </div>
+            <div class="box-body">
+
+                <table id="channels" class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>渠道号</th>
+                        <th>打包标识</th>
+                        <th>渠道名称</th>
+                        <th>版本</th>
+                        <th>配置状态</th>
+                        <th><input class="cnormal" name="select_all" value="0" id="select_all" type="checkbox"/></th>
+                    </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addTitle">增加渠道配置</h4>
+            </div>
+            <div class="modal-body">
+                <!--<div class="box box-primary">-->
+                <!--<div id="errBlock"></div>-->
+
+                <!--</div>-->
+                <form class="form-horizontal no-border" id="fmbase">
+                    <div class="box-body" style="margin-left: -50px;">
+                        <input type="text" class="form-control" type="hidden" style="display: none;" id="id1"
+                               name="id">
+
+                        <input type="text" class="form-control" type="hidden" style="display: none;" id="gameID1"
+                               name="gameID">
+
+                        <input type="text" class="form-control" type="hidden" style="display: none;" id="channelName1"
+                               name="channelName">
+
+                        <input type="text" class="form-control" type="hidden" style="display: none;"
+                               id="parentChannelID"
+                               name="parentChannelID">
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">打包标识</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="打包标识，字母和数字"
+                                       maxlength="30">
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="sdkSelector">
+                            <label for="sdk" class="col-sm-3 control-label">选择SDK</label>
+                            <div class="col-sm-9">
+                                <select class="form-control select2" style="width: 100%;" id="sdk" name="sdk">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="sdkShower">
+                            <label for="sdk" class="col-sm-3 control-label">渠道SDK</label>
+                            <div class="col-sm-9">
+                                <span id="currSDKName" style="display: inline-block;margin-top: 5px;"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="channelID" class="col-sm-3 control-label">渠道号</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="channelID" name="channelID"
+                                       placeholder="渠道号需要和U8Server后台配置的一致"
+                                       maxlength="30">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChannel">保 存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="testModal" role="dialog" aria-labelledby="addTitle">
+    <div class="modal-dialog" role="document" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="testModalTitle">渠道参数配置</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal no-border" id="fm" enctype="multipart/form-data">
+                    <div class="row" style="height: 500px;margin: -15px;">
+                        <div class="col-xs-2 vertical-line"> <!-- required for floating -->
+                            <!-- Nav tabs -->
+                            <ul id="configTab" class="nav nav-tabs tabs-left" style="margin-right:-15px;">
+                                <li class="active"><a href="#baseConfig" data-toggle="tab">基础配置</a></li>
+                                <li><a href="#channelConfig" data-toggle="tab">渠道参数</a></li>
+                                <li><a href="#iconConfig" data-toggle="tab">Icon配置</a></li>
+                                <li><a href="#splashConfig" data-toggle="tab">闪屏配置</a></li>
+                                <li><a href="#permissionConfig" data-toggle="tab">自动权限</a></li>
+                                <li id="productTabIndex"><a href="#productConfig" data-toggle="tab">商品配置</a></li>
+                                <li id="pluginTabIndex"><a href="#pluginConfig" data-toggle="tab">插件配置</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-xs-10">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane panel-custom active" id="baseConfig">
+                                    <p class="notewrapper note note-info">
+                                        1、打包标识作为打包脚本执行时生成的临时目录名称，尽量采用字母和数字的形式，比如九游的渠道，可以将aligames作为打包标识<br>
+                                        2、渠道号是全局唯一的，比如A游戏的九游渠道号是10，B游戏的九游渠道号是11。渠道号需要和U8Server后台渠道管理中设置的渠道号一致<br>
+                                        3、推荐不同渠道使用不同的包名，这样同一个设备可以同时安装多个渠道包
+                                    </p>
+
+                                    <div class="box box-primary no-border">
+                                        <!--<div id="errBlock"></div>-->
+                                        <!--<form class="form-horizontal no-border" id="fm" >-->
+                                        <div class="box-body no-border">
+                                            <input type="text" class="form-control" type="hidden" style="display: none;"
+                                                   id="id2"
+                                                   name="id">
+
+                                            <input type="text" class="form-control" type="hidden" style="display: none;"
+                                                   id="gameID2"
+                                                   name="gameID">
+
+                                            <input type="text" class="form-control" type="hidden" style="display: none;"
+                                                   id="channelName2"
+                                                   name="channelName">
+
+
+                                            <div class="form-group">
+                                                <label for="gameName" class="col-sm-3 control-label"
+                                                       data-toggle="tooltip">游戏名称</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="gameName"
+                                                           name="gameName" placeholder=""
+                                                           maxlength="50">
+                                                    <label for="gameName" class="lbl-tips">打出apk安装之后显示在设备上的名称，设置之后会覆盖母包的名称</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="bundleID" class="col-sm-3 control-label"
+                                                       data-toggle="tooltip">游戏包名</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="bundleID"
+                                                           name="bundleID" placeholder=""
+                                                           maxlength="100">
+                                                    <label for="bundleID" class="lbl-tips">游戏完整包名，
+                                                        比如com.u8.sdk.game.wzry</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="minSdkVersion" class="col-sm-3 control-label"
+                                                       data-toggle="tooltip">minSdkVersion</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="minSdkVersion"
+                                                           name="minSdkVersion" placeholder=""
+                                                           maxlength="50">
+                                                    <label for="minSdkVersion" class="lbl-tips">最终apk中minSdkVersion值,
+                                                        如果渠道无要求，推荐配置为15</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="targetSdkVersion" class="col-sm-3 control-label"
+                                                       data-toggle="tooltip">targetSdkVersion</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="targetSdkVersion"
+                                                           name="targetSdkVersion" placeholder=""
+                                                           maxlength="50">
+                                                    <label for="targetSdkVersion" class="lbl-tips">最终apk中targetSdkVersion值,
+                                                        如果渠道无要求，推荐配置为22</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="serverBaseUrl" class="col-sm-3 control-label"
+                                                       data-toggle="tooltip">U8Server URL</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="serverBaseUrl"
+                                                           name="serverBaseUrl" placeholder=""
+                                                           maxlength="1024">
+                                                    <label for="serverBaseUrl" class="lbl-tips">U8Server根地址，不配置默认游戏中配置的U8Server根地址</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sdkLogicVersionCode" class="col-sm-3 control-label"
+                                                       data-toggle="tooltip">逻辑版本号</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="sdkLogicVersionCode"
+                                                           name="sdkLogicVersionCode" placeholder="一般不需要填写"
+                                                           maxlength="64">
+                                                    <label for="sdkLogicVersionCode" class="lbl-tips">SDK逻辑版本号，如果服务端有多个SDK版本同时在使用，可以用逻辑版本号来区分服务器使用的版本</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="signApk" class="col-sm-3 control-label">是否签名</label>
+                                                <div class="col-sm-9">
+                                                    <label class="checkbox-inline" style="margin-left: -20px;">
+                                                        <input type="checkbox" id="signApk" name="signApk" value="1"
+                                                               checked>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label class="col-sm-3 control-label">签名类型</label>
+                                                <div class="col-sm-9">
+                                                    <label class="checkbox-inline" style="margin-left: -20px;">
+                                                        <input type="radio" id="signVersion1" name="signVersion"
+                                                               value="V1" checked> V1
+                                                    </label>
+                                                    <label class="checkbox-inline">
+                                                        <input type="radio" id="signVersion2" name="signVersion"
+                                                               value="V2"> V2
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="keystoreID" class="col-sm-3 control-label">签名证书</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control select2" style="width: 100%;"
+                                                            id="keystoreID" name="keystoreID">
+                                                    </select>
+                                                    <label for="keystoreID"
+                                                           class="lbl-tips">可以在左边菜单->签名文件中添加新的证书配置</label>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--</form>-->
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane panel-custom" id="channelConfig">
+                                    <p class="notewrapper note note-info" style="margin-top: 10px;">
+                                        1、渠道参数需要去渠道开发者平台申请或者联系渠道平台商务申请<br>
+                                        2、已经上线的游戏，渠道参数的修改请慎重。这里部分参数是后端使用，修改之后，可能会影响线上的游戏
+                                    </p>
+                                    <div class="box box-primary no-border">
+                                        <!--<div id="errBlock3"></div>-->
+                                        <!--<form class="form-horizontal no-border" id="fm3" >-->
+                                        <div class="box-body no-border" id="channelConfigBody">
+                                        </div>
+                                        <!--</form>-->
+                                    </div>
+                                </div>
+                                <div class="tab-pane panel-custom" id="iconConfig">
+
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <div class="panel panel-default panel-border no-border-top">
+                                            <div class="panel-heading no-background" role="tab" id="headingOne">
+                                                <h4 class="panel-title">
+                                                    <input type="radio" id="iconAuto" name="iconType" value="1">
+                                                    <a id="iconAutoTitle" role="button" data-toggle="collapse"
+                                                       data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                                                       aria-controls="collapseOne">
+                                                        打包工具自动处理ICON
+                                                    </a>
+                                                    <label style="font-size: 13px;font-weight: bold;">&nbsp;&nbsp;&nbsp;（没有正常显示？&nbsp;&nbsp;<a
+                                                            id="reloadIcon" style="color: blue">点我刷新试试</a>）</label>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                                 aria-labelledby="headingOne">
+                                                <div class="panel-body panel-border-top" style="margin-left: 10px;">
+
+                                                    <div class="row" id="icons">
+                                                    </div>
+
+                                                </div>
+                                                <div class="clearfix" style="margin-left: 25px;">
+                                                    <div class="lbl-tips tip-height">
+                                                        1、打包工具根据游戏上传的ICON自动生成带角标的ICON，如果需要替换，请修改游戏ICON
+                                                    </div>
+                                                    <div class="lbl-tips tip-height">2、没有角标配置的渠道，只能处理默认的ICON</div>
+                                                    <div class="lbl-tips tip-height">3、如果是带角标的ICON，请根据游戏ICON，选择合适的角标位置
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default panel-border">
+                                            <div class="panel-heading no-background" role="tab" id="headingTwo">
+                                                <h4 class="panel-title">
+                                                    <input type="radio" id="iconCustom" name="iconType" value="2">
+                                                    <a id="iconCustomTitle" class="collapsed" role="button"
+                                                       data-toggle="collapse" data-parent="#accordion"
+                                                       href="#collapseTwo" aria-expanded="false"
+                                                       aria-controls="collapseTwo">
+                                                        上传自定义ICON(512*512像素,格式：png)
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                                 aria-labelledby="headingTwo">
+                                                <div class="panel-body panel-border-top">
+
+                                                    <div class="icon-panel">
+                                                        <div style="float:left;margin-right: 10px;">
+                                                            <div id="iconPreview" class="iconpreview icon-size"
+                                                                 style="display: none;">
+
+                                                                <div class="mask-inner">
+                                                                    <i class="fa fa-trash-o" style=""></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="uploader">
+                                                            <div class="clickable">
+                                                                <label>
+                                                                    <span class="addImgBtn"><i
+                                                                            class="fa fa-plus-circle"></i></span>
+                                                                    <span class="imguploadTit">选择ICON</span>
+                                                                    <span class="imguploadTit">图片格式：PNG</span>
+                                                                    <span class="imguploadTit">512*512像素</span>
+                                                                    <input id="iconCustomFile" name="iconCustomFile"
+                                                                           title="添加图片" type="file">
+                                                                </label>
+                                                            </div>
+                                                            <!--<div class="mask-inner">-->
+                                                            <!--<i class="fa fa-trash-o" style=""></i>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="clearfix" style="margin-left: 25px;">
+                                                    <div class="lbl-tips tip-height">
+                                                        1、如果有特殊需求，请直接上传特定的ICON，最终渠道包中的ICON以这里上传的为准
+                                                    </div>
+                                                    <div class="lbl-tips tip-height">2、上传图片大小请小于2M</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane panel-custom" id="splashConfig">
+
+                                    <div class="panel-group" id="accordionSplash" role="tablist"
+                                         aria-multiselectable="true">
+
+                                        <div class="panel panel-default panel-border no-border-top">
+                                            <div class="panel-heading no-background" role="tab" id="headingThreeSplash">
+                                                <h4 class="panel-title">
+                                                    <input type="radio" id="splashNone" name="splash" value="0">
+                                                    <a id="splashNoneTitle" role="button" data-toggle="collapse"
+                                                       data-parent="#accordionSplash" href="#collapseThreeSplash"
+                                                       aria-expanded="false" aria-controls="collapseOne">
+                                                        不添加闪屏
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseThreeSplash" class="panel-collapse collapse in"
+                                                 role="tabpanel" aria-labelledby="headingThreeSplash">
+
+                                                <div class="clearfix" style="margin-left: 25px;">
+                                                    <div class="lbl-tips tip-height">1、请先和渠道商务人员或者文档确认好是否必须配置闪屏</div>
+                                                    <div class="lbl-tips tip-height">2、如果渠道要求必须配置闪屏，请选择下面两种闪屏方式</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="splashDefaultPanel"
+                                             class="panel panel-default panel-border no-border-top">
+                                            <div class="panel-heading no-background" role="tab" id="headingOneSplash">
+                                                <h4 class="panel-title">
+                                                    <input type="radio" id="splashDefault" name="splash" value="1">
+                                                    <a id="splashDefaultTitle" role="button" data-toggle="collapse"
+                                                       data-parent="#accordionSplash" href="#collapseOneSplash"
+                                                       aria-expanded="false" aria-controls="collapseOne">
+                                                        使用渠道SDK提供的默认闪屏
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOneSplash" class="panel-collapse collapse" role="tabpanel"
+                                                 aria-labelledby="headingOneSplash">
+                                                <div class="panel-body panel-border-top" style="margin-left: 10px;">
+
+                                                    <div class="icon-panel clearfix">
+                                                        <div id="uploaderSplashDiv"
+                                                             class="uploader splashwrapper horizontal">
+                                                            <img id="splashDefaultPng" alt="渠道默认闪屏"/>
+                                                            <!--<div class="mask-inner">-->
+                                                            <!--<i class="fa fa-trash-o" style=""></i>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix" style="margin-left: 10px;">
+                                                        <div class="lbl-tips tip-height">
+                                                            1、一般有闪屏要求的渠道，会提供默认的闪屏图片，请根据渠道要求使用默认闪屏图片
+                                                        </div>
+                                                        <div class="lbl-tips tip-height">2、默认闪屏图片由SDK接入同学放置在渠道配置目录下
+                                                        </div>
+                                                        <div class="lbl-tips tip-height">
+                                                            3、这里根据游戏的横竖屏设置，自动显示横屏或者竖屏的闪屏图片
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default panel-border">
+                                            <div class="panel-heading no-background" role="tab" id="headingTwoSplash">
+                                                <h4 class="panel-title">
+                                                    <input type="radio" id="splashCustom" name="splash" value="2">
+                                                    <a id="splashCustomTitle" class="collapsed" role="button"
+                                                       data-toggle="collapse" data-parent="#accordionSplash"
+                                                       href="#collapseTwoSplash" aria-expanded="false"
+                                                       aria-controls="collapseTwo">
+                                                        上传自定义闪屏
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseTwoSplash" class="panel-collapse collapse" role="tabpanel"
+                                                 aria-labelledby="headingTwoSplash">
+                                                <div class="panel-body panel-border-top" style="margin-left: 10px;">
+
+                                                    <div class="icon-panel clearfix">
+
+                                                        <div style="float:left;margin-right: 10px;">
+                                                            <div id="splashPreview" class="iconpreview splash-size-h"
+                                                                 style="display: none;">
+
+                                                                <div class="mask-inner">
+                                                                    <i class="fa fa-trash-o" style=""></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div id="uploaderCustomDiv" class="uploader horizontal">
+                                                            <div class="clickable">
+                                                                <label>
+                                                                    <span class="addImgBtn"><i
+                                                                            class="fa fa-plus-circle"></i></span>
+                                                                    <span class="imguploadTit">选择图片</span>
+                                                                    <span class="imguploadTit">图片格式：PNG</span>
+                                                                    <input id="splashCustomFile" name="splashCustomFile"
+                                                                           title="添加图片" type="file">
+                                                                </label>
+                                                            </div>
+                                                            <!--<div class="mask-inner">-->
+                                                            <!--<i class="fa fa-trash-o" style=""></i>-->
+                                                            <!--</div>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix" style="margin-left: 10px;">
+                                                        <div class="lbl-tips tip-height">闪屏配置说明：</div>
+                                                        <div class="lbl-tips tip-height">
+                                                            1、这里配置的是渠道SDK的闪屏，如果游戏有自己的闪屏，请游戏中自行处理
+                                                        </div>
+                                                        <div class="lbl-tips tip-height">
+                                                            2、如果上传自定义闪屏，请根据游戏横竖屏，上传横屏或者竖屏的闪屏图片
+                                                        </div>
+                                                        <div class="lbl-tips tip-height">
+                                                            3、建议横屏图片为800*480像素;竖屏为480*800像素;小于2M
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="tab-pane panel-custom" id="permissionConfig">
+                                    <p class="notewrapper note note-info" style="margin-top: 10px;">
+                                        1、U8SDK聚合框架中有敏感权限自动申请处理方案，和用户隐私协议处理方案，这里可以配置相关规则<br>
+                                        2、如果游戏层自己来处理敏感权限的申请，直接关闭自动权限处理即可<br>
+                                        3、【申请方式】建议选择独立Activity申请，游戏中直接申请，可能会导致游戏层初始化时因权限还未申请到而失败<br>
+                                        4、自动权限处理流程可以参考博客：<a href="http://www.uustory.com/?p=2280" target="_blank">【自动动态权限处理】</a>
+                                    </p>
+                                    <div class="box box-primary no-border">
+                                        <!--<div id="errBlock3"></div>-->
+                                        <!--<form class="form-horizontal no-border" id="fm3" >-->
+                                        <div class="box-body no-border">
+
+                                            <div class="form-group">
+                                                <label for="autoPermission"
+                                                       class="col-sm-3 control-label">开启自动权限</label>
+                                                <div class="col-sm-9">
+                                                    <label class="radio-inline" style="margin-left: -20px;">
+                                                        <input type="checkbox" class="form-control" id="autoPermission"
+                                                               name="autoPermission" value="1">
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="directPermission1"
+                                                       class="col-sm-3 control-label">申请方式</label>
+                                                <div class="col-sm-9">
+                                                    <label class="radio-inline" style="margin-left: -20px;">
+                                                        <input type="radio" class="form-control" id="directPermission1"
+                                                               name="directPermission" value="0"> 独立Activity中申请
+                                                    </label>
+                                                    <label class="radio-inline" style="margin-left: 30px;">
+                                                        <input type="radio" class="form-control" id="directPermission2"
+                                                               name="directPermission" value="1"> 游戏Activity中直接申请
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group" style="margin-top: 25px;">
+                                                <label for="name" class="col-sm-3 control-label" data-toggle="tooltip">排除权限组</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="excludePermissionGroups"
+                                                           name="excludePermissionGroups"
+                                                           placeholder="权限组名称大写，比如联系人权限，请输入：CONTACTS"
+                                                           maxlength="255">
+                                                    <label for="name"
+                                                           class="lbl-tips">如果某些权限不需要聚合框架自动申请，可以进行排除。多个用逗号分隔。</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="autoPermission"
+                                                       class="col-sm-3 control-label">开启隐私协议</label>
+                                                <div class="col-sm-9">
+                                                    <label class="radio-inline" style="margin-left: -20px;">
+                                                        <input type="checkbox" class="form-control" id="autoProtocol"
+                                                               name="autoProtocol" value="1">
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group" style="margin-top: 25px;">
+                                                <label for="name" class="col-sm-3 control-label" data-toggle="tooltip">隐私协议地址</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="protocolUrl"
+                                                           name="protocolUrl" placeholder="请输入隐私协议URL地址"
+                                                           maxlength="255">
+                                                    <label for="name" class="lbl-tips">如果直接放在apk的assets目录下，请输入file:///android_asset/隐私协议文件名称</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!--</form>-->
+                                    </div>
+                                </div>
+                                <div class="tab-pane panel-custom" id="productConfig">
+
+                                    <table id="products" class="table table-borderless">
+                                        <thead>
+                                        <tr>
+                                            <th style="padding-left: 20px;padding-top: 15px;padding-bottom: 15px;">
+                                                游戏商品ID
+                                            </th>
+                                            <th style="padding-left: 20px;padding-top: 15px;padding-bottom: 15px;">
+                                                渠道后台商品ID
+                                            </th>
+                                            <th style="padding-top:15px;padding-bottom: 15px;">操 作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+                                    <div style="margin-left: 20px;">
+                                        <div class="lbl-tips tip-height">商品映射关系配置说明：</div>
+                                        <div class="lbl-tips tip-height">1、如果渠道后台支持游戏内传入价格，那么推荐采用这种方式，
+                                            这里也不需要配置商品ID映射关系
+                                        </div>
+                                        <div class="lbl-tips tip-height">
+                                            2、游戏商品ID为游戏中该条商品的唯一ID;渠道商品ID是在渠道后台添加商品时渠道后台生成的商品ID或者计费点ID
+                                        </div>
+                                        <div class="lbl-tips tip-height">3、配置商品映射关系之后，
+                                            客户端调用支付接口直接传入游戏中商品实际ID，U8SDK会自动将该商品ID转换为对应的渠道商品ID
+                                        </div>
+                                        <div class="lbl-tips tip-height">
+                                            4、如果不进行商品映射关系配置，游戏也可以在调用支付接口的时候，传入渠道后台对应的实际商品ID
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane panel-custom" id="pluginConfig"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <a id="popTips" href="javascript:void(0);" data-toggle="popover" data-html="true" title="配置说明"
+                   data-content="" class="pull-left popup" style="cursor:default;margin-top: 7px;">
+                    <div class="clearfix">
+                        <div style="float:left;"><i class="fa fa-question-circle"></i></div>
+                        <div style="float:left;"><span style="margin-left: 3px;">该渠道配置有疑问？</span></div>
+                    </div>
+                </a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+                <button type="button" class="btn btn-primary" id="btnSaveConfig">保 存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="pluginModal" class="modal fade" role="dialog" aria-labelledby="pluginModalLabel">
+    <div class="modal-dialog" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="pluginTitle">插件列表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table id="plugins" class="table table-bordered table-striped table-hover"
+                           style="width: 98% !important; margin:0 auto;">
+                        <thead>
+                        <tr>
+                            <th>插件名称</th>
+                            <th>插件版本</th>
+                            <th>插件目录</th>
+                            <th>状 态</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/select2/select2.min.js"></script>
+<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+<script src="js/xsdk.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="dist/js/app.min.js"></script>
+<script src="plugins/jQuery/jquery.md5.js"></script>
+<script src="js/bootstrap-gtreetable-xsdk.js"></script>
+<script src="js/bootstrap-gtreetable.zh-CN.js"></script>
+<script src="js/bootstrap-dialog.js"></script>
+<script src="js/bootstrap-toggle.min.js"></script>
+<!--<script src="plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>-->
+<!--<script src="plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.fr.js"></script>-->
+<script>
+
+
+    function addNewProductRow() {
+        var rowStr = '<tr><td><input type="text" class="form-control nobordrinput" name="gameProductID" placeholder="请输入游戏中商品ID" maxlength="100"></td><td><input type="text" class="form-control nobordrinput" name="channelProductID" placeholder="请输入该商品对应渠道后台的商品ID" maxlength="100"></td><td style="padding-top: 15px;"><a name="productOption" href="javascript:;" onclick="javascript:addNewProduct(this);">添 加</a>  </td></tr>';
+        $("#products > tbody").append(rowStr);
+    }
+
+    function addProductRowWithData(data) {
+        var rowStr = '<tr><td><input type="text" class="form-control nobordrinput" name="gameProductID" value="' + data.gameProductID + '" maxlength="100" disabled="disabled"></td><td><input type="text" class="form-control nobordrinput" name="channelProductID" value="' + data.channelProductID + '" maxlength="100" disabled="disabled"></td><td style="padding-top: 15px;"><a name="productOption" href="javascript:;" onclick="javascript:deleteProductRow(this);">删 除</a>  </td></tr>';
+        $("#products > tbody").append(rowStr);
+    }
+
+    function deleteProductRow(tag) {
+        $(tag).closest('tr').remove();
+    }
+
+    function addNewProduct(tag) {
+
+        var channelProductIDInput = $(tag).parent().prev().children(":input");
+        var productIDInput = $(channelProductIDInput).parent().prev().children(":input");
+
+        var productID = $(productIDInput).val();
+        var channelProductID = $(channelProductIDInput).val();
+
+        if (isEmpty(productID) || isEmpty(channelProductID)) {
+            showTips("请输入游戏商品ID和渠道后台商品ID");
+            return;
+        }
+
+        $("input[name='gameProductID']").attr("disabled", true);
+        $("input[name='channelProductID']").attr("disabled", true);
+        $("a[name='productOption']").html("删 除");
+        $("a[name='productOption']").attr("onclick", "");
+        $("a[name='productOption']").unbind();
+        $("a[name='productOption']").click(function () {
+            //$(this).closest('tr').remove();
+            deleteProductRow(this);
+        });
+        addNewProductRow();
+
+    }
+
+    function getAllProducts() {
+
+        var all = [];
+
+        $('#products > tbody  > tr').each(function () {
+            var productID = $(this).find("input[name='gameProductID']").val();
+            var channelProductID = $(this).find("input[name='channelProductID']").val();
+            if (!isEmpty(productID) && !isEmpty(channelProductID)) {
+                var item = {"gameProductID": productID, "channelProductID": channelProductID};
+                all.push(item);
+            }
+        });
+
+        return JSON.stringify(all);
+        ;
+    }
+
+    $(function () {
+
+        var inited = false;
+        var gameLst;
+        var sdkLst;
+        //var currGameName;
+        var currChannelID;
+        var currChannelName;
+        var saveChannelUrl;
+        var saveLocalChannel = false;
+        var pluginInited = false;
+
+        var channelConfigResult = null;
+        var currChannelData = null;
+
+
+        $('input:not(.cnormal)').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+
+        $('#popTips').popover({
+            trigger: 'hover',
+            container: 'body'
+        });
+
+
+        $(".icon-container").click(function () {
+            $(this).toggleClass("icon-selected");
+        });
+
+        bundleFilePreview("#iconCustomFile", "#iconPreview", true);
+        bundleFilePreview("#splashCustomFile", "#splashPreview", true);
+
+        function saveChannel() {
+            var name = $("#name").val();
+            currChannelID = $("#channelID").val();
+            if (isEmpty(name) || isEmpty(currChannelID)) {
+                //alertShow("#errBlock", "请输入打包标识和渠道号");
+                showTips("请输入打包标识和渠道号");
+                return;
+            }
+
+            if (!saveLocalChannel) {
+                currChannelName = $("#sdk").find("option:selected").text();
+                if (isEmpty(currChannelName)) {
+                    showTips("请选择使用的SDK");
+                    return;
+                }
+            }
+
+
+            $("#channelName1").val(currChannelName);
+
+            var id = $("#id1").val();
+
+            if (id != null && id != undefined && id.length > 0 && !saveLocalChannel) {
+
+                showConfirm("修改渠道号和SDK之后， 需要重新配置渠道参数，是否确认修改？", function () {
+
+                    $('#fmbase').ajaxSubmit({
+                        url: saveChannelUrl,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {},
+                        success: function (result) {
+                            if (result.code == 0) {
+                                $('#myModal').modal('hide');
+                                search();
+                                showTips("操作成功");
+
+                            } else {
+                                showTips(result.reason);
+                            }
+                        }
+                    });
+                });
+
+                return;
+            }
+
+            $('#fmbase').ajaxSubmit({
+                url: saveChannelUrl,
+                type: 'POST',
+                dataType: 'json',
+                data: {},
+                success: function (result) {
+                    if (result.code == 0) {
+                        $('#myModal').modal('hide');
+                        search();
+                        showTips("操作成功");
+
+                    } else {
+                        showTips(result.reason);
+                    }
+                }
+            });
+
+        }
+
+
+        function saveConfig() {
+
+            //get channel params begin
+
+            var iconType = $("#iconType").val();
+
+            var fileIds = [];
+            var fileDict = [];
+            var paramDict = {};
+            $(".cfiletype").each(function () {
+                var key = $(this).attr("id");
+                key = key.substring(5); //remove cfile prefix
+                var path = $(this).attr("name");
+                if ($(this).get(0).files.length > 0) {
+                    var uploadFile = $(this).get(0).files[0]; //获取文件对象
+                    fileIds.push({key: key, path: path});
+                    fileDict.push(uploadFile);
+                }
+                paramDict[key] = path;
+            });
+
+            $(".channel-param").each(function () {
+                var key = $(this).attr("id");
+                key = key.substring(4); //remove key- prefix
+                paramDict[key] = $(this).val();
+            });
+
+            var channelParams = JSON.stringify(paramDict);
+            //get channel params end
+
+            //get products begin
+            var gameProducts = getAllProducts();
+            //get products end
+
+            //get plugins
+            var plugins = getPluginValues();
+
+            $('#fm').ajaxSubmit({
+                url: "/admin/channel/saveConfig",
+                type: 'POST',
+                dataType: 'json',
+                data: {channelParams: channelParams, gameProducts: gameProducts, channelPlugins: plugins},
+                success: function (result) {
+                    if (result.code == 0) {
+
+                        if (fileDict.length > 0) {
+                            //保存渠道参数中的文件
+                            var form = new FormData();
+                            form.append("channelID", $("#id2").val());
+                            form.append("fileIds", JSON.stringify(fileIds));
+
+                            var itemIndex;
+                            for (itemIndex in fileDict) {
+                                form.append('file', fileDict[itemIndex]);
+                            }
+
+                            $.ajax({
+                                cache: false,
+                                type: "POST",
+                                url: "/admin/channel/saveChannelFiles",
+                                contentType: false,
+                                processData: false,
+                                data: form,
+                                success: function (result) {
+
+                                    if (result.code == 0) {
+                                        $('#testModal').modal('hide');
+                                        showTips("操作成功");
+
+                                        search();
+
+                                    } else {
+                                        showTips(result.reason);
+                                    }
+
+                                }
+                            });
+
+                        } else {
+                            $('#testModal').modal('hide');
+                            showTips("操作成功");
+                            search();
+                        }
+
+                    } else {
+                        showTips(result.reason);
+                    }
+                }
+            });
+
+        }
+
+
+        function tooglePlugin(sdkName, isChecked) {
+
+            var checked = 0;
+            if (isChecked) {
+                checked = 1;
+            }
+            var data = $('#channels').DataTable().row('.selected').data();
+            $.post('admin/channel/tooglePlugin', {
+                channelID: data.id,
+                sdkName: sdkName,
+                checked: checked
+            }, function (result) {
+                if (result.code == 0) {
+                    //do nothing
+                } else {
+                    showTips(result.reason);
+                }
+            }, 'json');
+        }
+
+        function refreshPlugins() {
+            if (pluginInited) {
+                var table = $('#plugins').DataTable();
+                table.ajax.url('/admin/channel/getAllPlugins');
+                table.ajax.reload();
+                return;
+            }
+
+            pluginInited = true;
+
+            var table = $('#plugins').DataTable({
+                select: false,
+                "lengthChange": false,
+                "processing": true,
+//            "pageLength": 20,
+                "paging": false,
+                ajax: {
+                    type: "GET",
+                    url: "/admin/channel/getAllPlugins",
+                    dataSrc: "data",
+                    data: function (d) {
+                        var param = {};
+
+                        var data = $('#channels').DataTable().row('.selected').data();
+                        param.channelID = data.id;
+
+                        return param;
+                    }
+                },
+                columns: [
+                    {
+                        "sClass": "text-center",
+                        "data": "masterName",
+                        "render": function (data, type, full, meta) {
+
+                            if (full.extend == 1) {
+                                return data + "<span style='color:red;'>(覆写)</span>";
+                            } else {
+                                return data;
+                            }
+
+
+                        },
+                        "bSortable": false
+                    },
+                    {data: "versionName"},
+                    {data: "sdkName"},
+                    {
+                        "sClass": "text-center",
+                        "data": "state",
+                        "render": function (data, type, full, meta) {
+
+                            if (data == 1) {
+                                return '<input type="checkbox" name="openState" id="' + full.sdkName + '" checked data-toggle="toggle">';
+                            } else {
+                                return '<input type="checkbox" name="openState" id="' + full.sdkName + '" data-toggle="toggle">';
+                            }
+
+
+                        },
+                        "bSortable": false
+                    }
+                ],
+                "searching": false,
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "",
+                    "infoEmpty": "没有任何记录",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                    // "loadingRecords": "正在加载...",
+                    "processing": "正在处理...",
+                    "search": "搜索:",
+                    "paginate": {
+                        "first": "首页",
+                        "last": "尾页",
+                        "next": "下一页",
+                        "previous": "上一页"
+                    },
+                    "aria": {
+                        "sortAscending": ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": ""
+                    }
+                }
+            });
+
+            $('#plugins').on('draw.dt', function () {
+                $('#plugins input[type="checkbox"]').bootstrapToggle({
+                    on: '启用',
+                    off: '禁用',
+                    size: 'small'
+                });
+            });
+
+            $('#plugins').on('change', 'input[type="checkbox"]', function () {
+                var checked = $(this).prop('checked');
+                var sdkName = $(this).prop('id');
+
+                tooglePlugin(sdkName, checked);
+            });
+
+
+        }
+
+
+        function refreshChannelPlugins(gameID, channelID) {
+
+            $.post('admin/channel/getChannelPlugins', {gameID: gameID, channelID: channelID}, function (result) {
+                if (result.code == 0) {
+
+                    if (result.data == null || result.data == undefined || result.data.length == 0) {
+                        //no plugin
+                        $("#pluginTabIndex").hide();
+                        return;
+                    }
+                    var html = '<div class="panel-group" id="accordionPlugin" role="tablist" aria-multiselectable="true" style="margin-top: 5px;">';
+                    var index = 0;
+                    $.each(result.data, function (ind, plugin) {
+                        index = index + 1;
+                        var title = "未知插件";
+                        var version = "";
+                        var metas = null;
+                        if (plugin.master != null && plugin.master != undefined) {
+                            title = plugin.master.masterName;
+                            version = plugin.master.versionName;
+                            metas = plugin.master.metas;
+                        }
+
+                        var color = "#666";
+                        var fontStyle = "bold";
+                        var display = "none";
+                        var disabledClass = "";
+                        if (plugin.extend == 0) {
+                            color = "#ccc";
+                            fontStyle = "normal";
+                            display = "block";
+                            disabledClass = "locked";
+                        }
+
+                        html += '<div id="panel' + plugin.sdkName + '" class="panel panel-default panel-border no-border-top"><div class="panel-heading no-background clearfix" role="tab" id="heading' + index + '"><div class="pull-left" style="margin-top: -3px;"><h4 class="panel-title" style="color:' + color + ';font-weight:' + fontStyle + ';"> <a role="button" data-toggle="collapse" data-parent="#accordionPlugin" href="#collapse' + plugin.sdkName + '" aria-expanded="true" aria-controls="collapse' + plugin.sdkName + '">' + title + '(' + version + ')' + '</a> </h4></div> <div class="pull-right" style="margin-top: -3px;"><i id="' + plugin.sdkName + '" class="fa fa-pencil-square-o" style="display: ' + display + ';" aria-hidden="true"></i></div></div>';
+
+                        var expand = "";
+                        if (index == 1) {
+                            expand = "in";
+                        }
+                        html += '<div id="collapse' + plugin.sdkName + '" class="panel-collapse ' + disabledClass + ' collapse ' + expand + '" role="tabpanel" aria-labelledby="heading' + index + '"> <div class="panel-body panel-border-top" style="margin-left: 10px;"> <div class="box box-primary no-border" style="margin-left: -10px;"> <div class="box-body no-border" style="margin-left: -40px;">';
+
+                        if (metas != null && metas != undefined && metas.length > 0) {
+
+                            var disHtml = "";
+                            var fileBackground = "background-color: white;";
+                            if (plugin.extend == 0) {
+                                //继承游戏配置， 不能修改值
+                                disHtml = ' disabled="disabled" ';
+                                fileBackground = '';
+                            }
+
+                            $.each(metas, function (ind2, item) {
+
+                                html += '<div class="form-group"> <label class="col-sm-2 control-label" data-toggle="tooltip">' + item.showName + '</label> <div class="col-sm-9">';
+
+                                if (item.paramStyle == 2) {
+                                    //文件
+                                    html += '<div class="col-sm-12 input-group">';
+                                    var fileID = 'plgin' + item.paramKey;
+                                    var filePathID = 'cplginpath' + index;
+                                    html += '<input id="' + fileID + '" name="' + item.styleExtra + '" class="cfiletype" type="file" style="display:none" onchange="$(\'#' + filePathID + '\').val(this.files[0].name);">';
+
+                                    html += '<input id="' + filePathID + '" class="form-control file-prew" type="text" value="' + item.defaultVal + '" readonly="readonly" ' + disHtml + ' style="' + fileBackground + '">';
+
+                                    html += '<span class="input-group-addon" onclick="$(\'input[id=' + fileID + ']\').click();" style="cursor: pointer; background-color: #367fa9;color:white;"><i class="fa fa-folder-open"></i>选择</span>';
+
+                                    html += '</div>';
+
+                                } else if (item.paramStyle == 1) {
+                                    //list
+                                    var options = "";
+
+                                    if (item.styleExtra != null && item.styleExtra != undefined) {
+                                        var oplist = item.styleExtra.split("|");
+                                        $.each(oplist, function (opIndex, op) {
+                                            if (op == item.defaultVal) {
+                                                options += '<option value ="' + op + '" selected="selected">' + op + '</option>';
+                                            } else {
+                                                options += '<option value ="' + op + '">' + op + '</option>';
+                                            }
+                                        });
+                                    }
+
+                                    html += '<select id="key-' + item.paramKey + '" class="form-control select2 plugin-param" ' + disHtml + ' style="width: 100%;">' + options + '</select>'
+                                } else {
+                                    html += '<input type="text" id="key-' + item.paramKey + '" class="form-control plugin-param" ' + disHtml + ' value="' + item.defaultVal + '">';
+                                }
+
+                                html += '<label class="lbl-tips">' + item.metaDesc + '</label> </div> </div>';
+                            });
+
+                        } else {
+                            html += '<div class="form-group"> <label class="col-sm-12" style="color: gray;text-align: center;">该插件无需参数配置</label> </div> ';
+                        }
+
+                        html += '</div></div></div></div></div>';
+
+                    });
+                    html += "</div>";
+
+                    $("#pluginTabIndex").show();
+                    $("#pluginConfig").html(html);
+
+                    $(".fa-pencil-square-o").click(function () {
+                        var sdkName = $(this).attr("id");
+                        showConfirm("覆写之后，该插件参数配置将独立存在，不再和游戏全局配置一致。后续更改参数，请在这里单独修改。一般只有每个渠道该插件参数都不同时，才需要覆写。确认要覆写吗？", function () {
+                            overridePlugin(sdkName);
+                        });
+
+                    });
+
+
+                } else {
+                    showTips(result.reason);
+                }
+            }, 'json');
+
+
+        }
+
+        function overridePlugin(sdkName) {
+            var data = $('#channels').DataTable().row('.selected').data();
+            $.post('admin/channel/overridePlugin', {channelID: data.id, sdkName: sdkName}, function (result) {
+                if (result.code == 0) {
+
+                    //解锁配置
+
+                    $("#panel" + sdkName + " .panel-title").css("color", "#666");
+                    $("#panel" + sdkName + " .panel-title").css("font-weight", "bold");
+                    $("#panel" + sdkName + " .fa-pencil-square-o").css("display", "none");
+                    $("#panel" + sdkName + " input").removeAttr("disabled");
+                    $("#panel" + sdkName + " select").removeAttr("disabled");
+                    $("#panel" + sdkName + " .file-prew").css("background-color", "white");
+
+                    $("#accordionPlugin .collapse").removeClass("in");
+                    $("#panel" + sdkName + " .collapse").removeClass("locked");
+                    $("#panel" + sdkName + " .collapse").addClass("in");
+
+                } else {
+                    showTips(result.reason);
+                }
+            }, 'json');
+        }
+
+
+        function getPluginValues() {
+
+            var pluginParams = [];
+            $("#accordionPlugin .collapse").each(function () {
+
+                if (!$(this).hasClass("locked")) {
+
+                    var divID = $(this).attr("id");
+
+                    var sdkName = divID.substring("collapse".length);
+
+                    var params = {}
+                    $(this).find(".plugin-param").each(function () {
+                        var key = $(this).attr("id");
+                        key = key.substring(4); //remove key- prefix
+                        params[key] = $(this).val();
+                    });
+
+                    $(this).find(".cfiletype").each(function () {
+                        var key = $(this).attr("id");
+                        key = key.substring(5); //remove plgin prefix
+                        var path = $(this).attr("name");
+                        params[key] = path;
+                    });
+
+                    pluginParams.push({"sdkName": sdkName, "params": params});
+                }
+
+            });
+
+            return JSON.stringify(pluginParams);
+
+        }
+
+        $("#reloadIcon").click(function () {
+
+            var data = currChannelData;
+            var result = channelConfigResult;
+
+            if (data == null || result == null) {
+                return;
+            }
+
+            $("#icons").html("");
+            var iconHtml = '<div class="col-md-2" id="tempIcon"> <div class="icon-container"> <img class="ticon" src="/admin/channel/tempIconPath?gameID=' + data.gameID + '&channelID=' + data.id + '&name=icon.png" retry="0"> </div> <div class="icon-type"> <input id="cicon0" type="radio" name="icon" value="0"> 无角标 </div> </div>';
+
+            if (result.master != null && result.master.icons != null && result.master.icons != undefined) {
+                var icons = [
+                    {"name": "lt", "value": "left-top.png", "desc": "左上角"},
+                    {"name": "lb", "value": "left-bottom.png", "desc": "左下角"},
+                    {"name": "rt", "value": "right-top.png", "desc": "右上角"},
+                    {"name": "rb", "value": "right-bottom.png", "desc": "右下角"}
+                ];
+
+                $.each(icons, function (index, item) {
+
+                    if (result.master.icons.indexOf(item.name) != -1) {
+                        iconHtml += '<div class="col-md-2" id="tempIcon"> <div class="icon-container"> <img class="ticon" src="/admin/channel/tempIconPath?gameID=' + data.gameID + '&channelID=' + data.id + '&name=' + item.value + '" width="100" height="100" retry="0"> </div> <div class="icon-type"> <input type="radio" id="cicon' + item.name + '" name="icon" value="' + item.name + '"> ' + item.desc + ' </div> </div>';
+                    }
+
+                });
+
+            }
+
+            $("#icons").append(iconHtml);
+
+        });
+
+        function showCustomConfigDialog(data) {
+            $("#channelConfigBody").html("");
+            $("#icons").html("");
+            $("input:text").val('');
+
+            $("#products > tbody").html("");
+
+            $("#iconPreview").hide();
+            $("#splashPreview").hide();
+            $("#pluginTabIndex").hide();
+
+            $('#configTab a:first').tab('show');
+
+            if (data.isLocal == 1) {
+                $("#testModalTitle").html("参数配置－" + data.channelName + "<span style='color:red;'>(本地)</span>");
+            } else {
+                $("#testModalTitle").html("参数配置－" + data.channelName);
+            }
+
+            $.post('admin/channel/getChannelFullConfig', {appID: data.gameID, channelID: data.id}, function (result) {
+                if (result.code == 0) {
+                    currChannelData = data;
+                    channelConfigResult = result;
+                    $("#id2").val(data.id);
+                    $("#gameID2").val(data.gameID);
+                    $("#channelName2").val(data.channelName);
+
+                    $("#gameName").val(result.channel.gameName);
+                    $("#bundleID").val(result.channel.bundleID);
+
+                    $("#minSdkVersion").val(result.channel.minSdkVersion);
+                    $("#targetSdkVersion").val(result.channel.targetSdkVersion);
+                    $("#serverBaseUrl").val(result.channel.serverBaseUrl);
+                    $("#sdkLogicVersionCode").val(result.channel.sdkLogicVersionCode);
+
+
+                    if (result.channel.signApk == 1) {
+                        $("#signApk").iCheck("check");
+                    } else {
+                        $("#signApk").iCheck("uncheck");
+                    }
+
+                    if (result.channel.autoPermission == 1) {
+                        $("#autoPermission").iCheck("check");
+                    } else {
+                        $("#autoPermission").iCheck("uncheck");
+                    }
+
+                    if (result.channel.autoProtocol == 1) {
+                        $("#autoProtocol").iCheck("check");
+                    } else {
+                        $("#autoProtocol").iCheck("uncheck");
+                    }
+
+                    if (result.channel.directPermission == 1) {
+                        $("#directPermission1").iCheck("uncheck");
+                        $("#directPermission2").iCheck("check");
+                    } else {
+                        $("#directPermission1").iCheck("check");
+                        $("#directPermission2").iCheck("uncheck");
+                    }
+
+                    $("#excludePermissionGroups").val(result.channel.excludePermissionGroups);
+                    $("#protocolUrl").val(result.channel.protocolUrl);
+
+                    if (data.signVersion != null && data.signVersion == "V2") {
+                        $("#signVersion2").iCheck("check");
+
+                    } else {
+                        $("#signVersion1").iCheck("check");
+                    }
+
+                    reloadKeystores(data.gameID, result.channel.keystoreID, "#keystoreID");
+
+                    if (result.channel.isLocal == 1) {
+                        //本地配置， 隐藏商品配置
+                        $("#productTabIndex").hide();
+                    } else {
+                        $("#productTabIndex").show();
+                    }
+
+                    var metaLst = result.metas;
+                    var htmlContent = "";
+                    if (metaLst != null && metaLst != undefined && metaLst.length > 0) {
+
+                        var index = 0;
+                        $.each(metaLst, function (ind, item) {
+                            index = index + 1;
+                            htmlContent += '<div class="form-group"><label class="col-sm-3 control-label">' + item.showName + '</label><div class="col-sm-9">';
+                            if (item.paramStyle == 2) {
+                                //文件
+                                htmlContent += '<div class="col-sm-12 input-group">';
+                                var fileID = 'cfile' + item.paramKey;
+                                var filePathID = 'cfilepath' + index;
+                                htmlContent += '<input id="' + fileID + '" name="' + item.styleExtra + '" class="cfiletype" type="file" style="display:none" onchange="$(\'#' + filePathID + '\').val(this.files[0].name);">';
+
+                                htmlContent += '<input id="' + filePathID + '" class="form-control" type="text" value="' + item.defaultVal + '" readonly="readonly" style="background-color: white;">';
+
+                                htmlContent += '<span class="input-group-addon" onclick="$(\'input[id=' + fileID + ']\').click();" style="cursor: pointer; background-color: #367fa9;color:white;"><i class="fa fa-folder-open"></i>选择</span>';
+
+                                htmlContent += '</div>';
+
+                            } else if (item.paramStyle == 1) {
+                                //list
+                                var options = "";
+
+                                if (item.styleExtra != null && item.styleExtra != undefined) {
+                                    var oplist = item.styleExtra.split("|");
+                                    $.each(oplist, function (opIndex, op) {
+                                        if (op == item.defaultVal) {
+                                            options += '<option value ="' + op + '" selected="selected">' + op + '</option>';
+                                        } else {
+                                            options += '<option value ="' + op + '">' + op + '</option>';
+                                        }
+                                    });
+                                }
+
+                                htmlContent += '<select id="key-' + item.paramKey + '" class="form-control select2 channel-param" style="width: 100%;">' + options + '</select>'
+                            } else {
+                                var name = "ucusinput_" + index;
+                                htmlContent += '<input type="text" class="form-control channel-param" id="key-' + item.paramKey + '" name="' + name + '" placeholder=""';
+                                if (item.defaultVal != null) {
+                                    htmlContent += ' value="' + item.defaultVal + '" maxlength="4096">';
+                                }
+                            }
+
+
+                            htmlContent += '<label class="lbl-tips">' + item.metaDesc + '</label></div></div>';
+                        });
+
+
+                    } else {
+                        htmlContent += '<div class="form-group"> <label class="col-sm-12" style="color: gray;text-align: center;">无参数配置</label> </div> ';
+                    }
+
+                    $("#channelConfigBody").append(htmlContent);
+
+                    var productLst = result.products;
+                    if (productLst != null && productLst != undefined) {
+                        $.each(productLst, function (index, item) {
+
+                            addProductRowWithData(item);
+
+                        });
+
+                    }
+                    addNewProductRow();
+
+                    if (result.master != null && result.master.desc != null && result.master.desc != undefined) {
+                        $("#popTips").attr("data-content", result.master.desc.replace(/[\n\r]/g, '<br>'));
+                    } else {
+                        $("#popTips").attr("data-content", "该渠道没有设置相关信息");
+                    }
+
+                    if (result.channel.iconType == 1) {
+                        //打包工具自动处理
+                        $("#iconAuto").iCheck("check");
+                    } else if (result.channel.iconType == 2) {
+                        $("#iconCustom").iCheck("check");
+
+                        if (result.channel.hasCustomIcon) {
+                            $("#iconPreview").css("background-image", "url(/admin/channel/customIconPath?gameID=" + result.channel.gameID + "&channelID=" + result.channel.id + ")");
+                            $("#iconPreview").show();
+                        }
+
+                    }
+
+                    //show icons
+                    var iconHtml = '<div class="col-md-2" id="tempIcon"> <div class="icon-container"> <img class="ticon" data-src="/admin/channel/tempIconPath?gameID=' + data.gameID + '&channelID=' + data.id + '&name=icon.png" retry="0"> </div> <div class="icon-type"> <input id="cicon0" type="radio" name="icon" value="0"> 无角标 </div> </div>';
+
+                    if (result.master != null && result.master.icons != null && result.master.icons != undefined) {
+                        var icons = [
+                            {"name": "lt", "value": "left-top.png", "desc": "左上角"},
+                            {"name": "lb", "value": "left-bottom.png", "desc": "左下角"},
+                            {"name": "rt", "value": "right-top.png", "desc": "右上角"},
+                            {"name": "rb", "value": "right-bottom.png", "desc": "右下角"}
+                        ];
+
+                        $.each(icons, function (index, item) {
+
+                            if (result.master.icons.indexOf(item.name) != -1) {
+                                iconHtml += '<div class="col-md-2" id="tempIcon"> <div class="icon-container"> <img class="ticon" data-src="/admin/channel/tempIconPath?gameID=' + data.gameID + '&channelID=' + data.id + '&name=' + item.value + '" width="100" height="100" retry="0"> </div> <div class="icon-type"> <input type="radio" id="cicon' + item.name + '" name="icon" value="' + item.name + '"> ' + item.desc + ' </div> </div>';
+                            }
+
+                        });
+
+                    }
+
+                    $("#icons").append(iconHtml);
+
+                    $('input[name="icon"]').iCheck({
+                        checkboxClass: 'icheckbox_square-blue',
+                        radioClass: 'iradio_square-blue',
+                        increaseArea: '20%' // optional
+                    });
+
+                    if (result.channel.icon != null && result.channel.icon != undefined) {
+                        $("#cicon" + result.channel.icon).iCheck("check");
+                    } else {
+                        $("#cicon0").iCheck("check");
+                    }
+
+
+                    var gameOrientation = "landscape";
+                    if (result.game != null && result.game != undefined) {
+                        gameOrientation = result.game.orientation;
+                    }
+
+                    if (result.channel.splash == 0) {
+                        $("#splashNone").iCheck("check");
+                    } else if (result.channel.splash == 1) {
+                        $("#splashDefault").iCheck("check");
+                    } else if (result.channel.splash == 2) {
+                        $("#splashCustom").iCheck("check");
+                        if (result.channel.hasCustomSplash) {
+                            $("#splashPreview").css("background-image", "url(/admin/channel/customSplashPath?gameID=" + result.channel.gameID + "&channelID=" + result.channel.id + ")");
+                            $("#splashPreview").show();
+                        }
+                    }
+
+                    //show default splash
+                    $("#uploaderSplashDiv").removeClass("horizontal");
+                    $("#uploaderSplashDiv").removeClass("vertical");
+                    if (result.master != null && result.master.splash != null && result.master.splash != undefined) {
+
+                        var pngType = "0";
+                        if (gameOrientation == 'landscape') {
+
+
+                            if (result.master.splash.indexOf("11") != -1) {
+                                pngType = "11";
+                                $("#splashDefaultPanel").show();
+                            } else if (result.master.splash.indexOf("12") != -1) {
+                                pngType = "12";
+                                $("#splashDefaultPanel").show();
+                            } else {
+                                $("#splashDefaultPanel").hide();
+                            }
+
+
+                            $("#uploaderSplashDiv").addClass("horizontal");
+
+
+                        } else if (gameOrientation == 'portrait') {
+
+                            if (result.master.splash.indexOf("21") != -1) {
+                                pngType = "21";
+                                $("#splashDefaultPanel").show();
+                            } else if (result.master.splash.indexOf("22") != -1) {
+                                pngType = "22";
+                                $("#splashDefaultPanel").show();
+                            } else {
+                                $("#splashDefaultPanel").hide();
+                            }
+
+                            $("#uploaderSplashDiv").addClass("vertical");
+                        }
+
+                        if (pngType != "0") {
+                            $("#splashDefaultPng").attr("src", "admin/channel/defaultSplashPath?sdk=" + result.master.sdkName + "&type=" + pngType + "&t=" + Math.random());
+                        }
+
+                    }
+
+                    //show custom splash
+                    $("#uploaderCustomDiv").removeClass("horizontal");
+                    $("#uploaderCustomDiv").removeClass("vertical");
+                    $("#splashPreview").removeClass("splash-size-h");
+                    $("#splashPreview").removeClass("splash-size-v");
+                    if (gameOrientation == 'landscape') {
+
+
+                        $("#uploaderCustomDiv").addClass("horizontal");
+                        $("#splashPreview").addClass("splash-size-h");
+
+
+                    } else if (gameOrientation == 'portrait') {
+
+                        $("#uploaderCustomDiv").addClass("vertical");
+                        $("#splashPreview").addClass("splash-size-v");
+                    }
+
+
+                    //show plugins
+                    refreshChannelPlugins(data.gameID, data.id);
+
+                    setTimeout(function () {
+
+                        $(".ticon").each(function () {
+
+                            $(this).attr("src", $(this).attr("data-src"));
+
+                        });
+
+                    }, 500);
+
+
+                    $('#testModal').modal({backdrop: 'static', keyboard: false});
+                    $('#testModal').modal('show');
+
+
+                } else {
+                    showTips(result.reason);
+                }
+            }, 'json');
+        }
+
+
+        function deleteChannel(data) {
+
+            $.post('admin/channel/deleteChannel', {id: data.id}, function (result) {
+
+                if (result.code == 0) {
+
+                    showTips(result.reason);
+                    search();
+
+                } else {
+                    showTips(result.reason);
+                }
+
+            });
+
+        }
+
+
+        function reloadKeystores(gameID, selectedID, selector) {
+
+
+            $.get('admin/keystore/getAllKeystores', {gameID: gameID}, function (result) {
+                var itemList = [];
+                if (result.code == 0) {
+                    var lst = result.data;
+                    var itemIndex;
+                    for (itemIndex in lst) {
+                        if (lst[itemIndex].id == selectedID) {
+                            itemList.unshift({id: lst[itemIndex].id, text: lst[itemIndex].name});
+                        } else {
+                            itemList.push({id: lst[itemIndex].id, text: lst[itemIndex].name});
+                        }
+                    }
+                } else if (result.code == 2) {
+                    parent.location.href = "login.html";
+                }
+                $(selector).empty().trigger("change");
+                $(selector).select2({
+                    data: itemList
+                });
+
+
+                $(selector).trigger('change');
+            }, 'json');
+        }
+
+        function reloadSDKs(selectedID, selector) {
+
+            $.get('admin/channel/getAllMasters', {}, function (result) {
+                var itemList = [];
+                if (result.code == 0) {
+                    var lst = result.data;
+                    sdkLst = lst;
+                    var itemIndex;
+                    for (itemIndex in lst) {
+                        if (lst[itemIndex].sdkName == selectedID) {
+                            itemList.unshift({id: lst[itemIndex].sdkName, text: lst[itemIndex].masterName});
+                        } else {
+                            itemList.push({id: lst[itemIndex].sdkName, text: lst[itemIndex].masterName});
+                        }
+                    }
+                } else if (result.code == 2) {
+                    parent.location.href = "login.html";
+                }
+
+                $(selector).empty().trigger("change");
+
+                $(selector).select2({
+                    data: itemList
+                });
+                $(selector).trigger('change');
+
+
+            }, 'json');
+        }
+
+        function showAddDialog() {
+
+
+            saveChannelUrl = "admin/channel/saveChannel";
+            reloadSDKs(0, "#sdk");
+
+            $("#addTitle").html("添加打包配置");
+
+            $("input:text").val('');
+            $("#sdkShower").hide();
+            $("#sdkSelector").show();
+
+            var currGameID = getParameter("gameID");
+            console.log("showAddDialog:: curr game id is :" + currGameID);
+            if (currGameID == null || currGameID == undefined) {
+                showTips("请先选择一个游戏");
+                return;
+            }
+
+            $("#gameID1").val(currGameID);
+
+            $("#channelID").attr("readonly", false);
+
+            saveLocalChannel = false;
+
+            $('#myModal').modal({backdrop: 'static', keyboard: false});
+            $('#myModal').modal('show');
+
+        }
+
+
+        function showEditDialog(data) {
+
+            saveChannelUrl = "admin/channel/saveChannel";
+
+            $("#addTitle").html("编辑渠道打包配置—" + data.channelName);
+
+            $("input:text").val('');
+            $("#sdkShower").hide();
+            $("#sdkSelector").show();
+
+            saveLocalChannel = false;
+
+            $("#id1").val(data.id);
+            $("#gameID1").val(data.gameID);
+            $("#channelName1").val(data.channelName);
+            $("#name").val(data.name);
+            $("#channelID").val(data.channelID);
+
+            reloadSDKs(data.sdk, "#sdk");
+
+            $("#channelID").attr("readonly", false);
+
+            $('#myModal').modal({backdrop: 'static', keyboard: false});
+            $('#myModal').modal('show');
+
+        }
+
+
+        function showLocalConfigDialog(data, isEdit) {
+
+            if (data.isLocal == 1 && !isEdit) {
+                showTips("该条记录已经是子配置,请选择其他记录");
+                return;
+            }
+
+            saveChannelUrl = "admin/channel/saveLocalChannel";
+
+            $("#addTitle").html("子配置—" + data.channelName);
+
+            $("input:text").val('');
+
+            if (isEdit) {
+                $("#id1").val(data.id);
+            }
+
+            $("#sdkShower").show();
+            $("#sdkSelector").hide();
+            $("#currSDKName").html(data.channelName);
+
+
+            $("#gameID1").val(data.gameID);
+            $("#channelName1").val(data.channelName);
+            $("#parentChannelID").val(data.id);
+            $("#name").val(data.name);
+            $("#channelID").val(data.channelID);
+
+            //reloadSDKs(data.sdk, "#sdk", true);
+
+            $("#channelID").attr("readonly", true);
+
+            saveLocalChannel = true;
+
+            $('#myModal').modal({backdrop: 'static', keyboard: false});
+            $('#myModal').modal('show');
+
+        }
+
+
+        function packChannels() {
+
+            var channels = "";
+            var count = 0;
+            var table = $('#channels').DataTable();
+            table.column(0)
+                .data()
+                .each(function (value, index) {
+                    if ($('#abc' + value).is(':checked')) {
+                        count = count + 1;
+                        channels = channels + value + ',';
+                    }
+                });
+
+            if (count <= 0) {
+
+                showTips("请至少选择一个打包渠道");
+                return;
+            }
+            var currGameID = getParameter("gameID");
+            if (currGameID == null || currGameID.trim().length == 0) {
+                currGameID = 0;
+            }
+            $.post('admin/channel/package', {appID: currGameID, channelIDs: channels}, function (result) {
+                if (result.code == 0) {
+                    //showTips("操作成功");
+                    //跳转到打包队列
+                    parent.gotoOtherView("packlogs.html?gameID=" + currGameID, "打包队列");
+                } else if (result.code == 3) {
+                    showTips(result.reason);
+//                    parent.gotoOtherView("packlogs.html?gameID="+currGameID);
+                } else {
+                    showTips(result.reason);
+                }
+            }, 'json');
+
+        }
+
+
+        function toogleBoth(tagTitle, tagCheckbox) {
+
+            $(tagTitle).click(function () {
+
+                $(tagCheckbox).iCheck('toggle');
+
+            });
+
+
+            $(tagCheckbox).on('ifToggled', function (event) {
+                $(tagTitle).click();
+            });
+        }
+
+        function search() {
+            var currGameID = getParameter("gameID");
+            console.log("curr game id in package is :" + currGameID);
+            if (currGameID == null || currGameID.trim().length == 0) {
+                currGameID = 0;
+            }
+
+            var currName = $("#searchName").val();
+            var currChannelName = $("#searchChannelName").val();
+            var currChannelID = $("#searchChannelID").val();
+
+            if (inited) {
+                var table = $('#channels').DataTable();
+                table.ajax.url('admin/channel/getAllChannels?appID=' + currGameID + "&name=" + currName + "&channelName=" + currChannelName + "&channelID=" + currChannelID);
+                table.ajax.reload();
+                return;
+            }
+            inited = true;
+            var table = $('#channels').DataTable({
+                select: {
+                    style: 'single'
+                },
+                "lengthChange": false,
+                "ordering": false, // 禁止排序
+                ajax: function (data, callback, settings) {
+                    $.get('admin/channel/getAllChannels', {'appID': currGameID}, function (res) {
+                        if (res.code == 0) {
+                            callback(res);
+                        } else {
+                            showTips(res.reason);
+                        }
+                    })
+                },
+                columns: [
+                    {data: "id"},
+                    {data: "channelID"},
+                    {
+                        "sClass": "text-center",
+                        "data": "name",
+                        "render": function (data, type, full, meta) {
+
+                            if (full.isLocal == 1) {
+
+                                return data + "<span style='color:red;'>(本地)</span>"
+                            } else {
+                                return data;
+                            }
+
+                        },
+                        "bSortable": true
+                    },
+                    {data: "channelName"},
+                    {data: "versionName"},
+//                { data: "notifyUrl" },
+                    {
+                        data: "isConfiged", orderable: false, render: function (data) {
+                            if (data == 1) {
+                                return '<i style="color: green;" class="fa fa-check-square" aria-hidden="true"></i>';
+                            } else {
+                                return '<i style="color: gray;" class="fa fa-minus-square" aria-hidden="true"></i>';
+                            }
+                        }
+                    },
+                    {
+                        "sClass": "text-center",
+                        "data": "id",
+                        "render": function (data, type, full, meta) {
+
+                            var idStr = "\"abc" + data + "\"";
+                            var disHtml = "";
+                            if (full.isConfiged == 0) {
+                                disHtml = 'disabled="disabled"';
+                            }
+
+                            return '<input type="checkbox"' + 'id=' + idStr + ' value="0" ' + disHtml + '>';
+
+                        },
+                        "bSortable": false
+                    },
+//                    { data: "id", orderable:false, render: function (data){
+//                        var idStr="\"abc"+data+"\"";
+//                        var disHtml = "";
+//
+//                        return '<input type="checkbox"'+'id='+idStr+' value="0"'+'>';
+//                    }}
+                ],
+
+                "searching": false,
+                "language": {
+                    "lengthMenu": "显示 _MENU_ 条记录",
+                    "zeroRecords": "没有查到任何记录",
+                    "info": "_PAGE_ / _PAGES_",
+                    "infoEmpty": "没有任何记录",
+                    "infoFiltered": "(总记录：_MAX_ )",
+                    "loadingRecords": "正在加载...",
+                    "processing": "正在处理...",
+                    "search": "搜索:",
+                    "paginate": {
+                        "first": "首页",
+                        "last": "尾页",
+                        "next": "下一页",
+                        "previous": "上一页"
+                    },
+                    "aria": {
+                        "sortAscending": ": 递增排序",
+                        "sortDescending": ": 递减排序"
+                    },
+                    "select": {
+                        "rows": "已选中%d行"
+                    }
+                }
+            });
+
+            $('#select_all').on('click', function () {
+                var rows = table.rows({
+                    'search': 'applied'
+                }).nodes();
+                $('input[type="checkbox"]', rows).not(':disabled').prop('checked', this.checked);
+            });
+
+            var clickedInCheckBox = false;
+            $('#channels').on('change', 'input[type="checkbox"]', function () {
+
+                if (!$(this).checked) {
+                    var el = $('#select_all').get(0);
+                    if (el && el.checked && ('indeterminate' in el)) {
+                        el.indeterminate = true;
+                    }
+
+                }
+
+                clickedInCheckBox = true;
+
+            });
+
+            $('.panel-heading a').on('click', function (e) {
+                if ($(this).parents('.panel').children('.panel-collapse').hasClass('in')) {
+                    e.stopPropagation();
+                }
+                // You can also add preventDefault to remove the anchor behavior that makes
+                // the page jump
+                // e.preventDefault();
+            });
+
+            toogleBoth("#iconAutoTitle", "#iconAuto");
+            toogleBoth("#iconCustomTitle", "#iconCustom");
+
+            $("#iconAuto").iCheck("check");
+
+            toogleBoth("#splashNoneTitle", "#splashNone");
+            toogleBoth("#splashDefaultTitle", "#splashDefault");
+            toogleBoth("#splashCustomTitle", "#splashCustom");
+            $("#splashNone").iCheck("check");
+
+
+//            $("#channels tbody").on('click', 'tr', function(){
+//
+//                if(!clickedInCheckBox){
+//
+//                    var t = $(this).find('input[type="checkbox"]');
+//                    var checked = t.prop('checked');
+//                    if(checked){
+//                        t.prop('checked', false);
+//                    }else{
+//                        t.prop('checked', true);
+//                    }
+//                }else{
+//                    clickedInCheckBox = false;
+//                }
+//
+//
+//            });
+
+
+        }
+
+
+        $("#btnSaveChannel").click(function () {
+            saveChannel();
+        });
+
+        $("#btnSaveConfig").click(function () {
+            saveConfig();
+        });
+
+        $('button[data-btn-type]').click(function () {
+            var action = $(this).attr('data-btn-type');
+            switch (action) {
+                case 'add':
+                    showAddDialog();
+                    break;
+                case 'addSubConfig':
+                    var data = $('#channels').DataTable().row('.selected').data();
+                    if (data == null) {
+                        showTips("添加子配置，请先选中一条打包配置，子配置会基于该配置创建。创建之后，渠道参数保存在本地，不再和服务器端同步，后续渠道参数变更，如果需要，请将子配置的渠道参数一起变更。");
+                        return;
+                    }
+                    showLocalConfigDialog(data, false);
+                    break;
+
+                case 'edit':
+                    var data = $('#channels').DataTable().row('.selected').data();
+                    if (data == null) {
+                        showTips("请先选择一条记录");
+                        return;
+                    }
+
+                    if (data.isLocal == 1) {
+                        showLocalConfigDialog(data, true);
+                    } else {
+                        showEditDialog(data);
+                    }
+
+
+                    break;
+                case 'config':
+                    var data = $('#channels').DataTable().row('.selected').data();
+                    if (data == null) {
+                        showTips("请先选择一条记录");
+                        return;
+                    }
+
+                    showCustomConfigDialog(data);
+
+                    break;
+                case 'delete':
+                    var data = $('#channels').DataTable().row('.selected').data();
+                    if (data == null) {
+                        showTips("请先选择一条要删除的记录");
+                        return;
+                    }
+                    showConfirm("确定要删除该记录吗？（操作不可恢复）", function () {
+                        deleteChannel(data);
+                    });
+                    break;
+                case 'pack':
+                    packChannels();
+                    break;
+                case 'select':
+                    search();
+                    break;
+                case 'plugin':
+                    var data = $('#channels').DataTable().row('.selected').data();
+                    if (data == null) {
+                        showTips("请先选择一个渠道配置");
+                        return;
+                    }
+
+                    refreshPlugins();
+
+                    $('#pluginModal').modal({backdrop: 'static', keyboard: false});
+                    $('#pluginModal').modal('show');
+
+                    break;
+            }
+        });
+
+
+        //currGameName = getParameter("gameName");
+        search();
+    });
+</script>
+</body>
+</html>

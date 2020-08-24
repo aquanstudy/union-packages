@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Test</title>
+<meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+<style>
+body{width:100%;height:auto;text-align:center;background-color:#eee}
+button{width:80%;height:40px;background-color:#36A803;border:1px solid #ddd;border-radius:5px;font-size:18px;color:#fff;margin-top:50px;}
+</style>
+</head>
+<body>
+<div id="userinfo"></div>
+<button onClick="toActivity(0);">success</button>
+<button onClick="toActivity(1);">fail</button>
+<script>
+function toActivity(param){
+    window.mmengsdk.setLoginResult(param, '成功', 'ABC');
+}
+</script>
+</body>
+</html>

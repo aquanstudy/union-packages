@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/u8_p_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/u8_title_blue"
+        android:orientation="horizontal"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:id="@+id/u8_p_back"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:background="@drawable/u8_title_left_bg"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/u8_title_back" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/u8_p_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="用户和隐私协议"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/u8_u_backgame"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="fill_parent"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:background="@drawable/x_title_left_bg"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal" >-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/x_title_game" />-->
+<!--        </LinearLayout>-->
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/u8_p_webprotocol"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

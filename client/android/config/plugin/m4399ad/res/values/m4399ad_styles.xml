@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="m4399ad"/>
+
+    <style name="m4399ad.Anim.Fade" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/m4399ad_anim_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/m4399ad_anim_fade_out</item>
+        <item name="android:windowShowAnimation">@anim/m4399ad_anim_fade_in</item>
+        <item name="android:windowHideAnimation">@anim/m4399ad_anim_fade_out</item>
+    </style>
+
+    <style name="m4399ad.Anim.Slide" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/m4399sdk_support_slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/m4399sdk_support_slide_out_right</item>
+    </style>
+
+    <style name="m4399ad.Dialog.NoTitleBar" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/m4399ad.Anim.Fade</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="m4399ad.Dialog.WithTitleBar" parent="android:Theme.Holo.Dialog">
+        <item name="android:windowAnimationStyle">@style/m4399ad.Anim.Fade</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="m4399ad.Dialog.Alert" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="m4399ad.download.sheet" parent="m4399ad">
+        <item name="android:layout_width">336dp</item>
+    </style>
+
+    <style name="m4399ad.Progress" parent="android:Widget.Holo.Light.ProgressBar">
+    </style>
+
+    <style name="m4399ad.Activity"/>
+
+    <style name="m4399ad.Activity.Transparent" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- Display Text -->
+    <style name="m4399ad.Text"/>
+
+    <style name="m4399ad.Text.Target_Label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/m4399ad_shape_tv_target_label_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/m4399sdk_support_color_primary</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="m4399ad.Text.H1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+        <item name="android:textColor">#e0333333</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Scroll bars-->
+    <style name="m4399ad.ScrollBar"/>
+
+    <style name="m4399ad.ScrollBar.Vertical">
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarThumbVertical">@color/m4399ad_color_black_50000000</item>
+    </style>
+
+    <style name="m4399ad.ScrollBar.Horizontal">
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:scrollbars">horizontal</item>
+        <item name="android:scrollbarThumbHorizontal">@color/m4399ad_color_white_50ffffff</item>
+    </style>
+</resources>

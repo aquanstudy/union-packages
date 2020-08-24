@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+
+	<!-- Mintegral -->
+	<color name="mintegral_interstitial_black">#30000000</color>
+    <color name="mintegral_interstitial_white">#ffffff</color>
+    <color name="mintegral_nativex_cta_txt_nor">#C3C3C3</color>
+    <color name="mintegral_nativex_cta_txt_pre">#ffffff</color>
+    <color name="mintegral_nativex_land_cta_bg_nor">#7f000000</color>
+    <color name="mintegral_nativex_por_cta_bg_nor">#4A4A4A</color>
+    <color name="mintegral_nativex_por_cta_bg_pre">#4990E2</color>
+    <color name="mintegral_nativex_sound_bg">#B3000000</color>
+    <color name="mintegral_feeds_blue_pressed">#2485cc</color>
+    <color name="mintegral_feeds_gray">#737373</color>
+    <color name="mintegral_feeds_playerview_bg">#ff000000</color>
+    <color name="mintegral_feeds_white">#FFFFFF</color>
+</resources>

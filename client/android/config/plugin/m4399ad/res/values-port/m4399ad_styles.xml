@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="m4399ad"/>
+
+    <style name="m4399ad.download.sheet" parent="m4399ad">
+        <!-- workaround for GameBox-->
+        <item name="android:layout_width">320dp</item>
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_marginLeft">12dp</item>-->
+        <!--<item name="android:layout_marginRight">12dp</item>-->
+    </style>
+</resources>

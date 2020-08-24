@@ -1,0 +1,9 @@
+ _   _   _____      __    __
+| | | | /  _  \     \ \  / /
+| | | | | |_| |  __  \ \/ /
+| | | | }  _  { |__|  }  {
+| |_| | | |_| |      / /\ \
+\_____/ \_____/     /_/  \_\
+
+SprintBoot: ${spring-boot.version}
+${application.title} ${application.version}

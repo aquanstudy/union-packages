@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 通用标题栏高度 -->
+    <dimen name="u8_common_title_height">50dp</dimen>
+    <!-- 自动登陆界面字体 -->
+    <dimen name="u8_autologin_textsize">13sp</dimen>
+    <!-- 通用大号字体 -->
+    <dimen name="u8_common_textsize_l">20sp</dimen>
+    <!-- 通用中号字体 -->
+    <dimen name="u8_common_textsize_m">16sp</dimen>
+    <!-- 通用小号字体 -->
+    <dimen name="u8_common_textsize_s">15sp</dimen>
+
+</resources>

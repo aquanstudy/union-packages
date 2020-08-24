@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <permissionConfig>
+
+        <!--SDK 必选权限配置开始-->
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+        <uses-permission android:name="android.permission.READ_CALENDAR" />
+        <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+        <!--add 2018-08-01 android.permission.SYSTEM_ALERT_WINDOW.android.permission.GET_TASKS-->
+        <uses-permission android:name="android.permission.GET_TASKS" />
+        <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+        <!--SDK 必选权限配置结束-->
+
+        <!--SDK 可选权限配置开始；建议应用配置定位权限，可以提升应用的广告收益-->
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+        <!--如果应用需要精准定位的话加上该权限-->
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <!--SDK 可选权限配置结束-->
+	    
+    </permissionConfig>
+    
+    <applicationConfig proxyApplication="com.u8.sdk.ad.oppo.OppoAdProxyApplication">
+
+        <!--SDK 必选组件配置开始-->
+        <activity android:name="com.oppo.mobad.activity.AdActivity" />
+
+        <service android:name="com.oppo.mobad.service.AdService" />
+        <!--add 2018-05-01-->
+        <!--如果奖励视频不需要随机器旋转⽽旋转的请将VideoActivity设置android:screenOrientation="sensor"修改横屏或竖屏-->
+        <activity
+            android:name="com.oppo.mobad.activity.VideoActivity"
+            android:hardwareAccelerated="true"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor" />
+        <!--SDK 必选组件配置结束-->
+
+
+        <!--闪屏广告必须全屏展示，通过android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"设置你的SplashActivity为全屏显示，
+        闪屏只支持竖屏展示，通过android:screenOrientation="portrait" 设置你的SplashActivity为竖屏显示-->
+        <activity
+            android:name="com.u8.sdk.ad.oppo.SplashAdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        </activity>
+
+    </applicationConfig>
+    
+</manifest>

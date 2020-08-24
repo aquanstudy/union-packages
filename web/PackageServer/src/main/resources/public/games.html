@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>U8SDK打包管理系统</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/xsdk.css">
+<link rel="stylesheet"
+	href="css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="css/ionicons.min.css">
+<link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<link rel="stylesheet" href="plugins/datatables/extensions/Select/css/select.bootstrap.css">
+<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.vertical-tabs.css">
+<link rel="stylesheet" href="css/xsdk.css">
+<link href="css/bootstrap-toggle.min.css" rel="stylesheet">
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.min.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+    <style>
+        .tab-pane{
+            height:500px;
+            margin-left: -10px;
+            overflow-y:auto;
+            overflow-x:hidden;
+            width:96%;
+        }
+    </style>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="dataTables_filter" id="searchDiv" style="margin-right: 10px;">
+					<div class="btn-group" style="float: right; padding-top: 10px;">
+						<!--<button type="button" class="btn btn-default" data-btn-type="upload">上传母包</button>-->
+                        <!--<button type="button" class="btn btn-default" data-btn-type="uploadIcon">上传ICON</button>-->
+						<!--<button type="button" class="btn btn-default" data-btn-type="edit">游戏配置</button>-->
+                        <!--<button type="button" class="btn btn-default" data-btn-type="plugin">更换插件</button>-->
+						<button type="button" class="btn btn-primary" data-btn-type="pack">打包管理</button>
+                        <button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
+					</div>
+					<div class="btn-group" style="float: right; padding-top: 10px; margin-right: 10px;">
+						<button type="button" class="btn btn-default" data-btn-type="select">查询</button>
+						<!--<button type="button" class="btn btn-default" data-btn-type="reset">重置</button>-->
+					</div>
+					<div style="float: right; padding-top: 10px; margin-right: 5px; display: block;">
+						<div style="float: right;">
+							<input placeholder="请输入游戏名称" id="searchGameName" class="form-control" type="search"
+								likeOption="true" />
+						</div>
+					</div>
+				</div>
+				<div class="box-body clearfix" style="margin-top: 10px;">
+					<table id="gameList" class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>ICON</th>
+                                <th>游戏名称</th>
+								<th>App ID</th>
+								<th>App Key</th>
+								<th>App Secret</th>
+								<th>母包</th>
+								<th>VersionCode</th>
+								<th>VersionName</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="plugins/select2/select2.min.js"></script>
+	<script src="plugins/datatables/extensions/Select/js/dataTables.select.js"></script>
+	<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="plugins/iCheck/icheck.min.js"></script>
+	<script src="js/xsdk.js"></script>
+	<script src="js/jquery.form.min.js"></script>
+	<script src="dist/js/app.min.js"></script>
+	<script src="plugins/jQuery/jquery.md5.js"></script>
+    <script src="js/bootstrap-toggle.min.js"></script>
+	<script>
+
+
+
+    $(function () {
+
+        function deleteGame(id) {
+            $.post('admin/game/deleteGame',{id:id}, function (result) {
+                if(result.code == 0){
+                    showTips("操作成功");
+                    var table = $('#gameList').DataTable();
+                    table.ajax.reload();
+                }
+                else{
+                    showTips(result.reason);
+                }
+            },'json');
+        }
+
+        function search() {
+            var table = $('#gameList').DataTable();
+            table.ajax.reload();
+        }
+
+
+        var table = $('#gameList').DataTable({
+            select: {
+                style: 'single'
+            },
+            "lengthChange":false,
+            ajax: function (data, callback, settings) {
+
+                var searchGameName = $("#searchGameName").val();
+
+                $.get('admin/game/getAllPermittedGames', {gameName:searchGameName}, function (res) {
+                    if(res.code == 0){
+                        callback(res);
+                    }else{
+                        showTips(res.reason);
+                    }
+                })
+            },
+            columns: [
+                {
+                    "sClass":"text-center",
+                    "data":"id",
+                    "render":function(data, type, full, meta){
+
+                        return "<img style='margin-left: -20px;' id='icon"+data+"' src='admin/game/getGameIcon?gameID="+data+"' height='25' width='25'/>";
+
+                    },
+                    "bSortable":false
+                },
+                { data: "name" },
+                { data: "appID" },
+                { data: "appKey" },
+                { data: "appSecret" },
+                {
+                    "sClass":"text-center",
+                    "data":"apkPath",
+                    "render":function(data, type, full, meta){
+
+                        if(data != null && data.length > 0){
+                            return "已上传";
+                        }else{
+                            return "<span style='color:red;'>未上传</span>";
+                        }
+
+
+                    },
+                    "bSortable":false
+                },
+                { data: "versionCode" },
+                { data: "versionName" }
+            ],
+            "searching":false,
+            "language": {
+                "lengthMenu": "显示 _MENU_ 条记录",
+                "zeroRecords": "没有查到任何记录",
+                "info": "_PAGE_ / _PAGES_",
+                "infoEmpty": "没有任何记录",
+                "infoFiltered": "(总记录：_MAX_ )",
+                "loadingRecords": "正在加载...",
+                "processing":     "正在处理...",
+                "search":         "搜索:",
+                "paginate": {
+                    "first":      "首页",
+                    "last":       "尾页",
+                    "next":       "下一页",
+                    "previous":   "上一页"
+                },
+                "aria": {
+                    "sortAscending":  ": 递增排序",
+                    "sortDescending": ": 递减排序"
+                },
+                "select": {
+                    "rows": "已选中%d行"
+                }
+            }
+        });
+
+
+        $('button[data-btn-type]').click(function() {
+            var action = $(this).attr('data-btn-type');
+            switch (action){
+
+                case 'select':
+                    search();
+                    break;
+                case 'pack':
+                    var data = $('#gameList').DataTable().row('.selected').data();
+                    if(data == null){
+                        showTips("请先选择一个游戏");
+                        return;
+                    }
+                    parent.location.href = "gameindex.html?gameID="+data.appID;
+                    break;
+                case 'delete':
+                    var data = $('#gameList').DataTable().row('.selected').data();
+                    if(data == null){
+                        showTips("请先选择一个游戏");
+                        return;
+                    }
+
+                    showConfirm("如果服务端该游戏没有删除，请先在服务端后台删除该游戏。如果服务端该游戏依然存在，这里删除之后，只会将游戏的配置改为初始默认值。是否确定删除该游戏？",function(){
+                        deleteGame(data.id);
+                    });
+
+                    break;
+            }
+        });
+    });
+</script>
+</body>
+</html>

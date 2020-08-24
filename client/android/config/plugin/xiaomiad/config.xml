@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    
+	<params>
+        <param name="MIMO_AD_APP_ID" required="1" showName="AppID" desc="广告联盟上申请的appid" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="MIMO_AD_APP_KEY" value="fake_app_key" required="1" showName="AppKey" desc="广告联盟上申请的appkey" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="MIMO_AD_APP_TOKEN" value="fake_app_token" required="1" showName="AppToken" desc="广告联盟上申请的apptoken" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="MIMO_AD_SPLASH_POS_ID" required="1" showName="闪屏广告位ID" desc="广告联盟上申请的闪屏广告的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="MIMO_AD_BANNER_POS_ID" required="1" showName="Banner广告位ID" desc="广告联盟上申请的Banner广告的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="MIMO_AD_POPUP_POS_ID" required="1" showName="插屏广告位ID" desc="广告联盟上申请的插屏广告的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+        <param name="MIMO_AD_VIDEO_POS_ID" required="1" showName="视频广告位ID" desc="广告联盟上申请的激励视频的广告位ID" bWriteInManifest="0" bWriteInClient="1" />
+    </params>
+    
+    <operations>
+        <operation step="1" type="mergeManifest" from="SDKManifest.xml" to="AndroidManifest.xml" />
+        <operation step="2" type="copyRes" from="assets" to="assets" />
+        <operation step="3" type="copyRes" from="libs" to="lib" />
+        <operation step="4" type="copyRes" from="res" to="res" />
+        <operation step="4" type="copyRes" from="root" to="" />
+    </operations>
+    
+    <plugins>
+        <plugin name="com.u8.sdk.ad.mimo.MimoAd" type="7" desc="广告接口"/>
+    </plugins>
+    
+    <version>
+        <name>小米广告联盟</name>
+        <versionCode>1</versionCode>
+        <versionName>3.0.1</versionName>
+    </version>     
+    
+</config>
