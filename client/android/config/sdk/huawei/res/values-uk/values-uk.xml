@@ -1,35 +1,63 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="hms_abort" priority="translator">"Стоп"</string>
+    <string name="c_buoycircle_abort" priority="translator">"ТАК"</string>
+    <string name="c_buoycircle_abort_message" priority="translator">"Зупинити завантаження?"</string>
+    <string name="c_buoycircle_appmarket_name" priority="translator">"HUAWEI AppGallery"</string>
+    <string name="c_buoycircle_auto_hide_notice" priority="LT">"Перетягніть сюди, щоб приховати"</string>
+    <string name="c_buoycircle_cancel" priority="LT">"СКАСУВАТИ"</string>
+    <string name="c_buoycircle_check_failure" priority="translator">"Не вдалося перевірити наявність оновлень."</string>
+    <string name="c_buoycircle_checking" priority="translator">"Перевірка наявності оновлень…"</string>
+    <string name="c_buoycircle_confirm" priority="LT">"OK"</string>
+    <string name="c_buoycircle_download_failure" priority="translator">"Не вдалося завантажити HUAWEI AppGallery."</string>
+    <string name="c_buoycircle_download_no_space" priority="translator">"Недостатньо вільного місця. Не вдалося завантажити."</string>
+    <string name="c_buoycircle_download_retry" priority="translator">"Сталася помилка завантаження. Повторити спробу?"</string>
+    <string name="c_buoycircle_downloading_loading" priority="translator">"Завантаження..."</string>
+    <string name="c_buoycircle_floatwindow_click_fail_toast" priority="LT">"У Диспетчері телефону (Оптимізаторі) чи в меню \"Налаштування\" ввімкніть вторинний запуск для HUAWEI AppGallery."</string>
+    <string name="c_buoycircle_hide_guide_btn_cancel" priority="LT">"СКАСУВАТИ"</string>
+    <string name="c_buoycircle_hide_guide_btn_confirm" priority="LT">"ПРИХОВАТИ"</string>
+    <string name="c_buoycircle_hide_guide_content_nosensor" priority="LT">"Приховавши кульки, вам знадобиться перезапустити додаток, щоб знову показати їх."</string>
+    <string name="c_buoycircle_hide_guide_content_sensor" priority="LT">"Приховавши кульки, поверніть пристрій, щоб знову показати їх."</string>
+    <string name="c_buoycircle_hide_guide_noremind" priority="LT">"Більше не нагадувати"</string>
+    <string name="c_buoycircle_hide_guide_title" priority="LT">"Кульки"</string>
+    <string name="c_buoycircle_install" priority="LT">"УСТАНОВИТИ"</string>
+    <string name="c_buoycircle_no" priority="translator">"НІ"</string>
+    <string name="c_buoycircle_retry" priority="translator">"ПОВТОРИТИ"</string>
+    <string name="c_buoycircle_update_message_new" priority="translator">"Щоб використовувати цю службу, установіть найновішу версію такого додатка:\n\n%1$s"</string>
+    <string name="hms_game_achievement_finish_notice" priority="LT">"%1$s розблоковано"</string>
+    <string name="hms_game_check_update_failed_content" priority="LT">"Неможливо отримати доступ. Для роботи цієї служби потрібна остання версія Помічника керування додатками."</string>
+    <string name="hms_game_check_update_success_content" priority="LT">"Щоб використовувати цю службу, установіть найновішу версію Помічника керування додатками (%1$s МБ)."</string>
+    <string name="hms_game_login_notice" priority="LT">"Вітаємо, %1$s!"</string>
+<string name="hwid_huawei_login_button_text" priority="LT">"Увійти через Huawei"</string>
+<string name="hms_abort" priority="translator">"Стоп"</string>
     <string name="hms_abort_message" priority="translator">"Зупинити завантаження?"</string>
-    <string name="hms_bindfaildlg_message" priority="translator">"%1$s не може використовувати мобільні послуги Huawei. Будь ласка, запустіть Диспетчер телефону або перейдіть в налаштування, увімкніть всі дозволи для %2$s (в тому числі автоматичний запуск і вторинний запуск) і спробуйте ще раз."</string>
+    <string name="hms_bindfaildlg_message" priority="translator">"%1$s не може використовувати HMS Core. Запустіть \"Оптимізатор\" (Диспетчер телефону) або перейдіть в налаштування, увімкніть всі дозволи для %2$s (в тому числі автоматичний запуск і вторинний запуск) і спробуйте ще раз."</string>
     <string name="hms_cancel" priority="translator">"Скасувати"</string>
     <string name="hms_check_failure" priority="translator">"Не вдалося перевірити наявність оновлень."</string>
     <string name="hms_check_no_update" priority="translator">"Ви використовуєте найновішу версію."</string>
     <string name="hms_checking" priority="translator">"Перевірка оновлень..."</string>
     <string name="hms_confirm" priority="translator">"OK"</string>
-    <string name="hms_download_failure" priority="translator">"Не вдалося завантажити пакет Мобільних служб Huawei."</string>
+    <string name="hms_download_failure" priority="translator">"Не вдалося завантажити пакет HMS Core."</string>
     <string name="hms_download_no_space" priority="translator">"Недостатньо вільного місця. Завантаження не може бути завершено."</string>
     <string name="hms_download_retry" priority="translator">"Не вдалося завантажити. Повторити спробу?"</string>
-    <string name="hms_downloading" priority="translator">"Завантаження Мобільних служб Huawei | виконано: %d%%"</string>
+    <string name="hms_downloading" priority="translator">"Завантаження HMS Core | виконано: %d%%"</string>
     <string name="hms_downloading_loading" priority="LT">"Завантаження"</string>
-    <string name="hms_downloading_new" priority="LT">"Завантаження HMS"</string>
+    <string name="hms_downloading_new" priority="LT">"Завантаження HMS Core"</string>
     <string name="hms_gamebox_name" priority="LT">"HUAWEI GameCenter"</string>
     <string name="hms_install" priority="translator">"Встановити"</string>
-    <string name="hms_install_message" priority="translator">"Щоб використовувати цю функцію, потрібно встановити Мобільні служби Huawei. Встановити?"</string>
+    <string name="hms_install_message" priority="translator">"Щоб використовувати цю функцію, потрібно встановити HMS Core. Встановити?"</string>
     <string name="hms_retry" priority="translator">"Повторити"</string>
     <string name="hms_update" priority="translator">"Оновити"</string>
     <string name="hms_update_continue" priority="LT">"Завантажити"</string>
-    <string name="hms_update_message" priority="translator">"Щоб використовувати цю функцію, оновіть Мобільні служби Huawei до останньої версії. Оновити зараз?"</string>
+    <string name="hms_update_message" priority="translator">"Щоб використовувати цю функцію, оновіть HMS Core до останньої версії. Оновити зараз?"</string>
     <string name="hms_update_message_new" priority="LT">"Цій послузі потрібна остання версія наступної програми:\n\n%1$s"</string>
     <string name="hms_update_nettype" priority="LT">"Немає підключення до мережі Wi-Fi. Завантажити через мобільні дані?"</string>
-    <string name="hms_update_title" priority="translator">"Мобільні служби Huawei"</string>
-    <string name="upsdk_app_dl_installing" priority="LT">"Завантаження AppGallery"</string>
+    <string name="hms_update_title" priority="translator">"HMS Core"</string>
+<string name="upsdk_app_dl_installing" priority="LT">"Завантаження AppGallery"</string>
     <string name="upsdk_app_download_info_new" priority="translator">"Встановити"</string>
     <string name="upsdk_app_size" priority="translator">"Розмір"</string>
     <string name="upsdk_app_version" priority="translator">"Версія"</string>
     <string name="upsdk_cancel" priority="translator">"Скасувати"</string>
-    <string name="upsdk_checking_update_prompt" priority="translator">"Перевірка оновлень…"</string>
+    <string name="upsdk_checking_update_prompt" priority="LT">"Перевірка оновлень…"</string>
     <string name="upsdk_choice_update" priority="LT">"Доступне оновлення. Завантажте та встановіть останню версію."</string>
     <string name="upsdk_connect_server_fail_prompt_toast" priority="translator">"Не вдається підключитися до сервера. Повторіть спробу пізніше."</string>
     <string name="upsdk_detail" priority="translator">"Подробиці"</string>
@@ -45,34 +73,6 @@
     <string name="upsdk_third_app_dl_cancel_download_prompt_ex" priority="translator">"Скасувати встановлення?"</string>
     <string name="upsdk_third_app_dl_install_failed" priority="translator">"Встановлення не вдалося."</string>
     <string name="upsdk_third_app_dl_sure_cancel_download" priority="translator">"Так"</string>
-    <string name="upsdk_update_check_no_new_version" priority="translator">"Ви використовуєте найновішу версію."</string>
+    <string name="upsdk_update_check_no_new_version" priority="Reviewed">"Ви використовуєте найновішу версію."</string>
     <string name="upsdk_updating" priority="translator">"Оновлення"</string>
-<string name="c_buoycircle_abort" priority="translator">"ТАК"</string>
-    <string name="c_buoycircle_abort_message" priority="translator">"Зупинити завантаження?"</string>
-    <string name="c_buoycircle_appmarket_name" priority="translator">"HUAWEI AppGallery"</string>
-    <string name="c_buoycircle_auto_hide_notice" priority="translator">"Перетягніть сюди, щоб приховати"</string>
-    <string name="c_buoycircle_cancel" priority="translator">"СКАСУВАТИ"</string>
-    <string name="c_buoycircle_check_failure" priority="translator">"Не вдалося перевірити наявність оновлень."</string>
-    <string name="c_buoycircle_checking" priority="translator">"Перевірка наявності оновлень…"</string>
-    <string name="c_buoycircle_confirm" priority="translator">"OK"</string>
-    <string name="c_buoycircle_download_failure" priority="translator">"Не вдалося завантажити HUAWEI AppGallery."</string>
-    <string name="c_buoycircle_download_no_space" priority="translator">"Недостатньо вільного місця. Не вдалося завантажити."</string>
-    <string name="c_buoycircle_download_retry" priority="translator">"Сталася помилка завантаження. Повторити спробу?"</string>
-    <string name="c_buoycircle_downloading_loading" priority="translator">"Завантаження..."</string>
-    <string name="c_buoycircle_floatwindow_click_fail_toast" priority="translator">"У Диспетчері телефону чи в меню \"Налаштування\" ввімкніть вторинний запуск для HUAWEI AppGallery."</string>
-    <string name="c_buoycircle_hide_guide_btn_cancel" priority="translator">"СКАСУВАТИ"</string>
-    <string name="c_buoycircle_hide_guide_btn_confirm" priority="translator">"ПРИХОВАТИ"</string>
-    <string name="c_buoycircle_hide_guide_content_nosensor" priority="translator">"Приховавши кульки, вам знадобиться перезапустити додаток, щоб знову показати їх."</string>
-    <string name="c_buoycircle_hide_guide_content_sensor" priority="translator">"Приховавши кульки, поверніть пристрій, щоб знову показати їх."</string>
-    <string name="c_buoycircle_hide_guide_noremind" priority="translator">"Більше не нагадувати"</string>
-    <string name="c_buoycircle_hide_guide_title" priority="translator">"Кульки"</string>
-    <string name="c_buoycircle_install" priority="translator">"УСТАНОВИТИ"</string>
-    <string name="c_buoycircle_no" priority="translator">"НІ"</string>
-    <string name="c_buoycircle_retry" priority="translator">"ПОВТОРИТИ"</string>
-    <string name="c_buoycircle_update_message_new" priority="translator">"Щоб використовувати цю службу, установіть найновішу версію такого додатка:\n\n%1$s"</string>
-    <string name="hms_game_achievement_finish_notice" priority="LT">"%1$s розблоковано"</string>
-    <string name="hms_game_check_update_failed_content" priority="translator">"Неможливо отримати доступ. Для роботи цієї служби потрібна остання версія Помічника керування додатками."</string>
-    <string name="hms_game_check_update_success_content" priority="translator">"Щоб використовувати цю службу, встановіть останню версію Помічника керування додатками (%1$s МБ)."</string>
-    <string name="hms_game_login_notice" priority="LT">"Вітаємо, %1$s!"</string>
-<string name="hwid_huawei_login_button_text" priority="translator">"Увійти в Huawei"</string>
 </resources>

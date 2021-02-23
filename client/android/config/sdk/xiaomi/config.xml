@@ -16,7 +16,12 @@
     <plugins>
         <plugin name="com.u8.sdk.XiaoMiUser" desc="用户登录接口" type="1" />
         <plugin name="com.u8.sdk.XiaoMiPay" desc="用户支付接口" type="2" />
-    </plugins>
+    </plugins> 
+	
+	<dependencies>
+        <dependency name="androidx.appcompat:appcompat:1.0.2" />
+        <dependency name="androidx.legacy:legacy-support-v4:1.0.0" />
+    </dependencies>
 
     <version>
         <name>小米(商用版本)</name>

@@ -17,8 +17,7 @@ import file_utils
 
 
 def pack(gameID, channelID, packID, tempFilePath):
-    log_utils.debug(
-        "开始打包： gameID:" + gameID + ";channelID:" + channelID + ";packID:" + packID + ";temp file path:" + tempFilePath)
+    log_utils.debug("开始打包： gameID:" + gameID + ";channelID:" + channelID + ";packID:" + packID + ";temp file path:" + tempFilePath)
 
     # 设置临时环境变量
     os.environ['JAVA_HOME'] = file_utils.getJavaDir()
@@ -69,7 +68,7 @@ if __name__ == "__main__":
     reload(sys)
     sys.setdefaultencoding('utf-8')
 
-    parser = argparse.ArgumentParser(u"U8SDK 打包工具")
+    parser = argparse.ArgumentParser(u"打包工具")
     parser.add_argument('-g', '--game', help=u"游戏AppID")
     parser.add_argument('-c', '--channelID', help=u"渠道ID")
     parser.add_argument('-i', '--packId', help=u"本次打包唯一ID")

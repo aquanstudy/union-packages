@@ -22,10 +22,4 @@
         <versionName>1.0</versionName>
     </version>
 	
-	<extraR>
-        <package name="android.support.v7.appcompat" />
-        <package name="android.support.coordinatorlayout" />
-        <package name="android.support.compat" />
-    </extraR>
-	
 </config>

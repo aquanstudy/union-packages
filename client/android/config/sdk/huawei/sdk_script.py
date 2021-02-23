@@ -22,15 +22,14 @@ androidNS = 'http://schemas.android.com/apk/res/android'
 def execute(channel, decompileDir, packageName):
 	
     manifestFile = decompileDir + "/AndroidManifest.xml"
-	
+
     file_utils.modifyFileContent(manifestFile, "${applicationId}", packageName)
-	#file_utils.modifyFileContent(manifestFile, "com.cn.min", packageName)
 
-    appId = sdk_helper.getSdkParamByKey(channel, 'HuaWei_AppID')
-    cpId = sdk_helper.getSdkParamByKey(channel, 'HuaWei_CPID')
+    # appId = sdk_helper.getSdkParamByKey(channel, 'HuaWei_AppID')
+    # cpId = sdk_helper.getSdkParamByKey(channel, 'HuaWei_CPID')
 
-    log_utils.debug("huawei appId:"+appId+";cpId:"+cpId)
+    # log_utils.debug("huawei appId:"+appId+";cpId:"+cpId)
 
-    sdk_helper.addOrUpdateMetaData(decompileDir, 'com.huawei.hms.client.appid', 'appid='+appId)
-    sdk_helper.addOrUpdateMetaData(decompileDir, 'com.huawei.hms.client.cpid', 'cpid='+cpId)
+    # sdk_helper.addOrUpdateMetaData(decompileDir, 'com.huawei.hms.client.appid', 'appid='+appId)
+    # sdk_helper.addOrUpdateMetaData(decompileDir, 'com.huawei.hms.client.cpid', 'cpid='+cpId)
     

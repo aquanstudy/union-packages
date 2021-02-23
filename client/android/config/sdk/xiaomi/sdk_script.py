@@ -23,7 +23,7 @@ def execute(channel, decompileDir, packageName):
     manifestFile = decompileDir + "/AndroidManifest.xml"
 
     file_utils.modifyFileContent(manifestFile, "${applicationId}", packageName)
-
+	
 
     # manifestFile = file_utils.getFullPath(manifestFile)
     # ET.register_namespace('android', androidNS)
